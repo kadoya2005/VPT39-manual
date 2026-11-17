@@ -1059,6 +1059,8 @@ void draw() {
     <tr><td class="k">06_動くGIF・07_透明PNG</td><td>動く画像と、透明な部分の重なり</td></tr>
     <tr><td class="k">08_真っ白・09_真っ黒</td><td>画面全部が白（一番明るい）・黒（一番暗い）。<b>プロジェクターの一番明るい・暗い</b>、明るさのむら、黒の浮き（真っ黒でもどれだけ光るか）</td></tr>
     <tr><td class="k">10_月_比率テスト</td><td>黒い背景の真ん中に、まん丸の月。<b>比率の確認</b>：楕円に見えたら、四隅の形か出力の比率がずれている</td></tr>
+    <tr><td class="k">11_白にグリッド・12_黒にグリッド</td><td>120px ごとの格子（16×9 マス）・外枠・中心の十字・対角線・まん丸の円。<b>キャリブレーション</b>：四隅合わせ、端が切れていないか、線が曲がっていないか、ピント</td></tr>
+    <tr><td class="k">13_市松模様</td><td>120px の白黒のマス。<b>ピント・ゆがみ</b>、横長でつないだときの<b>つなぎ目のずれ</b>（マスがずれていないか）</td></tr>
     <tr><td class="k">photos\テスト用</td><td>横長・4:3・縦長・正方形の写真と、月（まん丸）。写真ウォールの<b>収まり方と切り替え方</b>（フォルダに photos/テスト用 と入れる）。月が楕円なら写真が歪んでいる</td></tr>
   </table>
   <div class="note"><b class="h">作り直す</b>VPT39 フォルダで <code>.venv\Scripts\python.exe tools\make_test_media.py</code> を実行すると、作り直せます（ffmpeg の部品が必要：<code>.venv\Scripts\python.exe -m pip install imageio-ffmpeg</code>）。</div>
