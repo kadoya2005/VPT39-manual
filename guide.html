@@ -1,0 +1,1086 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VPT39 使い方ガイド（詳細版）</title>
+<style>
+@page{size:A4;margin:13mm 13mm 14mm}
+:root{--ink:#1b1f27;--dim:#5b6472;--line:#d5dae1;--blue:#1f63d6;--blue-bg:#eaf1fd;--org:#d97706;--org-bg:#fff4e2;--red:#cc3322;--red-bg:#fdecea;--grn:#16834f;--grn-bg:#e7f6ee}
+*{box-sizing:border-box}
+html,body{margin:0;background:#e9ecf0;color:var(--ink);font-family:"Yu Gothic UI","Yu Gothic","Hiragino Sans","Meiryo",sans-serif;font-size:10.3pt;line-height:1.65;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.doc{width:210mm;margin:8mm auto;background:#fff;padding:13mm 13mm 14mm;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+@media print{html,body{background:#fff}.doc{width:auto;margin:0;padding:0;box-shadow:none}}
+.chap{break-before:page;page-break-before:always}
+.cover{min-height:255mm;display:flex;flex-direction:column}
+.cover h1{font-size:30pt;margin:30mm 0 2mm;letter-spacing:.02em}
+.cover .sub{font-size:14pt;color:var(--dim);margin:0 0 10mm}
+.cover .lead{font-size:11pt;max-width:150mm}
+h2{font-size:17pt;margin:0 0 3mm;padding-bottom:1.5mm;border-bottom:2.5pt solid var(--ink);display:flex;gap:3mm;align-items:baseline}
+h2 .c{color:var(--blue);font-size:13pt}
+h3{font-size:12.5pt;margin:5mm 0 1.5mm;padding-left:2.5mm;border-left:1.5mm solid var(--blue);break-after:avoid}
+h4{font-size:10.8pt;margin:3mm 0 1mm;break-after:avoid}
+p{margin:1mm 0 2mm}
+ul,ol{margin:1mm 0 2mm;padding-left:6mm}
+li{margin:.6mm 0}
+.toc{columns:2;column-gap:10mm;padding:0;list-style:none;font-size:11pt}
+.toc li{break-inside:avoid;margin:0 0 2mm}
+.toc b{color:var(--blue);display:inline-block;width:9mm}
+.note,.warn,.tip,.danger{border-radius:0 2mm 2mm 0;padding:2mm 3.5mm;margin:2mm 0 3mm;font-size:9.8pt;break-inside:avoid}
+.note{background:var(--blue-bg);border-left:2mm solid var(--blue)}
+.warn{background:var(--org-bg);border-left:2mm solid var(--org)}
+.tip{background:var(--grn-bg);border-left:2mm solid var(--grn)}
+.danger{background:var(--red-bg);border-left:2mm solid var(--red)}
+.note b.h,.warn b.h,.tip b.h,.danger b.h{margin-right:2mm}
+.warn b.h{color:#9a4d00}.tip b.h{color:var(--grn)}.danger b.h{color:var(--red)}.note b.h{color:var(--blue)}
+kbd{display:inline-block;min-width:6mm;padding:0 1.5mm;border:1pt solid #8a93a0;border-bottom-width:2pt;border-radius:1.2mm;background:#f6f7f9;font:700 9.5pt/1.45 "Segoe UI","Yu Gothic UI",sans-serif;text-align:center}
+.btn{display:inline-block;padding:0 1.6mm;border-radius:1.2mm;background:#2a2f37;color:#fff;font-weight:700;font-size:9.2pt;line-height:1.55;white-space:nowrap}
+.btn.red{background:#4a1515;color:#ffd0d0;border:1pt solid #b33}
+table{border-collapse:collapse;width:100%;margin:1.5mm 0 3mm;break-inside:auto}
+th,td{border:.8pt solid var(--line);padding:1.2mm 2.2mm;text-align:left;vertical-align:top;font-size:9.6pt}
+th{background:#f1f3f6}
+tr{break-inside:avoid}
+td.k{white-space:nowrap;font-weight:700;width:30mm;background:#fafbfc}
+figure{margin:2.5mm 0 3.5mm;break-inside:avoid}
+figcaption{font-size:9pt;color:var(--dim);margin-top:1mm}
+.shot{position:relative;overflow:hidden;border:1pt solid #8b94a1;border-radius:1.5mm;background:#111}
+.shot img{position:absolute;max-width:none;display:block}
+.shot .bx{position:absolute;border:2.2pt solid var(--red);border-radius:1mm}
+.shot .bx i{position:absolute;left:-2.5mm;top:-2.5mm;width:5.4mm;height:5.4mm;border-radius:50%;background:var(--red);color:#fff;font:800 8.8pt/5.4mm "Yu Gothic UI",sans-serif;text-align:center;font-style:normal;border:.7pt solid #fff}
+.side{display:grid;grid-template-columns:1fr 1fr;gap:5mm;align-items:start}
+.side.w{grid-template-columns:1.25fr 1fr}
+.legend{list-style:none;padding:0;margin:1mm 0}
+.legend li{display:flex;gap:2mm;margin:0 0 1.5mm}
+.legend li i{flex:none;width:5.4mm;height:5.4mm;border-radius:50%;background:var(--red);color:#fff;font:800 8.8pt/5.4mm "Yu Gothic UI",sans-serif;text-align:center;font-style:normal;margin-top:.4mm}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps>li{counter-increment:s;position:relative;padding-left:9mm;margin:0 0 2.2mm;break-inside:avoid}
+.steps>li::before{content:counter(s);position:absolute;left:0;top:.2mm;width:6.4mm;height:6.4mm;border-radius:50%;background:var(--blue);color:#fff;font-weight:800;font-size:10pt;line-height:6.4mm;text-align:center}
+.check{list-style:none;padding:0}
+.check li{padding-left:7mm;position:relative;margin:0 0 1.5mm;break-inside:avoid}
+.check li::before{content:"";position:absolute;left:0;top:1mm;width:4mm;height:4mm;border:1.2pt solid var(--ink);border-radius:.8mm}
+.dim{color:var(--dim)}
+.pill{display:inline-block;border-radius:3mm;padding:0 2mm;font-size:9pt;font-weight:700;color:#fff}
+.l1{background:var(--blue)}.l2{background:var(--grn)}.l3{background:var(--org)}
+.foot{font-size:8.5pt;color:var(--dim);margin-top:6mm;border-top:.8pt solid var(--line);padding-top:1.5mm}
+
+.flow{display:flex;align-items:stretch;gap:1.5mm;margin:2mm 0 3mm}
+.flow .fb{flex:1;border:1pt solid var(--line);border-radius:2mm;padding:2mm 1.5mm;text-align:center;background:var(--blue-bg);display:flex;flex-direction:column;gap:.6mm;font-size:9.6pt;line-height:1.3}
+.flow .fb b{color:var(--blue);font-size:12pt}
+.flow .fb small{color:var(--dim);font-size:8pt}
+.flow .fb.go{background:var(--grn-bg)}.flow .fb.go b{color:var(--grn)}
+.flow .fa{align-self:center;color:var(--dim);font-size:9pt}
+.mock{border:1pt solid #8b94a1;border-radius:1.5mm;overflow:hidden;font-family:"Segoe UI","Yu Gothic UI",sans-serif;background:#fff;break-inside:avoid}
+.mock.web .url{background:#eef0f3;padding:1.2mm 3mm;font-size:8.5pt;color:#444;border-bottom:1pt solid #d5dae1}
+.mock.web .pg{padding:3mm 5mm;font-size:9pt}
+.mock .h1{font-size:13pt;font-weight:700;margin-bottom:1.5mm}
+.mock .rel{font-weight:700;margin-top:2.2mm}
+.mock .rel em{font-style:normal;color:var(--red);font-weight:400;font-size:8.5pt;margin-left:2mm}
+.mock .rel em.ok{color:var(--grn);font-weight:700}
+.mock .li{color:#1f63d6;padding-left:4mm;margin:.7mm 0}
+.mock .dimx{opacity:.45}
+.mock .hit,.mock .hit2{position:relative;outline:2.2pt solid var(--red);outline-offset:.9mm;border-radius:1mm}
+.mock .hit i,.mock .hit2 i{position:absolute;right:-7mm;top:50%;transform:translateY(-50%);width:5.4mm;height:5.4mm;border-radius:50%;background:var(--red);color:#fff;font:800 8.8pt/5.4mm "Yu Gothic UI",sans-serif;text-align:center;font-style:normal}
+.mock.inst .tb{background:#f3f3f3;border-bottom:1pt solid #ddd;padding:1.2mm 3mm;font-size:8.5pt;display:flex;justify-content:space-between}
+.mock.inst .bd{display:flex}
+.mock.inst .lft{width:24mm;flex:none;background:linear-gradient(#2b5b84,#3776ab);color:#ffd43b;font-size:22pt;display:flex;align-items:flex-end;justify-content:center;padding-bottom:4mm}
+.mock.inst .mn{flex:1;padding:3mm 9mm 3mm 5mm;font-size:9pt}
+.mock .big{font-size:13pt;font-weight:600;color:#1b3a6b;margin-bottom:1.5mm}
+.mock .sm{font-size:8.5pt;color:#444;margin-bottom:2mm}
+.mock .opt{margin:1.6mm 0;font-size:10pt;color:#1b3a6b}
+.mock .opt small{color:#555;font-size:8pt;margin-left:5mm;display:inline-block;line-height:1.35}
+.mock .cb{font-size:9pt;margin:1.3mm 0}
+.mock .btnrow{text-align:right;margin-top:2mm}
+.mock .btnrow span{display:inline-block;border:1pt solid #888;padding:.5mm 6mm;border-radius:1mm;background:#f0f0f0}
+.mock.small .lft{width:16mm;font-size:16pt}
+pre.term{background:#0c0c0c;color:#e6e6e6;font:8.6pt/1.45 "Cascadia Mono","Consolas","BIZ UDGothic","MS Gothic",monospace;padding:3mm 4mm;border-radius:1.5mm;margin:0;white-space:pre-wrap;word-break:break-all}
+pre.term.sm{font-size:7.4pt}
+pre.term .cut{color:#888}
+pre.term .okl{color:#3dd68c;font-weight:700}
+pre.term .ngl{color:#ff8080;font-weight:700}
+pre.term .err{color:#ff5555}
+pre.code{background:#f4f6f8;border:1pt solid var(--line);border-radius:1.5mm;font:8.8pt/1.5 "Cascadia Mono","Consolas",monospace;padding:2.5mm 3.5mm;margin:1.5mm 0 3mm;white-space:pre;break-inside:avoid}
+pre.code .c{color:#6a737d}
+.sw{display:inline-block;padding:0 1.6mm;border-radius:1.2mm;font-weight:700;font-size:9.2pt;line-height:1.55;white-space:nowrap}
+.sw.g{background:#3dd68c;color:#04120a}.sw.h{background:#a9ecc9;color:#06291a}.sw.r{background:#ff4d4f;color:#fff}.sw.y{background:#3a2a08;color:#ffd27a;border:1pt solid #ffb020}.sw.n{background:#1f232a;color:#e6e8eb}
+</style>
+</head>
+<body>
+<div class="doc">
+
+<!-- ===================== 表紙 ===================== -->
+<section class="cover">
+  <h1>VPT39 使い方ガイド</h1>
+  <p class="sub">ライブ用 映像再生＋プロジェクションマッピング ／ 詳細版</p>
+  <div class="note" style="font-size:11pt;margin:0 0 6mm"><b class="h">このアプリは：</b>プロジェクションマッピングに特化した映像プレイヤー。<br>プロジェクタをつかったメディア/インタラクションアート作品、ライブ等で使いやすいように工夫してます。</div>
+  <p class="lead">このガイドは、VPT39 を初めて使う人が、準備から本番、トラブルのときまで一人で進められるように、実際の画面に番号を付けて説明したものです。<br>本番中は「クイックスタート（A4 両面）」、しくみの全体像は「しくみ（A4・2枚、concept.pdf）」もあわせて見てください。</p>
+  <h3 style="margin-top:10mm">目次</h3>
+  <ol class="toc">
+    <li><b>1</b>VPT39 でできること</li>
+    <li><b>2</b>はじめての準備（インストール）</li>
+    <li><b>3</b>起動と画面の見方</li>
+    <li><b>4</b>プロジェクターに映す（出力ウィンドウ）</li>
+    <li><b>5</b>素材とクリップ</li>
+    <li><b>6</b>レイヤー</li>
+    <li><b>7</b>再生の操作</li>
+    <li><b>8</b>ライブ入力とレイヤー映像</li>
+    <li><b>9</b>マッピング（形を合わせる）</li>
+    <li><b>10</b>写真ウォール</li>
+    <li><b>11</b>音声ミキサー</li>
+    <li><b>12</b>本番の操作と緊急時</li>
+    <li><b>13</b>保存と設定ファイル</li>
+    <li><b>14</b>困ったとき</li>
+    <li><b>15</b>本番前チェックリスト</li>
+  </ol>
+  <div class="danger" style="margin-top:auto;font-size:11pt"><b class="h">本番中に困ったら</b>あわてたとき（緊急の操作）は <b>12章</b>、うまく映らない・音が出ないなどは <b>14章「困ったとき」</b>。</div>
+  <div class="note"><b class="h">このガイドの画像について</b>説明用に用意したデモの状態を撮影しています。素材の名前や数値は、実際の本番とは違います。</div>
+</section>
+
+<!-- ===================== 1 ===================== -->
+<section class="chap">
+  <h2><span class="c">1</span>VPT39 でできること</h2>
+  <p>VPT39 は、ノートPC 1台で<b>動画や写真をプロジェクターに映し、スクリーンや壁の形に合わせる</b>ためのアプリです。VPT（VideoProjectionTool）の「四隅マッピング」と、VJアプリのように「クリップを並べて切り替える」操作を組み合わせています。</p>
+  <table>
+    <tr><th style="width:36mm">できること</th><th>内容</th></tr>
+    <tr><td class="k">クリップ再生</td><td>動画や画像をサムネイルで並べ、クリックで切り替え。前の映像からなめらかに入れ替わる（クロスフェード）</td></tr>
+    <tr><td class="k">列で再生</td><td>同じ番号のクリップを、全部のレイヤーで一斉に切り替え。曲ごとに映像をまとめて変えられる</td></tr>
+    <tr><td class="k">レイヤー</td><td>映像を何枚でも重ねられる。重ね方（通常・加算・スクリーン・乗算）と不透明度を選べる</td></tr>
+    <tr><td class="k">マッピング</td><td>レイヤーごとに四隅を動かして、台形や斜めのスクリーンにぴったり合わせる</td></tr>
+    <tr><td class="k">複数出力</td><td>プロジェクターを何台でも使える。レイヤーごとに、どのプロジェクターに映すか選ぶ（同じ映像を複数に同時にも）</td></tr>
+    <tr><td class="k">横長の画面</td><td>2台以上のプロジェクターをつないで1枚の横長の映像に。重なりはぼかしてつなぐ</td></tr>
+    <tr><td class="k">ライブ入力</td><td>カメラ・キャプチャーボード（別のPCの画面と音）や、同じPCのウィンドウ（Zoom など）を映す</td></tr>
+    <tr><td class="k">レイヤー映像</td><td>あるレイヤーの映像を、同じタイミングで別の場所・別の出力にも映す</td></tr>
+    <tr><td class="k">音声ミキサー</td><td>全部の動画の音を同時に鳴らし、出力ごと・レイヤーごとに音量とミュートを調整</td></tr>
+    <tr><td class="k">写真ウォール</td><td>フォルダに入った写真を順番に表示。新しく入った写真は優先して出す</td></tr>
+    <tr><td class="k">自動保存</td><td>設定は変更の2秒後に自動で保存。次に起動すると同じ状態から始まる</td></tr>
+  </table>
+  <h3>用意するもの</h3>
+  <ul>
+    <li><b>Windows のノートPC</b>（グラフィック機能つき。OpenGL 3.3 に対応していること）</li>
+    <li><b>プロジェクター</b>と、PC につなぐケーブル（HDMI など）。2台以上ならその数だけ</li>
+    <li><b>スピーカー</b>（音を出す場合）。PC のイヤホン端子や HDMI、オーディオインターフェースから</li>
+    <li>操作はPC の<b>ブラウザ</b>（Edge や Chrome）で行います</li>
+  </ul>
+  <h3>2つの画面</h3>
+  <p>VPT39 を起動すると、性格の違う2つの画面が開きます。この区別がいちばん大事です。</p>
+  <table>
+    <tr><th style="width:36mm">画面</th><th>役割</th><th style="width:45mm">どこに置く</th></tr>
+    <tr><td class="k">出力ウィンドウ</td><td>プロジェクターに映る映像そのもの。<b>ここでは基本的に操作しない</b>（マッピングの微調整だけ）</td><td>プロジェクターの画面で、フルスクリーン</td></tr>
+    <tr><td class="k">操作パネル</td><td>ブラウザに出る操作画面。<b>再生・音量・設定は全部ここ</b></td><td>手元のノートPC の画面</td></tr>
+  </table>
+</section>
+
+<!-- ===================== 2 ===================== -->
+<section class="chap">
+  <h2><span class="c">2</span>はじめての準備（インストール）</h2>
+  <p>新しいPC で使うときに<b>1回だけ</b>行います。インターネットにつないで、<b>20分ほど</b>みておいてください。すでに入っているものは飛ばしてかまいません。</p>
+  <h3>全体の流れ</h3>
+  <div class="flow">
+    <div class="fb"><b>①</b><span>Python 3.13<br>を入れる</span><small>VPT39 を動かす土台</small></div>
+    <div class="fa">▶</div>
+    <div class="fb"><b>②</b><span>VLC<br>を入れる</span><small>動画の音を出す部品</small></div>
+    <div class="fa">▶</div>
+    <div class="fb"><b>③</b><span>ZIP を<br>展開する</span><small>VPT39 のフォルダができる</small></div>
+    <div class="fa">▶</div>
+    <div class="fb"><b>④</b><span>setup.bat<br>を実行</span><small>残りの部品を自動で入れる</small></div>
+    <div class="fa">▶</div>
+    <div class="fb go"><b>⑤</b><span>run.bat<br>で起動</span><small>ここから毎回これだけ</small></div>
+  </div>
+  <table>
+    <tr><th style="width:30mm">やること</th><th style="width:48mm">いつ</th><th>どこから</th></tr>
+    <tr><td class="k">① Python</td><td>PC ごとに1回</td><td>https://www.python.org/downloads/windows/</td></tr>
+    <tr><td class="k">② VLC</td><td>PC ごとに1回</td><td>https://www.videolan.org/vlc/</td></tr>
+    <tr><td class="k">③ ZIP を展開</td><td>VPT39 を新しく置くとき</td><td>受け取った VPT39_配布用.zip</td></tr>
+    <tr><td class="k">④ setup.bat</td><td>③のあと1回</td><td>VPT39 フォルダの中</td></tr>
+    <tr><td class="k">⑤ run.bat</td><td>毎回</td><td>VPT39 フォルダの中</td></tr>
+  </table>
+  <div class="warn"><b class="h">Python は「3.13」を選ぶ</b>python.org のいちばん上にある最新版（3.14・3.15）では、Spout（8章）の部品が入りません。VPT39 は <b>Python 3.13（64bit）</b>で確かめています。</div>
+  <div class="tip"><b class="h">Python が入っているか分からないときは</b>①を飛ばして④の setup.bat を実行してみてください。入っていなければ「失敗：Python が見つかりません」と出るので、そのとき①に戻ります。</div>
+
+</section>
+
+<section class="chap">
+  <h3 style="margin-top:0">① Python を入れる</h3>
+  <ol class="steps">
+    <li><b>ブラウザで https://www.python.org/downloads/windows/ を開く</b><br>
+      「Python 3.13.〇〇」の見出しを探し、その下の <b>Download Windows installer (64-bit)</b> をクリックします。〇〇の数字は、いちばん大きいもの（上にあるもの）でかまいません。</li>
+  </ol>
+  <figure>
+    <div class="mock web">
+      <div class="url">🔒 python.org/downloads/windows/</div>
+      <div class="pg">
+        <div class="h1">Python Releases for Windows</div>
+        <div class="rel dimx">Python 3.15.2 - Oct. 25, 2026 <em>← 3.15 は選ばない</em></div>
+        <div class="li dimx">Download using the Python install manager.</div>
+        <div class="li dimx">Download Windows installer (64-bit)</div>
+        <div class="rel">Python 3.13.17 - Oct. 21, 2026 <em class="ok">← これ（3.13）</em></div>
+        <div class="li dimx">Note that Python 3.13.17 cannot be used on Windows 7 or earlier.</div>
+        <div class="li"><span class="hit">Download Windows installer (64-bit)<i>1</i></span></div>
+        <div class="li dimx">Download Windows installer (32-bit)</div>
+        <div class="li dimx">Download Windows installer (ARM64)</div>
+      </div>
+    </div>
+    <figcaption>図（イメージ）：python.org のダウンロードページ。32-bit・ARM64・「install manager」・「embeddable package」は選びません。</figcaption>
+  </figure>
+  <ol class="steps" start="2" style="counter-reset:s 1">
+    <li><b>ダウンロードした「python-3.13.〇〇-amd64.exe」をダブルクリック</b><br>ブラウザのダウンロード一覧か、「ダウンロード」フォルダにあります。</li>
+    <li><b>最初の画面で、下の「Add python.exe to PATH」にチェック → 「Install Now」</b><br>
+      <b>チェックを忘れると、setup.bat が Python を見つけられません。</b>いちばん大事なところです。</li>
+  </ol>
+  <figure>
+    <div class="mock inst">
+      <div class="tb">Python 3.13.17 (64-bit) Setup<span>✕</span></div>
+      <div class="bd">
+        <div class="lft">🐍</div>
+        <div class="mn">
+          <div class="big">Install Python 3.13.17 (64-bit)</div>
+          <div class="sm">Select Install Now to install Python with default settings, or choose Customize to enable or disable features.</div>
+          <div class="opt hit2">→ <b>Install Now</b><i>2</i><br><small>C:\Users\（名前）\AppData\Local\Programs\Python\Python313<br>Includes IDLE, pip and documentation<br>Creates shortcuts and file associations</small></div>
+          <div class="opt">→ Customize installation<br><small>Choose location and features</small></div>
+          <div class="cb">☑ Use admin privileges when installing py.exe</div>
+          <div class="cb"><span class="hit">☑ Add python.exe to PATH<i>1</i></span></div>
+        </div>
+      </div>
+    </div>
+    <figcaption>図（イメージ）：Python のインストール画面。<b>①</b>「Add python.exe to PATH」にチェック（最初は空いています）→ <b>②</b>「Install Now」。</figcaption>
+  </figure>
+</section>
+
+<section class="chap">
+  <ol class="steps" start="4" style="counter-reset:s 3">
+    <li><b>「このアプリがデバイスに変更を加えることを許可しますか？」と出たら「はい」</b></li>
+    <li><b>「Setup was successful」と出たら「Close」</b><br>途中に出る「Disable path length limit」は押しても押さなくてもかまいません。</li>
+  </ol>
+  <figure style="width:118mm">
+    <div class="mock inst small">
+      <div class="tb">Python 3.13.17 (64-bit) Setup<span>✕</span></div>
+      <div class="bd">
+        <div class="lft">🐍</div>
+        <div class="mn">
+          <div class="big">Setup was successful</div>
+          <div class="sm">New to Python? Start with the online tutorial and documentation. …</div>
+          <div class="opt">→ Disable path length limit</div>
+          <div class="btnrow"><span class="hit">Close<i>3</i></span></div>
+        </div>
+      </div>
+    </div>
+    <figcaption>図（イメージ）：終わりの画面。<b>③</b>「Close」で閉じます。</figcaption>
+  </figure>
+  <div class="note"><b class="h">チェックを忘れたときは</b>もう一度 python-3.13.〇〇-amd64.exe を実行し、「Modify」→ 次へ →「Add Python to environment variables」にチェック →「Install」。または一度アンインストールして入れ直します。</div>
+
+  <h3>② VLC を入れる</h3>
+  <ol class="steps">
+    <li><b>https://www.videolan.org/vlc/ を開き、オレンジの「Download VLC」をクリック</b><br>Windows のPC で開くと、64bit 版が自動で選ばれます。</li>
+    <li><b>ダウンロードした「vlc-〇〇-win64.exe」を実行</b><br>言語は「日本語」→ あとは「次へ」を押していき、「インストール」→「完了」。設定は変えなくてかまいません。</li>
+  </ol>
+  <div class="warn"><b class="h">VLC がないと</b>動画は映りますが<b>音が出ません</b>。操作パネル左上に「VLC（音声あり）」と出ていれば正常、「OpenCV（音声なし）」なら VLC が入っていません。</div>
+  <h3>③ ZIP を展開する</h3>
+  <ol class="steps">
+    <li><b>VPT39_配布用.zip を右クリック →「すべて展開」→「展開」</b><br>デスクトップやドキュメントなど、好きな場所に置いてかまいません。中に <b>VPT39</b> フォルダができます。</li>
+  </ol>
+  <div class="danger"><b class="h">ZIP の中から直接開かない</b>ZIP をダブルクリックして中をのぞいた状態で setup.bat を実行すると、動きません。必ず「すべて展開」してから、展開したフォルダの中で実行します。</div>
+
+</section>
+
+<section class="chap">
+  <h3 style="margin-top:0">④ setup.bat を実行する</h3>
+  <ol class="steps">
+    <li><b>VPT39 フォルダの setup.bat をダブルクリック</b><br>黒い画面が開き、[1/4]〜[4/4] の順に進みます。部品のダウンロードがあるので <b>2〜5分</b>かかります。文字が流れている間は、閉じずに待ちます。</li>
+    <li><b>「成功しました」と出たら、何かキーを押して閉じる</b></li>
+  </ol>
+  <div class="note"><b class="h">青い警告が出たら</b>「Windows によって PC が保護されました」と出たときは「詳細情報」→「実行」。「発行元を確認できませんでした」と出たときは「実行」を押します。</div>
+  <figure>
+<pre class="term">============================================
+  VPT39 セットアップ
+============================================
+
+[1/4] Python を確かめています...
+Python 3.13.17
+
+[2/4] 専用の環境（.venv）を作っています...
+
+[3/4] 必要な部品をダウンロードして入れています（数分かかります）...
+Collecting glfw>=2.7 (from -r requirements.txt (line 1))
+<span class="cut">　　…（ここに部品の名前がたくさん流れます）…</span>
+Successfully installed SpoutGL-0.1.1 cffi-2.1.1 comtypes-1.5.0 glcontext-3.1.0 …
+
+[4/4] フォルダを用意しています...
+
+<span class="okl">============================================
+  成功しました。run.bat で起動できます。
+============================================</span>
+  音声付きで再生するには VLC メディアプレイヤー（64bit）も必要です。
+  https://www.videolan.org/vlc/
+
+続行するには何かキーを押してください . . .</pre>
+    <figcaption>成功したときの画面（実際の表示。途中の部品の一覧は省略）。<b>最後に「成功しました」</b>と出ていれば準備完了です。</figcaption>
+  </figure>
+</section>
+
+<section class="chap">
+  <h3 style="margin-top:0">setup.bat がうまくいかないとき</h3>
+  <p>setup.bat は、最後に必ず<b>「成功しました」か「失敗：〜」のどちらか</b>を出して止まります。何も出ずに終わることはありません。失敗したときは、出た文字に合わせて直し、<b>もう一度 setup.bat を実行</b>します（入れ終わった部品は飛ばして、続きから入ります）。</p>
+  <div class="side">
+    <figure>
+<pre class="term sm">[1/4] Python を確かめています...
+
+<span class="ngl">############################################
+  失敗：Python が見つかりません
+############################################</span>
+  1. https://www.python.org/ から Python（3.10 以上・64bit）を入れてください。
+  2. 入れるときに「Add python.exe to PATH」にチェックを入れてください。
+  3. 入れたあと、この画面を閉じて setup.bat をもう一度実行してください。</pre>
+      <figcaption>失敗 A：Python が見つからない（実際の表示）</figcaption>
+    </figure>
+    <figure>
+<pre class="term sm">[3/4] 必要な部品をダウンロードして入れています...
+<span class="err">ERROR: Could not find a version that satisfies the requirement …
+ERROR: No matching distribution found for …</span>
+
+<span class="ngl">############################################
+  失敗：部品を入れられませんでした
+############################################</span>
+  ・インターネットにつながっているか確かめてください。
+  ・上に出ている赤い文字（ERROR）が原因です。写真に撮って相談してください。
+  ・直したら、setup.bat をもう一度実行してください（続きから入ります）。</pre>
+      <figcaption>失敗 B：部品を入れられない（実際の表示。ERROR の中身は原因によって変わる）</figcaption>
+    </figure>
+  </div>
+  <table>
+    <tr><th style="width:52mm">出た文字</th><th>原因と直し方</th></tr>
+    <tr><td class="k">失敗：Python が見つかりません</td><td>Python が入っていない、または「Add python.exe to PATH」のチェック忘れ。①をやり直す。<b>Python を入れた直後は、開いていた黒い画面を閉じてから</b> setup.bat を実行し直す</td></tr>
+    <tr><td class="k">失敗：部品を入れられませんでした</td><td>インターネットにつながっていない（学校や会社のネットワークで止められていることも）。別の回線（スマホのテザリングなど）で試す。それでもだめなら、赤い ERROR の行を写真に撮って相談</td></tr>
+    <tr><td class="k">（注意）この Python では Spout が使えません</td><td>失敗ではなく注意です。準備は続きます。Spout を使わないならそのままでかまいません。使うなら Python 3.13 を入れて、setup.bat をやり直す</td></tr>
+    <tr><td class="k">Microsoft Store が開いた</td><td>Python が入っていない状態です。Store から入れずに閉じて、①の手順（python.org）で入れる</td></tr>
+  </table>
+
+  <h3>⑤ run.bat で起動を確かめる</h3>
+  <ol class="steps">
+    <li><b>run.bat をダブルクリック</b><br>黒い出力ウィンドウと、ブラウザの操作パネルが開けば成功です（3章）。</li>
+    <li><b>初回だけ「Windows セキュリティの重要な警告」が出たら「許可」</b><br>スマホやタブレットから操作するための通信の確認です。</li>
+  </ol>
+  <div class="tip"><b class="h">ふだんは</b>run.bat をダブルクリックするだけです。足りない部品があれば、起動の前に自動で入れます。</div>
+</section>
+
+<section class="chap">
+  <h3 style="margin-top:0">フォルダの中身</h3>
+  <table>
+    <tr><th style="width:42mm">名前</th><th>何のためのもの</th></tr>
+    <tr><td class="k">run.bat</td><td>ふだんの起動。前回フルスクリーンにした出力は、同じ画面にフルスクリーンで開く</td></tr>
+    <tr><td class="k">run_window.bat</td><td>その回だけ、全部の出力をウィンドウで開く（準備・リハ用。設定は書き換えない）</td></tr>
+    <tr><td class="k">setup.bat</td><td>はじめての準備（上の④）</td></tr>
+    <tr><td class="k">.venv</td><td>setup.bat が作る、VPT39 専用の部品置き場（消すと setup.bat のやり直しが必要）</td></tr>
+    <tr><td class="k">media</td><td>動画・画像を入れるフォルダ（サブフォルダに分けてもよい）</td></tr>
+    <tr><td class="k">photos</td><td>写真ウォールの写真を入れるフォルダ（設定で別の場所にもできる）</td></tr>
+    <tr><td class="k">project.json</td><td>設定ファイル（自動で保存される。ふつうは触らない）</td></tr>
+    <tr><td class="k">manual</td><td>このガイドやクイックスタート、画面対応マニュアル（index.html）</td></tr>
+  </table>
+</section>
+
+<!-- ===================== 3 ===================== -->
+<section class="chap">
+  <h2><span class="c">3</span>起動と画面の見方</h2>
+  <p><b>run.bat</b> をダブルクリックすると、黒い<b>出力ウィンドウ</b>と、ブラウザの<b>操作パネル</b>が開きます。操作パネルが開かないときは、ブラウザで <b>http://localhost:8080/</b> を開きます。</p>
+  <figure>
+    <div class="shot" data-img="panel" data-crop="0,0,1440,900" data-b="0,0,1440,59,1;232,61,584,36,2;2,99,1026,604,3;0,706,1028,54,4;1033,61,405,40,5;1041,111,389,779,6"></div>
+    <figcaption>操作パネルの全体（デモの状態）</figcaption>
+  </figure>
+  <ul class="legend">
+    <li><i>1</i><span><b>上の帯</b>：明るさ・BLACKOUT・マッピング編集・スマホ・セッティング・保存・終了（12章・13章）</span></li>
+    <li><i>2</i><span><b>列で再生</b>：真下の列のクリップを全レイヤーで一斉に再生（7章）</span></li>
+    <li><i>3</i><span><b>レイヤーの行</b>：1行が1つのレイヤー。左に名前と基本操作、右にクリップ。下の行ほど手前に重なる（6章）。多いときはこの欄だけスクロール</span></li>
+    <li><i>4</i><span><b>レイヤー追加</b>（6章）</span></li>
+    <li><i>5</i><span><b>タブ</b>：「素材」「レイヤー設定」「ミキサー」「出力」を切り替える。<b>⧉</b> で別ウィンドウ（下）</span></li>
+    <li><i>6</i><span>選んでいるタブの中身（この図は「素材」：5章）</span></li>
+  </ul>
+</section>
+
+<section class="chap">
+  <h3 style="margin-top:0">上の帯</h3>
+  <figure>
+    <div class="shot" data-img="panel" data-crop="0,0,950,59" data-b="12,12,335,34,1;353,16,196,26,2;559,8,134,42,3;703,10,108,38,4;821,10,125,38,5"></div>
+  </figure>
+  <figure style="width:66mm;margin-left:auto;margin-top:-1mm">
+    <div class="shot" data-img="panel" data-crop="1008,0,432,59" data-b="1015,10,85,38,6;1110,10,188,38,7;1308,10,118,38,8"></div>
+  </figure>
+  <ul class="legend">
+    <li><i>1</i><span><b>VPT39 と状態の表示</b>：再生のしくみ（VLC（音声あり）なら正常）、出力の数、描画の速さ（fps）、「未保存」の有無</span></li>
+    <li><i>2</i><span><b>明るさ</b>：全部の出力の明るさ。音量には関係しません</span></li>
+    <li><i>3</i><span><b>BLACKOUT (B)</b>：0.5秒で全部の映像を暗くします（暗い間はボタンが黄色く光る）。もう一度押すと戻ります。<b>音は止まりません</b></span></li>
+    <li><i>4</i><span><b>全レイヤー消去</b>：全部のレイヤーをフェードアウトして消します</span></li>
+    <li><i>5</i><span><b>マッピング編集 (E)</b>：四隅を調整するモード（オンの間は赤）。本番中は必ずオフ</span></li>
+    <li><i>6</i><span><b>スマホ</b>：スマホから四隅を合わせる（オン・オフと QR コード。9章）。オンの間は緑の「スマホ ON」</span></li>
+    <li><i>7</i><span><b>セッティング：（名前）</b>：会場・公演ごとの設定ファイル（13章）</span></li>
+    <li><i>8</i><span><b>保存</b>（すぐ保存）・<b>終了</b>（確認のあと、保存してアプリを閉じる）</span></li>
+  </ul>
+  <h3>右側のタブと別ウィンドウ</h3>
+  <p>右側は4つのタブで切り替えます。<b>素材</b>（5章・8章）／<b>レイヤー設定</b>（6章・9章）／<b>ミキサー</b>（11章）／<b>出力</b>（4章）。</p>
+  <ul>
+    <li>タブの <b>⧉</b> を押すか、<b>タブをブラウザのウィンドウの外へドラッグして離す</b>と、その欄が別ウィンドウになります（離した場所に開きます）。素材が多いときは、素材を別ウィンドウにして大きく広げると便利です</li>
+    <li>別ウィンドウにした欄のタブは「↗」付きで薄くなります。押すと、そのウィンドウが前に出ます</li>
+    <li>別ウィンドウを閉じる（または「メイン画面に戻す」）と、タブに戻ります</li>
+  </ul>
+  <h3>「選択中のレイヤー」</h3>
+  <p>レイヤーの行をクリックすると、そのレイヤーが<b>選択中</b>になり、行の左端がオレンジ色になります。「レイヤー設定」タブとマッピングの図、素材をクリックしたときの追加先は、この選択中のレイヤーです。</p>
+  <h3>ボタンの色のきまり</h3>
+  <table>
+    <tr><th style="width:44mm">色</th><th>意味</th><th style="width:60mm">例</th></tr>
+    <tr><td><span class="sw g">表示</span> 緑</td><td>ふつうに動いている・選んでいる</td><td>表示、フルスクリーン中、再生中のクリップの枠、選んでいるタブ</td></tr>
+    <tr><td><span class="sw h">消す</span> 薄い緑</td><td>マウスを乗せている所（押すとこれが動く）。緑・赤のボタンは色はそのままで、薄い緑の縁が付く</td><td>すべてのボタン</td></tr>
+    <tr><td><span class="sw r">M</span> 赤</td><td>止めている・固定している状態。赤い文字はエラー</td><td>ミュート、隠し中、マッピング編集中、テスト表示中</td></tr>
+    <tr><td><span class="sw y">BLACKOUT (B)</span> 黄色</td><td>BLACKOUT だけの色（非常ボタン）。暗転中は黄色く光る</td><td>BLACKOUT</td></tr>
+  </table>
+  <h3>キーボード</h3>
+  <table>
+    <tr><th style="width:30mm">キー</th><th>動作</th><th style="width:50mm">使える場所</th></tr>
+    <tr><td><kbd>Space</kbd></td><td>レイヤー1（L1・一番奥）だけを次のクリップへ</td><td>操作パネル・出力ウィンドウ</td></tr>
+    <tr><td><kbd>B</kbd></td><td>ブラックアウトのオン／オフ</td><td>操作パネル・出力ウィンドウ</td></tr>
+    <tr><td><kbd>E</kbd></td><td>マッピング編集のオン／オフ（出力ウィンドウでは <kbd>Esc</kbd> でもオフ）</td><td>操作パネル・出力ウィンドウ</td></tr>
+    <tr><td><kbd>F</kbd> <kbd>F11</kbd></td><td>その出力ウィンドウのフルスクリーン切り替え（ダブルクリックでも。マッピング編集中はダブルクリックは効かない）</td><td>出力ウィンドウ</td></tr>
+    <tr><td><kbd>←</kbd><kbd>→</kbd><kbd>↑</kbd><kbd>↓</kbd></td><td>マッピング編集中だけ：選んでいる角（または全体）を 1px 動かす（<kbd>Shift</kbd> で 10px）</td><td>操作パネル・出力ウィンドウ</td></tr>
+    <tr><td><kbd>1</kbd>〜<kbd>9</kbd></td><td>レイヤーを選ぶ</td><td>出力ウィンドウ</td></tr>
+    <tr><td><kbd>Ctrl</kbd>+<kbd>S</kbd> / <kbd>Ctrl</kbd>+<kbd>Q</kbd></td><td>保存 ／ 終了</td><td>出力ウィンドウ</td></tr>
+  </table>
+  <div class="warn"><b class="h">注意</b>文字や数字を入れる欄（名前・フォルダ・フェードなど）や選択欄（▼）にカーソルがあるときは、キー操作は効きません。欄の外をクリックしてから押してください（スライダーやボタンを触った直後は効きます）。<kbd>Ctrl</kbd>+<kbd>Q</kbd> は<b>確認なしですぐ終了</b>します。</div>
+</section>
+
+<!-- ===================== 4 ===================== -->
+<section class="chap">
+  <h2><span class="c">4</span>プロジェクターに映す（出力ウィンドウ）</h2>
+  <ol class="steps">
+    <li><b>PC とプロジェクターをつなぎ、画面を「拡張」にする</b><br><kbd>⊞Win</kbd>＋<kbd>P</kbd> を押して「<b>拡張</b>」を選びます。「複製」だと手元の画面がそのまま映ってしまいます。</li>
+    <li><b>どの画面がプロジェクターか確かめる</b><br>「出力」タブの「画面の配置」にある <span class="btn">識別</span> を押すと、各画面の真ん中に番号が4秒間出ます。</li>
+    <li><b>出力ウィンドウをプロジェクターの画面へドラッグ</b><br>小さな黒いウィンドウの上の帯（タイトル）をつかんで、プロジェクター側の画面へ移します。</li>
+    <li><b>フルスクリーンにする</b><br>「出力」タブの <span class="btn">フルスクリーン</span> を押すと、<b>そのウィンドウがある画面いっぱい</b>に広がります。出力ウィンドウ上で <kbd>F</kbd> を押すか、ダブルクリックでも同じです。</li>
+    <li><b>スクリーンに映ったことを目で確認</b>。操作パネルは手元のPC 画面に置いたままにします。</li>
+  </ol>
+  <div class="side" style="grid-template-columns:56mm 1fr">
+    <figure style="margin-top:0">
+      <div class="shot" data-img="panel_outs" data-crop="1041,111,389,789" data-b="1330,122,89,27,1;1052,156,160,43,2;1213,159,97,38,3;1312,165,75,27,4;1389,165,30,27,5;1052,268,367,73,6;1052,457,367,24,7;1052,663,367,64,8;1267,737,152,27,9;1074,770,324,128,10;1052,207,367,55,11"></div>
+      <figcaption>「出力」タブ（出力2と出力3を横長につないだ例）</figcaption>
+    </figure>
+    <ul class="legend">
+      <li><i>1</i><span><b>＋出力を追加</b>：出力2、出力3…を増やす（上限なし）</span></li>
+      <li><i>2</i><span>出力の名前・解像度・いまある画面（画面1 がメイン）</span></li>
+      <li><i>3</i><span><b>フルスクリーン</b>：押すたびにオン／オフ。オンのときは枠なし・最前面・マウスカーソル非表示</span></li>
+      <li><i>4</i><span><b>手元に戻す</b>：ウィンドウに戻して、メイン画面の真ん中へ（見失ったとき用）</span></li>
+      <li><i>5</i><span><b>✕</b>：その出力を削除（出力が2つ以上のとき。そこに映していたレイヤーは出力1へ移る）</span></li>
+      <li><i>6</i><span><b>映すレイヤー</b>：この出力に映すレイヤーにチェック。グレーで押せないのは「そのレイヤーの出力はここだけ」の印</span></li>
+      <li><i>7</i><span>横長につないだ画面の名前と大きさ</span></li>
+      <li><i>8</i><span><b>横長にする</b>チェック、<b>重なり</b>、そのつなぎ目の<b>ガンマ</b>（下）</span></li>
+      <li><i>9</i><span><b>識別</b>／<b>ディスプレイ設定…</b>（Windows の設定を開く）</span></li>
+      <li><i>10</i><span><b>画面の配置図</b>：つながっている画面の並び・解像度・拡大率。緑の枠＝出力ウィンドウがある画面</span></li>
+      <li><i>11</i><span><b>本番の解像度</b>：本番のプロジェクターの解像度（下）</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="chap">
+  <h3 style="margin-top:0">プロジェクターが2台以上のとき</h3>
+  <p>使い方は2とおりあります。</p>
+  <table>
+    <tr><th style="width:44mm">使い方</th><th>やり方</th></tr>
+    <tr><td class="k">それぞれ別の映像</td><td><span class="btn">＋出力を追加</span> で出力2を出し、2台目の画面でフルスクリーン。映すレイヤーは「映すレイヤー」（⑥）か、「レイヤー設定」タブの「映す出力」で選ぶ</td></tr>
+    <tr><td class="k">同じ映像を両方に</td><td>1つのレイヤーを<b>両方の出力にチェック</b>。同じ映像が同じタイミングで出る。位置合わせ（四隅）は出力ごと（9章）。音は1回だけ鳴る</td></tr>
+    <tr><td class="k">2台で1枚の横長</td><td>下の「横長の画面」</td></tr>
+  </table>
+  <h3>横長の画面（2台のプロジェクターで1枚の映像）</h3>
+  <ol class="steps">
+    <li>出力を2つ用意し、左のプロジェクターに出力1（例では出力2）、右に出力2（例では出力3）をフルスクリーンにする</li>
+    <li>右側の出力の「<b>出力○の右につなげて横長にする</b>」（⑧）にチェック。2つが<b>1枚の横長の画面</b>（例：1920＋1920）になり、名前が「出力2＋出力3（横長）」になる</li>
+    <li>レイヤーをこの横長の画面に映し、四隅を横長の画面いっぱいに合わせる</li>
+    <li>プロジェクターの映像を少し重ねて設置したときは、「<b>重なり</b>」に重なっている幅（px）を入れる。重なり部分は両方に同じ映像が出て、なめらかにぼかしてつながる</li>
+    <li>重なりが周りより明るい・暗いときは、その出力の行の「<b>ガンマ</b>」（⑧）を調整する（明るすぎる→大きく、暗すぎる→小さく。ふつうは 2.2）。ガンマは<b>つなぎ目ごと</b>なので、3台以上つないだときは、つなぎ目ごとに合わせられる</li>
+  </ol>
+  <figure>
+    <div class="shot" data-img="out_wide" data-crop="0,40,2560,600" data-b="1150,40,250,600,1"></div>
+    <figcaption>出力2（左）と出力3（右）を横長につないだところ。① が重なり部分（左右で同じ映像が、ぼかしてつながる）</figcaption>
+  </figure>
+  <div class="note"><b class="h">ポイント</b>左右のプロジェクターは同じ解像度にします。3台以上もつなげられます（出力4を「出力3の右につなげる」）。つないだ右側の出力には「映すレイヤー」は出ません（横長の画面にまとめて映すため）。</div>
+  <div class="note"><b class="h">覚えている</b>フルスクリーンにした画面は保存されます。次の起動でも、<b>位置と解像度が同じ</b>画面にフルスクリーンで開きます。画面がない・並びが変わったときは、ウィンドウで開いて警告を出します。</div>
+  <div class="tip"><b class="h">本番の解像度（⑪）</b>本番で使うプロジェクターの解像度（1920×1080 など）を選んでおくと、<b>ウィンドウの大きさに関係なく、いつもその大きさで描きます</b>。別のPCで小さいウィンドウのまま合わせても、本番でそのまま使えます（形が違うときは黒い帯付きで縮小表示）。「自動」はウィンドウの大きさで描きます。</div>
+  <div class="warn"><b class="h">× では閉じない・拡大率は 100%</b>出力ウィンドウは右上の × では閉じません（減らすときは「出力」タブの ✕）。プロジェクターの画面は Windows の「拡大縮小」を 100% にし、画面の並びの変更はリハの前に。</div>
+</section>
+
+<!-- ===================== 5 ===================== -->
+<section class="chap">
+  <h2><span class="c">5</span>素材とクリップ</h2>
+  <h3>素材を入れる</h3>
+  <p>動画や画像を <b>media</b> フォルダに入れると、数秒で「<b>素材</b>」タブにサムネイル付きで出ます。</p>
+  <table>
+    <tr><th style="width:24mm">種類</th><th>使えるファイル</th></tr>
+    <tr><td class="k">動画</td><td>mp4・mov・m4v・avi・mkv・webm・wmv・mpg・mpeg</td></tr>
+    <tr><td class="k">画像</td><td>png・jpg・jpeg・bmp・gif・webp。<b>動くGIF・動くPNG（APNG）・動くWebP</b> はそのまま動く。透明な部分は下のレイヤーが透ける</td></tr>
+  </table>
+  <div class="tip"><b class="h">安定させるコツ</b>動画は <b>H.264・1920×1080（16:9）・30fps</b> の mp4 に。16:9 以外は引き伸ばされます。</div>
+  <div class="side" style="grid-template-columns:70mm 1fr">
+    <figure style="margin-top:0">
+      <div class="shot" data-img="panel" data-crop="1031,59,409,241" data-b="1035,64,81,39,1;1039,109,174,29,2;1039,168,393,34,3;1041,206,258,94,4;1139,207,27,23,5"></div>
+    </figure>
+    <ul class="legend">
+      <li><i>1</i><span><b>素材</b>タブ（⧉ で別ウィンドウ）</span></li>
+      <li><i>2</i><span><b>ファイル</b>／<b>空白・レイヤー・入力</b>の切り替え（後者は8章）</span></li>
+      <li><i>3</i><span><b>絞り込み</b>：フォルダ（media の中のサブフォルダ）とファイル名。右のつまみでサムネイルの大きさ</span></li>
+      <li><i>5</i><span><b>✕</b>：マウスを乗せると出る。押すと、その素材を<b>ごみ箱</b>へ（確認あり。ごみ箱から戻せる）</span></li>
+      <li><i>4</i><span><b>素材</b>：クリックすると<b>選択中の動画レイヤーの最後</b>に追加。<b>レイヤーの行へドラッグ</b>すると、落とした位置に追加（行のどこでもよい。下のレイヤーへは、ドラッグしたまま欄の下の端へ近づけると自動でスクロール）</span></li>
+    </ul>
+  </div>
+  <h3>クリップ（1つ分の素材）</h3>
+  <div class="side" style="grid-template-columns:36mm 1fr">
+    <figure style="margin-top:0">
+      <div class="shot" data-img="panel" data-crop="236,102,144,144" data-b="241,107,134,75,1;241,185,134,15,2;241,201,134,18,3;241,220,108,20,4;351,108,24,22,5;352,220,22,20,6"></div>
+    </figure>
+    <ul class="legend">
+      <li><i>1</i><span><b>サムネイル</b>：クリックで再生。ドラッグで並べ替え。左上は番号（列）</span></li>
+      <li><i>2</i><span><b>再生位置バー</b>：ドラッグで再生位置を移動（7章）</span></li>
+      <li><i>3</i><span><b>⏮ 頭出し／▶⏸ 再生・一時停止／⏹ 停止</b>と経過時間</span></li>
+      <li><i>4</i><span>ファイル名</span></li>
+      <li><i>5</i><span><b>終了時の動き</b>のマーク：押すたびに切り替わる（下の表）</span></li>
+      <li><i>6</i><span><b>✕</b> 削除（確認あり）</span></li>
+    </ul>
+  </div>
+  <table>
+    <tr><th style="width:36mm">終了時の動き（⑤を押す順）</th><th>動画が最後まで行ったら</th></tr>
+    <tr><td class="k">⟳ ループ</td><td>頭に戻って繰り返す（新しく追加したクリップはこれ）</td></tr>
+    <tr><td class="k">⏸ 最後で停止</td><td>最後の映像のまま止まる</td></tr>
+    <tr><td class="k">■ 終了で消える</td><td>フェードアウトして消える</td></tr>
+    <tr><td class="k">⏭ 次へ進む</td><td>同じレイヤーの次のクリップを自動で再生（プレイリストのように続けて流せる）。<b>動画のみ</b></td></tr>
+  </table>
+</section>
+
+<section class="chap">
+  <h3 style="margin-top:0">空白クリップ（何も映さない）</h3>
+  <div class="side" style="grid-template-columns:62mm 1fr">
+    <figure style="margin-top:0">
+      <div class="shot" data-img="panel" data-crop="524,102,288,130" data-b="528,106,136,121,1;693,132,94,29,2"></div>
+    </figure>
+    <ul class="legend">
+      <li><i>1</i><span><b>空白のクリップ</b>：押すと、今の映像と音がフェードアウトして、そのレイヤーは何も映さない</span></li>
+      <li><i>2</i><span><b>＋ 空白を追加</b>：空白のクリップを最後に追加。素材はこの枠にもドラッグできる</span></li>
+    </ul>
+  </div>
+  <p>「他のレイヤーは映像を流しているけれど、このレイヤーはこの曲では休ませたい」ときに使います。ふつうのクリップと同じく、並べ替え・「次へ」・「列で再生」の対象になるので、曲ごとに列をそろえるときの<b>すき間埋め</b>にも便利です。</p>
+  <h3>パソコンから取り込む・消す</h3>
+  <div class="note"><b class="h">パソコンから取り込む</b>エクスプローラーから動画や画像を、操作パネルの「素材」の欄へ<b>ドラッグして離す</b>と、media フォルダにコピーされます（緑の点線が出たら離す。何個でも一度に）。フォルダで絞り込んでいるときは、そのフォルダに入ります。同じ名前があると「名前 (2)」で保存します。動画・画像でないファイルは飛ばします。素材を消すときは、タイルにマウスを乗せて右上の ✕（ごみ箱へ移る）。</div>
+  <h3>並べ替えとコピー</h3>
+  <ul>
+    <li>クリップのサムネイルを<b>ドラッグ</b>すると、同じレイヤーの中で並べ替えられます（落とす位置に黄色い線が出る）</li>
+    <li><b>別のレイヤーへドラッグ</b>すると、そのレイヤーに<b>コピー</b>されます（終了時の動きは「ループ」に戻る）</li>
+    <li><b>曲ごとに列をそろえる</b>：曲1の映像はどのレイヤーでも1番目、曲2は2番目…と並べると、「列で再生」の1回で全レイヤーが切り替わります。映さないレイヤーには空白を置きます</li>
+  </ul>
+</section>
+
+<!-- ===================== 6 ===================== -->
+<section class="chap">
+  <h2><span class="c">6</span>レイヤー</h2>
+  <p>レイヤーは「映像を重ねる層」です。<b>L1 が一番奥</b>で、番号が大きいほど手前に重なります。レイヤーには<b>動画レイヤー</b>（クリップを並べて再生）と<b>写真ウォール</b>（10章）の2種類があります。</p>
+  <figure style="max-width:130mm">
+    <div class="shot" data-img="panel" data-crop="0,252,820,153" data-b="8,258,161,24,1;8,285,215,23,2;8,313,215,23,3;8,338,215,27,4;8,366,215,26,5;238,258,140,140,6"></div>
+  </figure>
+  <ul class="legend">
+    <li><i>1</i><span><b>名前と番号</b>：「L2 動画」の L2 は奥から2番目のレイヤー、「動画」は種類</span></li>
+    <li><i>2</i><span><b>いま再生中</b>：ファイル名、経過／長さ、進み具合</span></li>
+    <li><i>3</i><span><b>◀ 前／次へ ▶／消す</b>（7章）</span></li>
+    <li><i>4</i><span><b>表示</b>（緑のとき映る。押すと赤い「隠し中」）・<b>M</b>（音のミュート。赤で消音中）・<b>▲▼</b>（重なり順）・<b>🗑</b>（削除。確認あり）。「隠し中」でも<b>音は鳴り続ける</b></span></li>
+    <li><i>5</i><span><b>不透明度</b></span></li>
+    <li><i>6</i><span><b>クリップ</b>（5章・7章）</span></li>
+  </ul>
+  <h3>「レイヤー設定」タブ</h3>
+  <div class="side" style="grid-template-columns:48mm 1fr">
+    <figure style="margin-top:0">
+      <div class="shot" data-img="panel_insp" data-crop="1041,111,389,612" data-b="1052,153,367,34,1;1052,192,369,22,2;1052,220,367,35,3;1052,259,367,61,4;1052,324,367,34,5;1052,363,369,22,6;1052,393,367,280,7"></div>
+    </figure>
+    <ul class="legend">
+      <li><i>1</i><span><b>名前</b></span></li>
+      <li><i>2</i><span><b>不透明度</b>（行の左と同じ）</span></li>
+      <li><i>3</i><span><b>合成方法</b>（下の表）</span></li>
+      <li><i>4</i><span><b>映す出力</b>：どの出力（プロジェクター）に映すか。<b>複数にチェックすると、同じ映像を同時に映す</b>。出力が1つのときは出ない</span></li>
+      <li><i>5</i><span><b>フェード</b>：切り替えにかける秒数（0〜30秒）。0 で一瞬。音も同じ秒数で入れ替わる</span></li>
+      <li><i>6</i><span><b>エッジぼかし</b>：四角のふちをぼかして、はみ出しを目立たなくする（2台のプロジェクターをつなぐときは4章の「重なり」を使う）</span></li>
+      <li><i>7</i><span><b>マッピング</b>（9章）</span></li>
+    </ul>
+  </div>
+  <table>
+    <tr><th style="width:30mm">合成方法</th><th>見え方</th><th style="width:52mm">使いどころ</th></tr>
+    <tr><td class="k">通常</td><td>そのまま上に重なる（不透明度で透ける）</td><td>ふつうの映像</td></tr>
+    <tr><td class="k">加算</td><td>下の映像に明るさを足す。黒は透明、重なると明るくなる</td><td>光・炎・パーティクル</td></tr>
+    <tr><td class="k">スクリーン</td><td>加算より穏やかに明るく重なる。黒は透明</td><td>黒背景の素材を重ねる</td></tr>
+    <tr><td class="k">乗算</td><td>下の映像を暗くする。白は透明</td><td>影・汚し・枠</td></tr>
+  </table>
+  <p><b>レイヤーを追加する</b>：レイヤー欄の一番下の <span class="btn">＋動画レイヤー</span> か <span class="btn">＋写真ウォール</span>。新しいレイヤーは<b>一番手前</b>に追加され、選択中のレイヤーと同じ出力に映ります。</p>
+</section>
+
+<!-- ===================== 7 ===================== -->
+<section class="chap">
+  <h2><span class="c">7</span>再生の操作</h2>
+  <figure style="max-width:130mm">
+    <div class="shot" data-img="panel" data-crop="0,59,680,195" data-b="232,61,440,36,1;241,107,134,75,2;241,187,134,33,3;8,157,215,27,4"></div>
+  </figure>
+  <table>
+    <tr><th style="width:8mm"></th><th style="width:36mm">操作</th><th>何が起きるか</th><th style="width:34mm">変わるレイヤー</th></tr>
+    <tr><td>1</td><td class="k">列で再生 1, 2 …</td><td>その番号のクリップを一斉に再生</td><td><b>全部</b>の動画レイヤー</td></tr>
+    <tr><td>2</td><td class="k">サムネイルをクリック</td><td>そのクリップにクロスフェードで切り替え。緑の枠＝再生中</td><td><b>そのレイヤーだけ</b></td></tr>
+    <tr><td>3</td><td class="k">ミニ操作</td><td>下を参照</td><td>そのレイヤーだけ</td></tr>
+    <tr><td>4</td><td class="k">前・次へ・消す</td><td>前／次のクリップへ（最後の次は最初へ）。「消す」でフェードアウト</td><td>そのレイヤーだけ</td></tr>
+    <tr><td></td><td class="k"><kbd>Space</kbd></td><td>次のクリップへ</td><td><b>L1 だけ</b></td></tr>
+  </table>
+  <h3>ミニ操作（サムネイルの下）</h3>
+  <ul>
+    <li><b>再生位置バー</b>：再生中は<b style="color:var(--grn)">緑</b>、一時停止中は<b style="color:var(--org)">オレンジ</b>。ドラッグすると、その位置へ移動します</li>
+    <li><b>⏮</b> 頭出し（先頭に戻って再生）　<b>▶／⏸</b> 再生・一時停止（もう一度押すと続きから）　<b>⏹</b> 停止（そのレイヤーを消す）</li>
+    <li>再生していないクリップのバーをドラッグしたり ⏮ を押したりすると、<b>そのクリップが始まります</b></li>
+    <li>画像・空白・カメラ・ウィンドウ・レイヤー映像のクリップは ⏹ だけです</li>
+  </ul>
+  <h3>切り替えのしくみ（クロスフェード）</h3>
+  <p>クリップを押すと、前の映像が薄くなりながら、次の映像が濃くなって入れ替わります。<b>音も同時に</b>入れ替わります。かかる秒数はレイヤーの「フェード」です。</p>
+  <div class="note"><b class="h">途切れない</b>次の動画の最初の映像が出るまで（最大3秒ほど）は、前の動画の映像と音を流し続けます。ファイルが消えた・壊れている動画は切り替えずに前の映像のまま、行の左に赤字で知らせます。</div>
+</section>
+
+<!-- ===================== 8 ===================== -->
+<section class="chap">
+  <h2><span class="c">8</span>ライブ入力とレイヤー映像</h2>
+  <p>「素材」タブで <span class="btn">空白・レイヤー・入力</span> に切り替えると、ファイル以外の素材が並びます。ファイルと同じように、<b>クリックで選択中のレイヤーの最後に追加</b>、<b>レイヤーの行へドラッグで好きな位置に追加</b>します。</p>
+  <div class="side" style="grid-template-columns:62mm 1fr">
+    <figure style="margin-top:0">
+      <div class="shot" data-img="panel_special" data-crop="1041,100,389,740" data-b="1093,109,119,29,1;1039,174,393,108,2;1039,290,393,194,3;1039,491,393,114,4;1355,491,77,27,5;1039,613,393,108,6;1039,728,393,108,7"></div>
+    </figure>
+    <ul class="legend">
+      <li><i>1</i><span><b>空白・レイヤー・入力</b>（「ファイル」で元の一覧へ）</span></li>
+      <li><i>2</i><span><b>空白</b>：何も映さない・音も止める（5章）</span></li>
+      <li><i>3</i><span><b>レイヤーの映像</b>：L1, L2 … の今の映像（下）</span></li>
+      <li><i>4</i><span><b>カメラ・キャプチャーボード</b>（下）</span></li>
+      <li><i>5</i><span><b>一覧を更新</b>：機器をつないだ・ウィンドウを開いたあとに押す</span></li>
+      <li><i>6</i><span><b>ウィンドウ</b>：同じPCで開いているウィンドウ（下）</span></li>
+      <li><i>7</i><span><b>Spout</b>：ほかの映像アプリ（TouchDesigner・Processing・OBS など）から送られている映像（次のページ）</span></li>
+    </ul>
+  </div>
+  <figure style="max-width:120mm">
+    <div class="shot" data-img="panel" data-crop="236,405,576,160" data-b="240,413,136,145,1;243,490,130,25,2;384,413,136,121,3;528,413,136,121,4;672,413,136,121,5"></div>
+    <figcaption>レイヤーの行に並んだ特別なクリップ</figcaption>
+  </figure>
+  <ul class="legend">
+    <li><i>1</i><span><b>カメラ</b>（茶色）</span></li>
+    <li><i>2</i><span>一緒に流す<b>音声入力</b>を選ぶ欄</span></li>
+    <li><i>3</i><span><b>ウィンドウ</b>（青）</span></li>
+    <li><i>4</i><span><b>Spout</b>（紫）</span></li>
+    <li><i>5</i><span><b>レイヤーの映像</b>（緑）。空白はしま模様</span></li>
+  </ul>
+</section>
+
+<section class="chap">
+  <h3 style="margin-top:0">レイヤーの映像（同じ映像を、別の場所・別の出力に）</h3>
+  <p>あるレイヤーの<b>今の映像そのもの</b>を、別のレイヤーの素材として使います。元のレイヤーでクリップを切り替えると、こちらも同じタイミングで切り替わります。</p>
+  <ul>
+    <li>例：L1「背景動画」の映像を、L3 で出力2にも映す（L3 は L1 と別の位置・別の形に合わせられる）</li>
+    <li>元のレイヤーを「表示」オフにしても使えます（素材としてだけ使う）</li>
+    <li>音は元のレイヤーで鳴ります（二重になりません）。自分自身の映像は使えません</li>
+    <li>単に「同じレイヤーを2つの出力に」なら、「映す出力」で両方にチェックするほうが簡単です（6章）</li>
+  </ul>
+  <h3>カメラ・キャプチャーボード（別のPCの画面と音）</h3>
+  <ol class="steps">
+    <li>キャプチャーボード（HDMI→USB など）やカメラをPC につなぎ、「<b>一覧を更新</b>」</li>
+    <li>一覧の機器をレイヤーに追加し、クリップを押すと映像が映る（遅れはおよそ 0.1〜0.2 秒）</li>
+    <li>音も流すときは、クリップの「<b>音声なし</b>」の欄で音声入力を選ぶ（キャプチャーボードなら、たいてい同じ名前が入った「デジタル オーディオ インターフェイス」など）。音量はミキサーのそのレイヤーで</li>
+  </ol>
+  <div class="note"><b class="h">ポイント</b>再生中に音声入力を選び直すと、映像は止めずに音だけ入れ替わります。音は Windows の「既定のスピーカー」から出ます。<b>OBS の仮想カメラ</b>も一覧に出るので、OBS で作った画面も取り込めます。</div>
+  <div class="note"><b class="h">同じ機種を2台</b>同じ機種のキャプチャーボードを2台つなぐと、2台目は「<b>名前（2台目）</b>」と出ます。抜き差しや再起動で1台目と2台目が入れ替わることがあるので、いつも同じ USB の差し込み口につなぎます。</div>
+  <div class="note"><b class="h">途中で抜けたら</b>映っていたカメラのケーブルが抜けたり電源が切れたりすると、<b>最後の映像のまま</b>、行の左に赤字で「カメラの映像が止まっています」と出て、5秒ごとに自動でつなぎ直します。つながると赤字は消えます。</div>
+  <div class="warn"><b class="h">同じカメラは1か所だけ</b>同じカメラを2つのクリップで同時には開けません（赤字で知らせます）。同じカメラの映像を別の場所にも映すときは「レイヤーの映像」を使います。</div>
+  <h3>ウィンドウ取り込み（同じPCの別のアプリ）</h3>
+  <p>Zoom・Discord・ブラウザなど、<b>どのウィンドウでも</b>映像を取り込めます。音は取り込みません。</p>
+  <ul>
+    <li>ウィンドウは<b>最小化しない</b>でください（止まることがあります）。ほかのウィンドウの後ろに隠れていても取り込めます</li>
+    <li>題名が変わるアプリ（再生中の曲名が出るなど）でも、だいたい同じ題名のウィンドウを探します</li>
+    <li>動画配信サービスなど、保護された映像は黒くなることがあります</li>
+  </ul>
+</section>
+
+
+<section class="chap">
+  <h3 style="margin-top:0">Spout（ほかの映像アプリから受け取る）</h3>
+  <p><b>Spout</b> は、Windows のアプリ同士で映像を受け渡すしくみです（Mac の Syphon にあたる）。映像をグラフィックボードの中で直接渡すので<b>遅れがほとんどなく</b>、<b>透明な部分もそのまま</b>重ねられます。送る側のアプリが Spout に対応している必要があります。</p>
+  <table>
+    <tr><th style="width:36mm">送る側のアプリ</th><th>Spout で送る方法</th></tr>
+    <tr><td class="k">Processing</td><td>「Spout for Processing」ライブラリ（下で詳しく）</td></tr>
+    <tr><td class="k">TouchDesigner</td><td>送りたい TOP の後ろに「<b>Syphon Spout Out</b>」TOP をつなぐ。名前は「Sender Name」</td></tr>
+    <tr><td class="k">OBS Studio</td><td>追加機能「<b>Spout2 Plugin for OBS</b>」を入れ、ツール → Spout Output Settings で出力を開始</td></tr>
+    <tr><td class="k">VJアプリ</td><td>Spout に対応しているものは、出力の設定で Spout をオン</td></tr>
+  </table>
+  <ol class="steps">
+    <li><b>送る側のアプリで Spout 出力をオンにする</b>（アプリは動かしたままにする）</li>
+    <li>VPT39 の「素材」タブ → <span class="btn">空白・レイヤー・入力</span> → <span class="btn">一覧を更新</span></li>
+    <li>「Spout」の欄に送り元の名前が出るので、レイヤーの行へドラッグ（クリックでも追加）。クリップを押すと映る</li>
+  </ol>
+  <div class="note"><b class="h">止まったら</b>送る側のアプリが止まる・閉じると、<b>最後の映像のまま</b>赤字で「Spout の映像が止まっています」と出ます。同じ名前で送り直すと、続きが自動で映ります。</div>
+  <div class="warn"><b class="h">Python 3.13 で</b>Spout の部品は Python 3.13 までにしか対応していません。3.14 以降の Python で setup.bat を実行すると「（注意）この Python では Spout が使えません」と出て、Spout の欄は空になります（ほかの機能は使える）。</div>
+
+</section>
+
+<section class="chap">
+  <h3 style="margin-top:0">Processing で作った映像を映す（Spout for Processing）</h3>
+  <ol class="steps">
+    <li><b>ライブラリを入れる</b>：Processing のメニュー「スケッチ」→「ライブラリをインポート」→「<b>ライブラリを追加…</b>」。検索欄に <b>Spout</b> と入れ、「<b>Spout for Processing</b>」を選んで「Install」。1回だけでよい</li>
+    <li><b>スケッチに3か所書き足す</b>（下の例）：① いちばん上で <code>import spout.*;</code> ② <code>setup()</code> で Spout を作って名前を付ける ③ <code>draw()</code> の<b>最後</b>で <code>spout.sendTexture();</code></li>
+    <li><b>size() は P2D か P3D にする</b>。<code>size(1280, 720)</code> のまま（JAVA2D）だと送れません</li>
+    <li><b>実行（▶）する</b>。VPT39 で「一覧を更新」すると、Spout の欄に付けた名前（例：Processing）が出る</li>
+  </ol>
+<pre class="code"><span class="c">// ① Spout を使う</span>
+import spout.*;
+Spout spout;
+
+void setup() {
+  size(1280, 720, P2D);            <span class="c">// P2D か P3D（OpenGL）にする</span>
+  spout = new Spout(this);         <span class="c">// ② 作って</span>
+  spout.setSenderName("Processing"); <span class="c">//    VPT39 の一覧に出る名前</span>
+}
+
+void draw() {
+  background(0);
+  fill(255, 120, 200);
+  ellipse(mouseX, mouseY, 160, 160);
+  spout.sendTexture();             <span class="c">// ③ いま描いた画面を送る（draw の最後）</span>
+}</pre>
+  <table>
+    <tr><th style="width:40mm">したいこと</th><th>書き方</th></tr>
+    <tr><td class="k">背景を透明にして重ねる</td><td><code>background(0);</code> の代わりに <code>clear();</code>。描いた所だけが VPT39 の上のレイヤーに重なる（VPT39 側の合成は「通常」）</td></tr>
+    <tr><td class="k">解像度</td><td><code>size()</code> の大きさがそのまま送られる。投影する大きさ（例：1920, 1080）にすると、きれいに映る</td></tr>
+    <tr><td class="k">2つ以上送る</td><td>スケッチごとに別の名前を付ける（同じ名前だと後から動かした方だけになる）</td></tr>
+    <tr><td class="k">止める</td><td>スケッチを止めると、VPT39 は最後の映像のまま赤字で知らせる</td></tr>
+  </table>
+  <div class="tip"><b class="h">一覧に出ないとき</b>① スケッチが実行中か ② <code>size()</code> が P2D／P3D か ③ <code>draw()</code> の中で <code>sendTexture()</code> を呼んでいるか ④「一覧を更新」を押したか。<b>ノートPC</b>で映らないときは、Windows の「設定 → ディスプレイ → グラフィック」で、Processing（java.exe）と VPT39（python.exe）の両方を「高パフォーマンス」にして、同じグラフィックボードで動かします。</div>
+  <div class="note"><b class="h">Mac では</b>Mac の Processing には同じ使い方の「Syphon」ライブラリがあります。VPT39 は Windows 専用なので、受け取れるのは Spout です。</div>
+</section>
+
+<!-- ===================== 9 ===================== -->
+<section class="chap">
+  <h2><span class="c">9</span>マッピング（形を合わせる）</h2>
+  <p>プロジェクターを斜めから当てたり、台形のスクリーンに映したりすると、映像の形がずれます。<b>レイヤーごとに四隅を動かして</b>、スクリーンの形に合わせます。</p>
+  <ol class="steps">
+    <li><b>レイヤーの行をクリックして選ぶ</b>（左端がオレンジになる）。「レイヤー設定」タブを開く</li>
+    <li>上の帯の <span class="btn">マッピング編集 (E)</span> をオン（または <kbd>E</kbd>）。出力ウィンドウにレイヤーの枠と四隅の点、下に操作の案内が出ます。<span class="btn">テスト表示</span> をオンにすると格子・対角線・円が映り、ゆがみが分かりやすくなります</li>
+    <li>図で<b>角をドラッグ</b>して、スクリーンの角に合わせる。内側をドラッグすると全体が移動します</li>
+    <li>最後に<b>矢印キーで微調整</b>：⑥ で角（または全体）を選び、矢印キーで 1px ずつ（下の表）。スクリーンの前で合わせるなら<b>スマホ</b>から（次のページ）</li>
+  </ol>
+  <div class="side">
+    <figure>
+      <div class="shot" data-img="panel_insp" data-crop="1041,385,389,318" data-b="1200,393,219,27,1;1052,426,367,27,2;1052,459,367,209,3;1052,674,367,27,6"></div>
+      <figcaption>「レイヤー設定」タブのマッピング</figcaption>
+    </figure>
+    <figure>
+      <div class="shot" data-img="out1_edit" data-crop="0,0,1280,720" data-b="66,46,22,22,4;15,655,1180,50,5"></div>
+      <figcaption>編集中の出力ウィンドウ</figcaption>
+    </figure>
+  </div>
+  <ul class="legend">
+    <li><i>1</i><span><b>編集 (E)</b>／<b>テスト表示</b>／<b>四隅リセット</b>（画面いっぱいの四角に戻す）</span></li>
+    <li><i>2</i><span><b>位置合わせする出力</b>：複数の出力に映しているレイヤーのとき、どの出力の四隅を直すか選ぶ（出力ウィンドウ上で角をつかんでも切り替わる）</span></li>
+    <li><i>3</i><span><b>図</b>：その出力に映しているレイヤーが出る（選択中以外は薄く）。白い四角が動かせる角</span></li>
+    <li><i>4</i><span><b>選んでいる角</b>（赤）。ほかの角は黄色。「全体」を選んでいるときは、案内に ALL と出る</span></li>
+    <li><i>5</i><span><b>案内</b>：編集中のレイヤーと出力、操作キー（編集中だけ出る）</span></li>
+    <li><i>6</i><span><b>矢印キーで動かす所</b>：左上／右上／右下／左下／<b>全体</b>（緑が選択中）。全体は形を変えずに位置だけずらす</span></li>
+  </ul>
+  <table>
+    <tr><th style="width:40mm">出力ウィンドウ上の操作</th><th>動作</th></tr>
+    <tr><td><kbd>1</kbd>〜<kbd>9</kbd> ／ <kbd>Tab</kbd> ／ <kbd>A</kbd></td><td>レイヤーを選ぶ ／ 動かす所を次へ（左上→右上→右下→左下→全体。<kbd>Shift</kbd>+<kbd>Tab</kbd> で前へ）／ 全体を選ぶ</td></tr>
+    <tr><td><kbd>←</kbd><kbd>→</kbd><kbd>↑</kbd><kbd>↓</kbd></td><td>選んだ角（全体）を 1px 動かす（<kbd>Shift</kbd> を押しながらだと 10px）。<b>操作パネルでも同じ</b>（マッピング編集中だけ）</td></tr>
+    <tr><td><kbd>T</kbd> ／ <kbd>R</kbd> ／ <kbd>E</kbd>・<kbd>Esc</kbd></td><td>テスト表示 ／ 四隅リセット（<b>合わせた形が消える。本番中は押さない</b>）／ 編集を終える</td></tr>
+  </table>
+</section>
+
+
+<section class="chap">
+  <h3 style="margin-top:0">スマホで位置合わせ（セッティングモード）</h3>
+  <p>PC から離れて、<b>スクリーンの前や客席でスマホを持って</b>四隅を合わせられます。スマホで操作している間、スクリーンの映像そのものに黄色い枠と赤い印（いま動かしている所）が出るので、<b>スクリーンを見たまま</b>十字ボタンを押すだけで合わせられます。</p>
+  <div class="side" style="grid-template-columns:52mm 1fr">
+    <figure style="margin-top:0">
+      <div class="shot" data-img="mobile" data-crop="0,0,390,720" data-b="278,6,102,47,1;10,57,370,100,2;10,161,370,211,3;10,401,162,172,4;178,401,202,172,5;10,579,370,50,6;10,632,370,76,7"></div>
+      <figcaption>スマホの画面（http://PCのアドレス:8080/m）</figcaption>
+    </figure>
+    <ul class="legend">
+      <li><i>1</i><span><b>枠を表示</b>：スクリーンに枠と印を出す（PC の「マッピング編集」と同じ）。スマホで開くと自動でオン。<b>合わせ終わったら必ずオフ</b>。左上の丸が緑ならつながっている</span></li>
+      <li><i>2</i><span><b>レイヤー</b>と、複数の出力に映しているときは<b>出力</b>を選ぶ（PC の選択も変わる）</span></li>
+      <li><i>3</i><span><b>配置図</b>：角を指でなぞると変形、内側をなぞると移動（だいたいの位置まで）</span></li>
+      <li><i>4</i><span><b>動かす所</b>：左上・右上・左下・右下・全体（緑が選択中）</span></li>
+      <li><i>5</i><span><b>十字ボタン</b>：押すと 1回分、<b>長押しで続けて</b>動く（1.5秒たつと速くなる）。真ん中で 1px／10px を切り替え</span></li>
+      <li><i>6</i><span><b>1つ戻す</b>（続けて動かした分はまとめて1回）・<b>テスト模様</b>（格子。オンの間は赤）・<b>四隅リセット</b>（確認あり。1つ戻すで戻せる）</span></li>
+      <li><i>7</i><span><b>不透明度</b>・<b>ぼかし</b></span></li>
+    </ul>
+  </div>
+  <h3>つなぎ方（QR コード）</h3>
+  <div class="side" style="grid-template-columns:62mm 1fr">
+    <figure style="margin-top:0">
+      <div class="shot" data-img="panel_lan" data-crop="460,60,520,463" data-b="473,106,164,38,1;606,147,228,228,2;664,406,112,27,3"></div>
+    </figure>
+    <ol class="steps">
+      <li><b>上の帯の「スマホ」を押し、「スマホから操作する」（①）</b>。起動し直す必要はありません。初めてのときに「Windows セキュリティの重要な警告」が出たら、「<b>プライベート ネットワーク</b>」にチェックして「アクセスを許可する」</li>
+      <li><b>PC とスマホを同じ Wi-Fi につなぎ、スマホのカメラで QR コード（②）を読み取る</b>。位置合わせの画面が開く（下にアドレスも出るので、入力してもよい）</li>
+      <li><b>終わったら「スマホからの操作をやめる」</b>。オン・オフは保存され、次の起動でも同じ。Wi-Fi を変えたときは「アドレスを調べ直す」（③）</li>
+    </ol>
+  </div>
+  <div class="warn"><b class="h">気をつけること</b>合言葉がないので、<b>同じ Wi-Fi の人なら誰でも操作できます</b>。自分のルーターか、スマホのテザリングで使います。会場やホテルの Wi-Fi は、機器どうしの通信を止めていることが多く、つながらないことがあります。使わないときは「スマホからの操作をやめる」を押します。</div>
+  <div class="tip"><b class="h">画面が消えないように</b>スマホの「自動ロック」を長め（5分など）にしておきます。つながらなくなると、スマホの上に赤く「PCとつながっていません」と出て、ボタンが押せなくなります（つながると自動で戻る）。</div>
+</section>
+
+<!-- ===================== 10 ===================== -->
+<section class="chap">
+  <h2><span class="c">10</span>写真ウォール</h2>
+  <p>指定したフォルダに入った写真を、順番に表示するレイヤーです。会場で撮った写真や、来場者から集めた写真を流すのに使います。</p>
+  <figure style="max-width:110mm">
+    <div class="shot" data-img="panel" data-crop="0,567,1184,137" data-b="8,573,215,27,1;238,573,428,104,2;670,573,140,124,3;814,573,364,94,4"></div>
+  </figure>
+  <ul class="legend">
+    <li><i>1</i><span>写真ウォールの行（名前と「表示」など。音はないので M はない）</span></li>
+    <li><i>2</i><span><b>並べた画像</b>：押すとその画像をすぐ出す（緑の枠＝いま出している）。ドラッグで並べ替え、✕ で外す</span></li>
+    <li><i>3</i><span>素材の画像を<b>ここへドラッグ</b>して並べる</span></li>
+    <li><i>4</i><span>写真の枚数・間隔と、<b>次の写真 ▶</b>（すぐ次へ）</span></li>
+  </ul>
+  <h3>出す写真の決め方（2とおり）</h3>
+  <table>
+    <tr><th style="width:44mm">やり方</th><th>出し方</th></tr>
+    <tr><td class="k">行に画像を並べる</td><td>「素材」タブの画像を、写真ウォールの行へドラッグ（写真ウォールを選んでいるときは、素材の画像をクリックでも）。<b>並べた順に</b>出し、最後まで行ったら最初へ。<b>1枚だけなら、その画像を出し続ける</b>。画像を押すと、その画像をすぐ出す</td></tr>
+    <tr><td class="k">フォルダの写真（行が空のとき）</td><td>「フォルダ」に入っている写真を順番に出す（今までどおり）。新しく入った写真を優先できる</td></tr>
+  </table>
+  <p>どちらも<b>列で再生とは別に</b>、「間隔」と「切り替え方」に合わせて動きます。写真ウォールに入れられるのは画像だけです（動画・カメラなどは動画レイヤーへ）。</p>
+  <h3>設定（写真ウォールの行を選んで「レイヤー設定」タブ）</h3>
+  <table>
+    <tr><th style="width:36mm">設定</th><th>内容</th></tr>
+    <tr><td class="k">フォルダ</td><td>行に画像を並べていないときに、写真を読むフォルダ。「photos」のように書くと VPT39 フォルダの中、フルパスでほかの場所も指定できる。<b>名前を間違えると空のフォルダが新しく作られ「0枚」</b>になるので、枚数を確認</td></tr>
+    <tr><td class="k">間隔(秒)</td><td>次の写真に切り替えるまでの秒数。0 なら自動では切り替えない</td></tr>
+    <tr><td class="k">切り替え方</td><td>フェード（じわっと）／静止（効果なし・パッと切り替え）／スライド（右から左・左から右・下から上・上から下）／ワイプ（左から順に）／ズーム（少し寄りから）。かける時間は「フェード」の秒数。スライドは前の写真を押し出す。<b>切り替えの途中は次の写真を出さない</b>（間隔より切り替え時間が長いと、そのぶん間隔が延びる）</td></tr>
+    <tr><td class="k">白フチ</td><td>写真のまわりの白い枠の太さ</td></tr>
+    <tr><td class="k">新着を優先して表示</td><td>新しく入った写真を先に出す（前の切り替えから最短3秒）。間隔が 0 でも、新着だけは自動で出る</td></tr>
+  </table>
+  <div class="side">
+    <figure>
+      <div class="shot" data-img="out_wide" data-crop="1300,0,1260,709" data-b="1716,92,662,503,1"></div>
+      <figcaption>① 写真ウォール（例では横長の画面の右側）</figcaption>
+    </figure>
+    <div>
+      <ul>
+        <li>写真は<b>縦長・横長のまま</b>、歪まずに収まります（マッピングの四角の形に合わせて自動で調整）</li>
+        <li>書き込み途中の写真を避けるため、保存されてから<b>1秒待って</b>から読み込みます</li>
+        <li>読むのはフォルダの<b>すぐ下</b>の png・jpg・bmp・gif・webp だけ（サブフォルダの中や、iPhone の HEIC 写真は出ない）。動くGIF・APNG・WebP は動く</li>
+        <li>止めたいときは行の「表示」を消すか「消す」。「消す」のあとは「次の写真 ▶」を押すまで新しい写真は出ない</li>
+      </ul>
+    </div>
+  </div>
+  <div class="danger"><b class="h">運用の注意</b>写真ウォールは、そのフォルダに入った写真を<b>すべて</b>映します。人の目で確認して OK になった写真だけが入るフォルダ（例：Dropbox の「承認済み」フォルダ）を指定してください。写っている人の掲載の同意にも気をつけます。</div>
+</section>
+
+<!-- ===================== 11 ===================== -->
+<section class="chap">
+  <h2><span class="c">11</span>音声ミキサー</h2>
+  <p>動画レイヤーとカメラの音は、どの出力に映していても<b>全部同時に鳴ります</b>。音量は「<b>ミキサー</b>」タブで調整します。</p>
+  <div class="side">
+    <figure>
+      <div class="shot" data-img="panel_mixer" data-crop="1041,111,389,311" data-b="1052,151,367,27,1;1052,184,367,34,2;1052,218,367,36,3;1221,218,38,27,4"></div>
+    </figure>
+    <ul class="legend">
+      <li><i>1</i><span><b>音声マスター</b>：全体の音量</span></li>
+      <li><i>2</i><span><b>出力ごと</b>：その出力に映しているレイヤー全部の音量（複数の出力に映すレイヤーは1つ目の出力のところ）</span></li>
+      <li><i>3</i><span><b>レイヤーごと</b>：そのレイヤーの音量。下の緑のバーは、その音量で鳴らしている目安（クロスフェード中は上下する）</span></li>
+      <li><i>4</i><span><b>M</b>：ミュート。赤くなったら消音中</span></li>
+    </ul>
+  </div>
+  <p>実際の音量は <b>レイヤー × 出力 × 音声マスター</b> の掛け算です。どれか1つでも 0 か M（ミュート）なら、その音は消えます。写真ウォールには音がないので、ミキサーには出ません。レイヤーの映像・ウィンドウ・空白のクリップは音を出しません。</p>
+  <div class="note"><b class="h">止まらない音</b>映像の BLACKOUT や「表示」オフでは<b>音は止まりません</b>（ライブ中に音楽が途切れないように）。音を止めるのは M かフェーダーです。</div>
+  <h3>音が出ないとき（上から順に）</h3>
+  <ol>
+    <li>PC の音量（タスクバーのスピーカー）が 0 やミュートになっていないか</li>
+    <li>Windows の音の出力先が、つないだスピーカーになっているか</li>
+    <li>ミキサーの M が赤くないか、フェーダーが左端になっていないか</li>
+    <li>操作パネル左上が「VLC（音声あり）」か（「音量は全レイヤー共通」と出たら、レイヤーごとの音量が効かない状態）</li>
+    <li>動画ファイル自体に音が入っているか。カメラなら、クリップの音声入力が「音声なし」になっていないか</li>
+  </ol>
+</section>
+
+<!-- ===================== 12 ===================== -->
+<section class="chap">
+  <h2><span class="c">12</span>本番の操作と緊急時</h2>
+  <h3>本番中にすること</h3>
+  <ul>
+    <li>曲が変わったら <b>列で再生</b>、1つだけ変えたいときは<b>サムネイル</b>をクリック</li>
+    <li>L1 を順番に進めるだけなら <kbd>Space</kbd></li>
+    <li>音量はミキサーのフェーダーで。映像の明るさは上の帯の「明るさ」</li>
+  </ul>
+  <h3>あわてたとき</h3>
+  <table>
+    <tr><th style="width:44mm">したいこと</th><th>操作</th><th style="width:38mm">戻し方</th></tr>
+    <tr><td class="k">映像だけ消したい</td><td><span class="btn red">BLACKOUT</span> か <kbd>B</kbd>（0.5秒で暗くなる。音は流れたまま）</td><td>もう一度 BLACKOUT か <kbd>B</kbd></td></tr>
+    <tr><td class="k">音だけ止めたい</td><td>ミキサーの M（全部なら各「出力」の M）</td><td>もう一度 M</td></tr>
+    <tr><td class="k">映像を静止したい</td><td>クリップの ⏸</td><td>もう一度 ⏸／▶</td></tr>
+    <tr><td class="k">全部消して黒にしたい</td><td><span class="btn">全レイヤー消去</span>（フェードアウト。<b>映像も音も</b>消える）</td><td>クリップを押し直す</td></tr>
+    <tr><td class="k">枠・線・文字・格子が映る</td><td>マッピング編集を <kbd>E</kbd> でオフ、テスト表示をオフ</td><td>—</td></tr>
+  </table>
+  <div class="tip"><b class="h">BLACKOUT と全レイヤー消去の違い</b>BLACKOUT は「幕を下ろす」ように映像を隠すだけで、裏では再生が続いています。戻すと続きから見えます。全レイヤー消去は再生そのものを止めます。</div>
+  <div class="danger"><b class="h">本番前に必ず</b><kbd>E</kbd> とテスト表示をオフにし、<b>スクリーンを目で見て</b>点・枠・文字・格子が消えたことを確認（編集中の枠と文字は BLACKOUT 中でも映る）。</div>
+  <h3>アプリが落ちたとき</h3>
+  <ol class="steps">
+    <li>プロジェクターのリモコンの <b>AV ミュート</b>（映像ミュート）で、客席にデスクトップが映らないようにする</li>
+    <li><b>run.bat</b> をダブルクリック</li>
+    <li><b>全部の出力</b>が元の画面にフルスクリーンで出るのを待つ（出ないものは4章の手順で）</li>
+    <li>クリップを押し直す（並び・形・音量は保存されている。<b>再生位置は戻らない</b>）</li>
+    <li>映像と音を確かめてから、AV ミュートを解除</li>
+  </ol>
+  <div class="note"><b class="h">操作パネルだけ閉じたとき</b>映像は止まっていません。ブラウザで <b>http://localhost:8080/</b> を開けば元どおり操作できます。</div>
+</section>
+
+<!-- ===================== 13 ===================== -->
+<section class="chap">
+  <h2><span class="c">13</span>保存と設定ファイル</h2>
+  <ul>
+    <li>設定は<b>変更から2秒後に自動で</b> project.json に保存されます（セッティングを開いていれば、そのファイルにも）。すぐ保存したいときは <span class="btn">保存</span></li>
+    <li><span class="btn">終了</span> を押すと、確認のあと保存して閉じます</li>
+    <li>保存されるもの：レイヤーとクリップの並び、四隅の形、音量、出力ウィンドウの位置とフルスクリーンの画面など</li>
+    <li>保存されないもの：その時の再生位置、BLACKOUT の状態（起動時はいつもオフ）、テスト表示（起動時はいつもオフ）</li>
+  </ul>
+  <h3>セッティング（会場・公演ごとの設定ファイル）</h3>
+  <p>会場や公演ごとに、<b>曲順・クリップ・レイヤー・マッピング・音量・出力の設定</b>をまとめて、名前を付けて保存しておけます。上の帯の「<b>セッティング：（名前）</b>」を押すと、窓が開きます。</p>
+  <div class="side" style="grid-template-columns:66mm 1fr">
+    <figure style="margin-top:0">
+      <div class="shot" data-img="panel_set" data-crop="400,60,640,304" data-b="413,133,614,38,1;413,176,614,41,2;901,220,39,27,3;942,183,44,27,4;988,183,30,27,5"></div>
+    </figure>
+    <ul class="legend">
+      <li><i>1</i><span><b>名前を付けて保存</b>：名前を入れて保存（Enter でも）。同じ名前があれば、上書きしてよいか確認</span></li>
+      <li><i>2</i><span><b>いま開いているセッティング</b>（緑の枠）。変えると2秒後に自動で上書き保存</span></li>
+      <li><i>3</i><span><b>開く</b>：確認のあと、そのセッティングに切り替わる</span></li>
+      <li><i>4</i><span><b>複製</b>：いま開いているものを元に、新しい名前で保存（会場違いの版を作るとき）</span></li>
+      <li><i>5</i><span><b>✕</b>：ごみ箱へ（確認あり・ごみ箱から戻せる）</span></li>
+    </ul>
+  </div>
+  <ul>
+    <li>ファイルは <b>VPT39\settings</b> フォルダに「名前.json」で入ります。Dropbox で同期すれば、別のPCでも同じ一覧が使えます（人に渡すときは、そのファイルを相手の settings に入れてもらう）</li>
+    <li><b>開くと、出力ウィンドウも作り直します</b>。保存した画面がないPCでは、その出力はウィンドウで開くので、投影する画面へ移してフルスクリーンにします。<b>本番中は開かない</b>でください（映像が一瞬切れます）</li>
+    <li>開く前に、いまのセッティングは保存されます（「（名前なし）」は置き換わるので、残すなら先に名前を付けて保存）。操作パネルの番号とスマホのオン・オフは PC ごとなので変わりません</li>
+    <li><b>別のPCで準備するとき</b>は、出力ごとの「本番の解像度」（4章）を本番のプロジェクターに合わせておくと、四隅や重なりがそのまま本番で使えます</li>
+  </ul>
+  <h3>project.json の主な項目</h3>
+  <table>
+    <tr><th style="width:36mm">項目</th><th>意味</th></tr>
+    <tr><td class="k">media_dir</td><td>素材フォルダ（ふつうは "media"）</td></tr>
+    <tr><td class="k">web_port</td><td>操作パネルの番号（ふつうは 8080 → http://localhost:8080/）</td></tr>
+    <tr><td class="k">allow_lan</td><td>スマホから操作するか（「スマホ」ボタンで切り替わる。9章）</td></tr>
+    <tr><td class="k">outputs</td><td>出力ウィンドウごとの位置・フルスクリーンの画面・音量</td></tr>
+    <tr><td class="k">layers</td><td>レイヤーとクリップ、四隅、音量など</td></tr>
+    <tr><td class="k">setting_name</td><td>いま開いているセッティングの名前（なければ名前なし）</td></tr>
+  </table>
+  <div class="warn"><b class="h">手で直すとき</b>アプリを終了し、コピーを取ってから開きます（壊すと起動できません）。</div>
+</section>
+
+<!-- ===================== 14 ===================== -->
+<section class="chap">
+  <h2><span class="c">14</span>困ったとき</h2>
+  <table>
+    <tr><th style="width:50mm">こんなとき</th><th>確かめること・直し方</th></tr>
+    <tr><td class="k">プロジェクターに何も映らない</td><td>プロジェクターの電源・入力切替・ケーブル → <kbd>⊞Win</kbd>+<kbd>P</kbd> が「拡張」か → 出力ウィンドウがその画面でフルスクリーンか → BLACKOUT が赤く光っていないか → 「明るさ」が左端でないか → レイヤーの「表示」と「映す出力」</td></tr>
+    <tr><td class="k">プロジェクターが認識されない</td><td>ケーブルの抜き差し → プロジェクターの入力切替 → <kbd>⊞Win</kbd>+<kbd>P</kbd> をもう一度。<span class="btn">識別</span> で番号が出ない画面は、PC に認識されていない</td></tr>
+    <tr><td class="k">手元の画面がそのまま映る</td><td>「複製」になっている。<kbd>⊞Win</kbd>+<kbd>P</kbd> で「拡張」に</td></tr>
+    <tr><td class="k">出力ウィンドウが見当たらない</td><td>「出力」タブの <span class="btn">手元に戻す</span></td></tr>
+    <tr><td class="k">違う画面にフルスクリーンになった</td><td>「手元に戻す」→ 正しい画面へドラッグ → フルスクリーン。<span class="btn">識別</span> で番号を確かめる</td></tr>
+    <tr><td class="k">起動したらウィンドウのまま</td><td>前回の画面がつながっていないか、解像度・並びが変わった（警告が出る）。プロジェクターをつないで、4章の手順でもう一度フルスクリーン</td></tr>
+    <tr><td class="k">違う映像が出ている</td><td>そのレイヤーの緑の枠のクリップ／「映す出力」／重なり順（手前のレイヤーに隠れていないか）</td></tr>
+    <tr><td class="k">映像に枠・点・文字・格子</td><td>マッピング編集かテスト表示がオン → <kbd>E</kbd> とテスト表示をオフ</td></tr>
+    <tr><td class="k">映像がカクカク・遅れる</td><td>素材が重い（4K・高ビットレート・HEVC など）。H.264・1080p・30fps に書き出し直す。左上の fps が大きく下がっていないか</td></tr>
+    <tr><td class="k">素材が一覧に出ない</td><td>media フォルダに入っているか、対応形式か（5章）。数秒待つ</td></tr>
+    <tr><td class="k">サムネイルが出ない</td><td>しばらく待つ（初めての素材は作るのに時間がかかる）。読めない動画は出ない</td></tr>
+    <tr><td class="k">行の左に赤字が出た</td><td>「ファイルが見つかりません」「再生できません」「読み込み失敗」＝ファイルが消えた・名前が変わった・壊れている。前の映像は流れたまま。素材を入れ直してクリップを作り直す</td></tr>
+    <tr><td class="k">音が出ない</td><td>11章「音が出ないとき」</td></tr>
+    <tr><td class="k">写真ウォールに出ない</td><td>行の枚数が「0枚」ならフォルダ名の間違い／写真の形式（HEIC は不可）・サブフォルダに入れていないか／「表示」がオンか／映す出力</td></tr>
+    <tr><td class="k">操作パネルが開かない</td><td>ブラウザで http://localhost:8080/ を開く。開かなければ run.bat の黒い画面に出ている「操作パネル: http://…」のアドレスを開く（run.bat を2回起動すると 8081 などになる）</td></tr>
+    <tr><td class="k">キーが効かない</td><td>文字・数字の入力欄や選択欄（▼）にカーソルがある。欄の外をクリック</td></tr>
+    <tr><td class="k">カメラが映らない</td><td>「一覧を更新」→ 機器がつながっているか（ケーブル・電源）→ ほかのアプリ（Zoom・OBS など）や別のクリップが同じカメラを使っていないか。キャプチャーボードは、つないだPC側の画面出力も確認</td></tr>
+    <tr><td class="k">カメラの音が出ない</td><td>クリップの音声入力が「音声なし」になっていないか → ミキサー → Windows の既定のスピーカー</td></tr>
+    <tr><td class="k">ウィンドウが映らない・止まる</td><td>そのウィンドウを最小化していないか。閉じて開き直したときは、クリップを押し直す。保護された映像（動画配信など）は黒くなる</td></tr>
+    <tr><td class="k">横長のつなぎ目が目立つ</td><td>「重なり」の幅を、実際に重なっている幅に合わせる → 明るさの違いは「ガンマ」→ 左右のプロジェクターの明るさ・色の設定をそろえる</td></tr>
+    <tr><td class="k">赤字「映像が止まっています」</td><td>カメラ：ケーブル・電源を確認（5秒ごとに自動でつなぎ直す）。Spout：送る側のアプリが動いているか（同じ名前で送り直すと戻る）。ウィンドウ：閉じられていないか。どれも最後の映像のまま映り続ける</td></tr>
+    <tr><td class="k">Spout の欄が空</td><td>送る側で Spout 出力がオンか →「一覧を更新」→ setup.bat に「Spout が使えません」と出ていたら Python 3.13 を入れて setup.bat をやり直す（8章）</td></tr>
+    <tr><td class="k">スマホでつながらない</td><td>上の帯の「スマホ」が緑の「スマホ ON」か → PC とスマホが同じ Wi-Fi か（スマホがモバイル回線になっていないか）→ Wi-Fi を変えたなら「アドレスを調べ直す」→ ファイアウォールで「許可」したか → 会場の Wi-Fi ならテザリングに変える（9章）</td></tr>
+    <tr><td class="k">セッティングを開いたら出力がウィンドウになった</td><td>保存した画面がこのPCにない（並び・解像度が違う）。出力ウィンドウを投影する画面へ移してフルスクリーン（4章）</td></tr>
+    <tr><td class="k">写真ウォールが同じ写真のまま</td><td>行に画像を1枚だけ並べている（1枚なら出し続ける）か、「間隔」が 0。フォルダの写真を出すなら、行の画像を ✕ で外す</td></tr>
+    <tr><td class="k">素材をドロップしても入らない</td><td>「素材」タブの欄の上で離したか（緑の点線）。動画・画像でないファイルは入らない。大きな動画はコピーに時間がかかる（「取り込み中 ○%」）</td></tr>
+    <tr><td class="k">setup.bat が「失敗」</td><td>2章「setup.bat がうまくいかないとき」</td></tr>
+    <tr><td class="k">アプリが落ちた</td><td>12章「アプリが落ちたとき」</td></tr>
+  </table>
+</section>
+
+<!-- ===================== 15 ===================== -->
+<section class="chap">
+  <h2><span class="c">15</span>本番前チェックリスト</h2>
+  <div class="side">
+    <div>
+      <h3 style="margin-top:0">前日まで</h3>
+      <ul class="check">
+        <li>素材を H.264・1080p・30fps の mp4 に書き出した</li>
+        <li>素材を media フォルダに入れ、全部のクリップが再生できた</li>
+        <li>曲ごとに列（番号）をそろえて並べた</li>
+        <li>写真ウォールのフォルダは「承認済み」の写真だけが入る場所</li>
+        <li>本番と<b>同じPC・同じプロジェクター</b>で通しリハをした</li>
+        <li>project.json のコピーを取った</li>
+        <li>Windows Update を済ませ、本番中に再起動しない設定にした</li>
+      </ul>
+      <h3>会場で</h3>
+      <ul class="check">
+        <li>PC の電源ケーブルをつないだ（バッテリーで動かさない）</li>
+        <li><kbd>⊞Win</kbd>+<kbd>P</kbd> が「拡張」、プロジェクターの拡大率 100%</li>
+        <li>出力が正しい画面でフルスクリーン（<span class="btn">識別</span> で確認）</li>
+        <li>マッピングを合わせた（横長なら、つなぎ目と重なりも確認）</li>
+        <li>カメラ・キャプチャーボード・取り込むウィンドウ・Spout の映像と音を確かめた</li>
+        <li>テスト用の素材（下）で、なめらかさ・音のずれ・スピーカーの左右を確かめた</li>
+      </ul>
+    </div>
+    <div>
+      <h3 style="margin-top:0">開演直前</h3>
+      <ul class="check">
+        <li><b>マッピング編集がオフ</b>（上の帯のボタンが赤くない。スマホで合わせたときは「枠を表示」もオフ）</li>
+        <li><b>テスト表示がオフ</b>（格子が映っていない）</li>
+        <li>BLACKOUT の状態を確認（開演まで暗くしておくならオン＝黄色く光る）</li>
+        <li>音声ミキサーの M が意図どおり、音量を確認</li>
+        <li>スピーカーから音が出ることを耳で確認</li>
+        <li>通知をオフ（Windows の「応答不可」／集中モード）</li>
+        <li>スリープ・画面オフの時間を「なし」に</li>
+        <li>ほかのアプリは閉じた</li>
+        <li>クイックスタートを機材の横に置いた</li>
+        <li>プロジェクターのリモコンの AV ミュートの場所を確認</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot">VPT39 使い方ガイド（詳細版）　／　しくみ：concept.pdf　本番中：quickstart.pdf　画面の場所：index.html</div>
+</section>
+
+<section class="chap">
+  <h3 style="margin-top:0">テスト用の素材（media\テスト用・photos\テスト用）</h3>
+  <p>本番の素材の代わりに、動きや音を確かめるための素材が入っています。リハや、新しいPC・プロジェクターの確認に使います。</p>
+  <table>
+    <tr><th style="width:52mm">ファイル</th><th>確かめられること</th></tr>
+    <tr><td class="k">01_カウント_音あり.mp4</td><td>1〜12 の数字と、1秒ごとの「ピッ」（最初だけ高い音）。切り替え・クロスフェード・<b>音と映像のずれ</b></td></tr>
+    <tr><td class="k">02_グリッド_60fps.mp4</td><td>格子・円・四隅の名前・時計の針・流れる白い帯。<b>四隅合わせ</b>と<b>なめらかさ</b>（帯がカクつかないか）</td></tr>
+    <tr><td class="k">03_カラーバー.mp4</td><td>色の帯と16段の明るさ（小さな 1kHz の音）。<b>色・明るさ・黒のつぶれ</b>（0〜2 の区別がつくか）</td></tr>
+    <tr><td class="k">04_横長_3840x1080.mp4</td><td>2台つないだ横長の画面用。左右の名前と、つなぎ目を横切る黄色い線。<b>つなぎ目の位置と明るさ</b></td></tr>
+    <tr><td class="k">05_左右の音.mp4</td><td>光っている側のスピーカーから鳴れば正しい。<b>スピーカーの左右</b></td></tr>
+    <tr><td class="k">06_動くGIF・07_透明PNG</td><td>動く画像と、透明な部分の重なり</td></tr>
+    <tr><td class="k">08_真っ白・09_真っ黒</td><td>画面全部が白（一番明るい）・黒（一番暗い）。<b>プロジェクターの一番明るい・暗い</b>、明るさのむら、黒の浮き（真っ黒でもどれだけ光るか）</td></tr>
+    <tr><td class="k">10_月_比率テスト</td><td>黒い背景の真ん中に、まん丸の月。<b>比率の確認</b>：楕円に見えたら、四隅の形か出力の比率がずれている</td></tr>
+    <tr><td class="k">photos\テスト用</td><td>横長・4:3・縦長・正方形の写真と、月（まん丸）。写真ウォールの<b>収まり方と切り替え方</b>（フォルダに photos/テスト用 と入れる）。月が楕円なら写真が歪んでいる</td></tr>
+  </table>
+  <div class="note"><b class="h">作り直す</b>VPT39 フォルダで <code>.venv\Scripts\python.exe tools\make_test_media.py</code> を実行すると、作り直せます（ffmpeg の部品が必要：<code>.venv\Scripts\python.exe -m pip install imageio-ffmpeg</code>）。</div>
+  <div class="foot">VPT39 使い方ガイド（詳細版）　／　しくみ：concept.pdf　本番中：quickstart.pdf　画面の場所：index.html</div>
+</section>
+
+</div>
+<script>
+// 画面写真の切り抜きと、番号つきの赤い枠を描く
+(function(){
+  var IMG={panel:{src:'img/panel.jpg',w:1440,h:900},panel_special:{src:'img/panel_special.jpg',w:1440,h:900},panel_insp:{src:'img/panel_insp.jpg',w:1440,h:900},panel_mixer:{src:'img/panel_mixer.jpg',w:1440,h:900},panel_photo:{src:'img/panel_photo.jpg',w:1440,h:900},panel_set:{src:'img/panel_set.jpg',w:1440,h:900},panel_lan:{src:'img/panel_lan.jpg',w:1440,h:900},mobile:{src:'img/mobile.jpg',w:390,h:844},panel_outs:{src:'img/panel_outs.jpg',w:1440,h:900},out1:{src:'img/out1.jpg',w:1280,h:720},out1_edit:{src:'img/out1_edit.jpg',w:1280,h:720},out1_black:{src:'img/out1_black.jpg',w:1280,h:720},out_wide:{src:'img/out_wide.jpg',w:2560,h:709}};
+  [].forEach.call(document.querySelectorAll('.shot'),function(el){
+    var im=IMG[el.dataset.img], c=el.dataset.crop.split(',').map(Number);
+    el.style.aspectRatio=c[2]+' / '+c[3];
+    var h='<img src="'+im.src+'" alt="" style="width:'+(im.w/c[2]*100)+'%;left:'+(-c[0]/c[2]*100)+'%;top:'+(-c[1]/c[3]*100)+'%">';
+    (el.dataset.b||'').split(';').filter(Boolean).forEach(function(s){
+      var b=s.split(','), x=+b[0],y=+b[1],w=+b[2],hh=+b[3];
+      h+='<div class="bx" style="left:'+((x-c[0])/c[2]*100)+'%;top:'+((y-c[1])/c[3]*100)+'%;width:'+(w/c[2]*100)+'%;height:'+(hh/c[3]*100)+'%"><i>'+b[4]+'</i></div>';
+    });
+    el.innerHTML=h;
+  });
+})();
+</script>
+</body>
+</html>

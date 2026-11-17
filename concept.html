@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VPT39 のしくみ</title>
+<style>
+@page{size:A4;margin:0}
+:root{--ink:#1b1f27;--dim:#5b6472;--line:#d5dae1;--l1:#1f63d6;--l2:#16834f;--l3:#d97706;--red:#cc3322}
+*{box-sizing:border-box}
+html,body{margin:0;background:#e9ecf0;color:var(--ink);font-family:"Yu Gothic UI","Yu Gothic","Hiragino Sans","Meiryo",sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.sheet{width:210mm;height:297mm;margin:8mm auto;background:#fff;padding:8mm 10mm 7mm;display:flex;flex-direction:column;gap:2mm;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.12);font-size:9.6pt;line-height:1.5}
+@media print{html,body{background:#fff}.sheet{margin:0;box-shadow:none}}
+.top{display:flex;align-items:baseline;gap:4mm;border-bottom:2.5pt solid var(--ink);padding-bottom:1.5mm}
+.top h1{margin:0;font-size:19pt}
+.top p{margin:0;color:var(--dim);font-size:10.5pt}
+h2{margin:0 0 1mm;font-size:11.5pt;display:flex;align-items:center;gap:2mm}
+h2 .n{width:6mm;height:6mm;border-radius:50%;background:var(--ink);color:#fff;font-size:9.5pt;display:inline-flex;align-items:center;justify-content:center}
+.box{border:1pt solid var(--line);border-radius:2.5mm;padding:1.6mm 3mm}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:2mm}
+.box p{margin:.8mm 0 0}
+svg{display:block;width:100%;height:auto}
+svg text{font-family:"Yu Gothic UI","Yu Gothic","Meiryo",sans-serif}
+.dim{color:var(--dim)}
+table{border-collapse:collapse;width:100%}
+td{border:.8pt solid var(--line);padding:.7mm 2mm;font-size:9pt;vertical-align:top}
+td:first-child{white-space:nowrap;font-weight:700;width:24mm;background:#f5f6f8}
+.foot{margin-top:auto;font-size:8.5pt;color:var(--dim);display:flex;justify-content:space-between;border-top:.8pt solid var(--line);padding-top:1.5mm}
+.flow{display:flex;align-items:stretch;gap:1.2mm}
+.flow div{flex:1;border:1pt solid var(--line);border-radius:2mm;padding:1.2mm 1.5mm;text-align:center;background:#f5f6f8}
+.flow div b{display:block;font-size:10.5pt}
+.flow div span{display:block;font-size:8.3pt;color:var(--dim);line-height:1.35}
+.flow div.go{background:#1b1f27;border-color:#1b1f27}.flow div.go b{color:#fff}.flow div.go span{color:#c9d0da}
+.flow i{font-style:normal;align-self:center;font-weight:700}
+b.l1{color:var(--l1)}b.l2{color:var(--l2)}b.l3{color:var(--l3)}
+.intro{background:#eaf1fd;border-left:2mm solid var(--l1);border-radius:0 2.5mm 2.5mm 0;padding:2mm 3.5mm;font-size:10pt;line-height:1.55}
+.intro b{color:var(--l1)}
+.sheet+.sheet{page-break-before:always}
+.sw{display:inline-block;padding:0 1.6mm;border-radius:1.2mm;font-weight:700;font-size:8.6pt;line-height:1.55;white-space:nowrap}
+.sw.g{background:#3dd68c;color:#04120a}.sw.h{background:#a9ecc9;color:#06291a}.sw.r{background:#ff4d4f;color:#fff}.sw.y{background:#3a2a08;color:#ffd27a;border:1pt solid #ffb020}
+.chips{display:flex;flex-wrap:wrap;gap:1.2mm;margin-top:1mm}
+.chips span{border-radius:1.5mm;padding:.3mm 2mm;font-size:8.6pt;color:#fff;font-weight:700}
+</style>
+</head>
+<body>
+<section class="sheet">
+  <div class="top"><h1>VPT39 のしくみ</h1><p>映像は「素材 → レイヤー → 出力 → スクリーン」の順に流れます</p></div>
+  <div class="intro"><b>このアプリは：</b>プロジェクションマッピングに特化した映像プレイヤー。<br>プロジェクタをつかったメディア/インタラクションアート作品、ライブ等で使いやすいように工夫してます。</div>
+
+  <!-- 1. 全体の流れ -->
+  <div class="box">
+    <h2><span class="n">1</span>映像が届くまで</h2>
+    <svg viewBox="0 0 760 250" role="img" aria-label="素材からレイヤー、出力、スクリーンへの流れ">
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#1b1f27"/></marker>
+      </defs>
+      <!-- 素材 -->
+      <rect x="4" y="60" width="118" height="130" rx="10" fill="#f5f6f8" stroke="#9aa3af"/>
+      <text x="63" y="84" text-anchor="middle" font-size="15" font-weight="700">① 素材</text>
+      <text x="63" y="102" text-anchor="middle" font-size="11" fill="#5b6472">media フォルダの</text>
+      <text x="63" y="116" text-anchor="middle" font-size="11" fill="#5b6472">動画・画像・入力</text>
+      <rect x="22" y="128" width="36" height="24" rx="3" fill="#cfd6df"/><rect x="66" y="128" width="36" height="24" rx="3" fill="#cfd6df"/>
+      <rect x="22" y="158" width="36" height="24" rx="3" fill="#cfd6df"/><rect x="66" y="158" width="36" height="24" rx="3" fill="#cfd6df"/>
+      <line x1="126" y1="125" x2="160" y2="125" stroke="#1b1f27" stroke-width="2" marker-end="url(#ar)"/>
+      <text x="143" y="116" text-anchor="middle" font-size="10" fill="#5b6472">並べる</text>
+
+      <!-- レイヤー -->
+      <text x="270" y="20" text-anchor="middle" font-size="15" font-weight="700">② レイヤー（重ねる層）</text>
+      <g>
+        <rect x="166" y="34" width="210" height="58" rx="8" fill="#fff4e2" stroke="#d97706" stroke-width="2"/>
+        <text x="176" y="54" font-size="12" font-weight="700" fill="#d97706">L3 写真ウォール</text>
+        <text x="176" y="72" font-size="10" fill="#5b6472">写真を順番に表示</text>
+        <rect x="300" y="46" width="30" height="34" rx="3" fill="#f3c98a"/><rect x="336" y="46" width="30" height="34" rx="3" fill="#f3c98a" opacity=".6"/>
+      </g>
+      <g>
+        <rect x="166" y="100" width="210" height="58" rx="8" fill="#e7f6ee" stroke="#16834f" stroke-width="2"/>
+        <text x="176" y="120" font-size="12" font-weight="700" fill="#16834f">L2 オーバーレイ</text>
+        <text x="176" y="138" font-size="10" fill="#5b6472">クリップ：</text>
+        <rect x="226" y="126" width="30" height="20" rx="3" fill="#8fd1ae"/><text x="241" y="140" text-anchor="middle" font-size="10" font-weight="700">1</text>
+        <rect x="262" y="126" width="30" height="20" rx="3" fill="#8fd1ae"/><text x="277" y="140" text-anchor="middle" font-size="10" font-weight="700">2</text>
+      </g>
+      <g>
+        <rect x="166" y="166" width="210" height="58" rx="8" fill="#eaf1fd" stroke="#1f63d6" stroke-width="2"/>
+        <text x="176" y="186" font-size="12" font-weight="700" fill="#1f63d6">L1 背景動画</text>
+        <text x="176" y="204" font-size="10" fill="#5b6472">クリップ：</text>
+        <rect x="226" y="192" width="30" height="20" rx="3" fill="#9dbcf0"/><text x="241" y="206" text-anchor="middle" font-size="10" font-weight="700">1</text>
+        <rect x="262" y="192" width="30" height="20" rx="3" fill="#9dbcf0"/><text x="277" y="206" text-anchor="middle" font-size="10" font-weight="700">2</text>
+        <rect x="298" y="192" width="30" height="20" rx="3" fill="#9dbcf0"/><text x="313" y="206" text-anchor="middle" font-size="10" font-weight="700">3</text>
+      </g>
+      <text x="270" y="244" text-anchor="middle" font-size="10.5" fill="#5b6472">番号が大きいほど手前に重なる</text>
+
+      <!-- 出力先の矢印 -->
+      <path d="M376,129 C420,129 420,96 452,96" fill="none" stroke="#16834f" stroke-width="2.5" marker-end="url(#ar)"/>
+      <path d="M376,195 C420,195 420,104 452,104" fill="none" stroke="#1f63d6" stroke-width="2.5" marker-end="url(#ar)"/>
+      <path d="M376,63 C430,63 420,182 452,182" fill="none" stroke="#d97706" stroke-width="2.5" marker-end="url(#ar)"/>
+      <text x="414" y="236" text-anchor="middle" font-size="10" fill="#5b6472">「映す出力」で</text>
+      <text x="414" y="249" text-anchor="middle" font-size="10" fill="#5b6472">行き先を選ぶ（複数も可）</text>
+
+      <!-- 出力 -->
+      <text x="510" y="20" text-anchor="middle" font-size="15" font-weight="700">③ 出力</text>
+      <rect x="456" y="70" width="110" height="62" rx="8" fill="#1b1f27"/>
+      <text x="511" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">出力1</text>
+      <text x="511" y="114" text-anchor="middle" font-size="10" fill="#c9d0da">L1＋L2 を合成</text>
+      <rect x="456" y="152" width="110" height="62" rx="8" fill="#1b1f27"/>
+      <text x="511" y="178" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">出力2</text>
+      <text x="511" y="196" text-anchor="middle" font-size="10" fill="#c9d0da">L3 だけ</text>
+
+      <!-- プロジェクター → スクリーン -->
+      <text x="676" y="20" text-anchor="middle" font-size="15" font-weight="700">④ スクリーン</text>
+      <g>
+        <line x1="570" y1="101" x2="598" y2="101" stroke="#1b1f27" stroke-width="2" marker-end="url(#ar)"/>
+        <rect x="602" y="88" width="34" height="26" rx="5" fill="#5b6472"/><circle cx="636" cy="101" r="7" fill="#d5dae1" stroke="#5b6472" stroke-width="2"/>
+        <path d="M642,96 L690,62 L690,140 L642,106z" fill="#1f63d6" opacity=".14"/>
+        <polygon points="688,58 752,66 750,132 690,142" fill="#eaf1fd" stroke="#1f63d6" stroke-width="2"/>
+        <text x="720" y="104" text-anchor="middle" font-size="10" fill="#1f63d6">スクリーン</text>
+      </g>
+      <g>
+        <line x1="570" y1="183" x2="598" y2="183" stroke="#1b1f27" stroke-width="2" marker-end="url(#ar)"/>
+        <rect x="602" y="170" width="34" height="26" rx="5" fill="#5b6472"/><circle cx="636" cy="183" r="7" fill="#d5dae1" stroke="#5b6472" stroke-width="2"/>
+        <path d="M642,178 L690,154 L690,214 L642,188z" fill="#d97706" opacity=".14"/>
+        <rect x="690" y="152" width="62" height="64" rx="3" fill="#fff4e2" stroke="#d97706" stroke-width="2"/>
+        <text x="721" y="188" text-anchor="middle" font-size="10" fill="#d97706">壁など</text>
+      </g>
+      <text x="676" y="240" text-anchor="middle" font-size="10" fill="#5b6472">プロジェクター1台＝出力1つ</text>
+    </svg>
+  </div>
+
+  <div class="two">
+    <!-- 2. 2つの画面 -->
+    <div class="box">
+      <h2><span class="n">2</span>画面は2つ</h2>
+      <svg viewBox="0 0 360 120" role="img" aria-label="操作パネルと出力ウィンドウ">
+        <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#1b1f27"/></marker></defs>
+        <rect x="10" y="12" width="140" height="84" rx="6" fill="#fff" stroke="#1b1f27" stroke-width="2"/>
+        <rect x="18" y="20" width="124" height="68" rx="2" fill="#20242c"/>
+        <rect x="24" y="28" width="30" height="18" rx="2" fill="#4a5361"/><rect x="58" y="28" width="30" height="18" rx="2" fill="#2fd17c"/><rect x="92" y="28" width="44" height="40" rx="2" fill="#323946"/>
+        <rect x="24" y="52" width="64" height="5" rx="2" fill="#2fd17c"/><rect x="24" y="62" width="64" height="5" rx="2" fill="#4a5361"/>
+        <path d="M0,100 L160,100 L150,96 L10,96z" fill="#1b1f27"/>
+        <text x="80" y="116" text-anchor="middle" font-size="11" font-weight="700">ノートPC：操作パネル</text>
+        <line x1="160" y1="54" x2="208" y2="54" stroke="#1b1f27" stroke-width="2" marker-end="url(#ar2)"/>
+        <text x="184" y="46" text-anchor="middle" font-size="9.5" fill="#5b6472">命令</text>
+        <rect x="212" y="18" width="140" height="78" rx="4" fill="#1b1f27"/>
+        <rect x="222" y="28" width="120" height="58" fill="#2a3f62"/><polygon points="236,78 270,40 300,64 326,48 340,78" fill="#3f6fb5"/>
+        <text x="282" y="116" text-anchor="middle" font-size="11" font-weight="700">プロジェクター：出力ウィンドウ</text>
+      </svg>
+      <p><b>操作は全部ノートPCの操作パネル</b>で。出力ウィンドウは映すだけ（フルスクリーンにして客席側に出す）。四隅の位置合わせは、同じ Wi-Fi の<b>スマホ</b>からもできる。</p>
+    </div>
+    <!-- 3. 列で再生 -->
+    <div class="box">
+      <h2><span class="n">3</span>曲ごとに切り替える（列で再生）</h2>
+      <svg viewBox="0 0 360 120" role="img" aria-label="列で再生の図">
+        <text x="70" y="18" text-anchor="middle" font-size="10.5" fill="#5b6472">列1（曲1）</text>
+        <text x="170" y="18" text-anchor="middle" font-size="10.5" fill="#cc3322" font-weight="700">列2（曲2）</text>
+        <text x="270" y="18" text-anchor="middle" font-size="10.5" fill="#5b6472">列3（曲3）</text>
+        <text x="4" y="52" font-size="11" font-weight="700" fill="#16834f">L2</text>
+        <text x="4" y="92" font-size="11" font-weight="700" fill="#1f63d6">L1</text>
+        <rect x="35" y="30" width="70" height="36" rx="4" fill="#cdeedb"/><rect x="135" y="30" width="70" height="36" rx="4" fill="#8fd1ae"/><rect x="235" y="30" width="70" height="36" rx="4" fill="#cdeedb"/>
+        <rect x="35" y="72" width="70" height="36" rx="4" fill="#d6e3fa"/><rect x="135" y="72" width="70" height="36" rx="4" fill="#9dbcf0"/><rect x="235" y="72" width="70" height="36" rx="4" fill="#d6e3fa"/>
+        <rect x="128" y="24" width="84" height="90" rx="6" fill="none" stroke="#cc3322" stroke-width="3"/>
+        <text x="318" y="62" font-size="10" fill="#cc3322">「2」を</text><text x="318" y="76" font-size="10" fill="#cc3322">押すと</text><text x="318" y="90" font-size="10" fill="#cc3322">縦一列が</text><text x="318" y="104" font-size="10" fill="#cc3322">一斉に</text>
+      </svg>
+      <p>曲ごとに<b>同じ番号（列）</b>へクリップを並べておくと、「列で再生 2」の1回で全部のレイヤーが曲2の映像になる。</p>
+    </div>
+  </div>
+
+  <div class="two">
+    <!-- 4. マッピング -->
+    <div class="box">
+      <h2><span class="n">4</span>形を合わせる（マッピング）</h2>
+      <svg viewBox="0 0 360 110" role="img" aria-label="四隅を動かしてスクリーンに合わせる">
+        <defs><marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#cc3322"/></marker></defs>
+        <polygon points="40,22 150,30 146,96 46,86" fill="none" stroke="#9aa3af" stroke-width="2" stroke-dasharray="5 4"/>
+        <text x="96" y="62" text-anchor="middle" font-size="9.5" fill="#5b6472">スクリーン</text>
+        <rect x="20" y="12" width="150" height="90" fill="#1f63d6" opacity=".18" stroke="#1f63d6" stroke-width="1.5"/>
+        <text x="95" y="8" text-anchor="middle" font-size="9.5" fill="#1f63d6">合わせる前（はみ出す）</text>
+        <path d="M188,58 L214,58" stroke="#1b1f27" stroke-width="2" marker-end="url(#ar)"/>
+        <polygon points="240,22 350,30 346,96 246,86" fill="#1f63d6" opacity=".22" stroke="#1f63d6" stroke-width="2"/>
+        <circle cx="240" cy="22" r="4.5" fill="#cc3322"/><circle cx="350" cy="30" r="4.5" fill="#ffd400" stroke="#1b1f27"/><circle cx="346" cy="96" r="4.5" fill="#ffd400" stroke="#1b1f27"/><circle cx="246" cy="86" r="4.5" fill="#ffd400" stroke="#1b1f27"/>
+        <path d="M226,10 L237,19" stroke="#cc3322" stroke-width="2" marker-end="url(#ar3)"/>
+        <text x="295" y="8" text-anchor="middle" font-size="9.5" fill="#1f63d6">四隅を動かして合わせた</text>
+      </svg>
+      <p>レイヤーごとに<b>四隅</b>をドラッグして、台形や斜めのスクリーンにぴったり合わせる。形は割合で覚えるので、解像度が変わってもずれない。</p>
+    </div>
+    <!-- 5. 切り替え -->
+    <div class="box">
+      <h2><span class="n">5</span>切り替え（クロスフェード）</h2>
+      <svg viewBox="0 0 360 110" role="img" aria-label="クロスフェードのグラフ">
+        <line x1="30" y1="92" x2="350" y2="92" stroke="#9aa3af"/>
+        <line x1="30" y1="14" x2="30" y2="92" stroke="#9aa3af"/>
+        <text x="24" y="20" text-anchor="end" font-size="9" fill="#5b6472">100%</text>
+        <text x="24" y="94" text-anchor="end" font-size="9" fill="#5b6472">0</text>
+        <path d="M30,20 L140,20 L240,92 L350,92" fill="none" stroke="#9aa3af" stroke-width="3"/>
+        <path d="M30,92 L140,92 L240,20 L350,20" fill="none" stroke="#1f63d6" stroke-width="3"/>
+        <text x="80" y="15" text-anchor="middle" font-size="10" fill="#5b6472">前の映像・音</text>
+        <text x="300" y="15" text-anchor="middle" font-size="10" fill="#1f63d6">次の映像・音</text>
+        <line x1="140" y1="100" x2="240" y2="100" stroke="#cc3322" stroke-width="2"/>
+        <line x1="140" y1="96" x2="140" y2="104" stroke="#cc3322" stroke-width="2"/><line x1="240" y1="96" x2="240" y2="104" stroke="#cc3322" stroke-width="2"/>
+        <text x="190" y="109" text-anchor="middle" font-size="9.5" fill="#cc3322">「フェード」の秒数</text>
+        <text x="85" y="72" text-anchor="middle" font-size="9" fill="#5b6472">次の映像の準備中も</text>
+        <text x="85" y="84" text-anchor="middle" font-size="9" fill="#5b6472">前の映像が続く</text>
+      </svg>
+      <p>クリップを押すと、<b>映像と音が一緒に</b>なめらかに入れ替わる。秒数はレイヤーの「フェード」で決める（0 なら一瞬）。</p>
+    </div>
+  </div>
+
+  <div class="two">
+    <!-- 10. 音 -->
+    <div class="box">
+      <h2><span class="n">6</span>音の流れ</h2>
+      <svg viewBox="0 0 360 74" role="img" aria-label="音量の掛け算">
+        <defs><marker id="ar4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#1b1f27"/></marker></defs>
+        <rect x="2" y="14" width="76" height="40" rx="6" fill="#eaf1fd" stroke="#1f63d6"/><text x="40" y="32" text-anchor="middle" font-size="10.5" font-weight="700">レイヤー</text><text x="40" y="47" text-anchor="middle" font-size="9" fill="#5b6472">の音量</text>
+        <text x="88" y="40" text-anchor="middle" font-size="16" font-weight="700">×</text>
+        <rect x="98" y="14" width="76" height="40" rx="6" fill="#f1f3f6" stroke="#1b1f27"/><text x="136" y="32" text-anchor="middle" font-size="10.5" font-weight="700">出力</text><text x="136" y="47" text-anchor="middle" font-size="9" fill="#5b6472">の音量</text>
+        <text x="184" y="40" text-anchor="middle" font-size="16" font-weight="700">×</text>
+        <rect x="194" y="14" width="80" height="40" rx="6" fill="#f1f3f6" stroke="#1b1f27"/><text x="234" y="32" text-anchor="middle" font-size="10.5" font-weight="700">音声</text><text x="234" y="47" text-anchor="middle" font-size="9" fill="#5b6472">マスター</text>
+        <line x1="278" y1="34" x2="300" y2="34" stroke="#1b1f27" stroke-width="2" marker-end="url(#ar4)"/>
+        <path d="M306,26 L316,26 L330,14 L330,54 L316,42 L306,42z" fill="#1b1f27"/>
+        <path d="M336,22 Q346,34 336,46 M342,16 Q356,34 342,52" fill="none" stroke="#1b1f27" stroke-width="2"/>
+        <text x="180" y="70" text-anchor="middle" font-size="9.5" fill="#5b6472">どれか1つでも 0 や M（ミュート）なら、その音は消える</text>
+      </svg>
+      <p>全部のレイヤーの音が<b>同時に</b>鳴る。<b>BLACKOUT や「隠し中」は映像だけ</b>で、音は止まらない。</p>
+    </div>
+    <!-- 11. ボタンの色 -->
+    <div class="box">
+      <h2><span class="n">7</span>ボタンの色のきまり</h2>
+      <table>
+        <tr><td><span class="sw g">表示</span> 緑</td><td>ふつうに動いている・選んでいる</td></tr>
+        <tr><td><span class="sw h">消す</span> 薄い緑</td><td>マウスを乗せている所</td></tr>
+        <tr><td><span class="sw r">M</span> 赤</td><td>止めている・固定している状態（ミュート・隠し中・編集中・テスト表示）。赤い文字はエラー</td></tr>
+        <tr><td><span class="sw y">BLACKOUT</span></td><td>非常ボタン。暗転中は黄色く光る</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="foot"><span>VPT39 のしくみ（1／2）</span><span>操作の手順：quickstart.pdf　くわしく：guide.pdf　画面の場所：index.html</span></div>
+</section>
+
+<section class="sheet">
+  <div class="top"><h1>VPT39 のしくみ</h1><p>入力・出力の組み方と、本番で役立つしくみ</p></div>
+
+  <!-- 6. 素材のいろいろ -->
+  <div class="box">
+    <h2><span class="n">8</span>素材（入力）のいろいろ　<span class="dim" style="font-weight:400;font-size:9pt">— どれもクリップとして並べ、同じように切り替えられる</span></h2>
+    <svg viewBox="0 0 760 150" role="img" aria-label="いろいろな素材がレイヤーに入る図">
+      <defs><marker id="b1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#1b1f27"/></marker></defs>
+      <g font-size="11">
+        <rect x="4" y="6" width="150" height="40" rx="7" fill="#f5f6f8" stroke="#9aa3af"/>
+        <text x="79" y="23" text-anchor="middle" font-weight="700">ファイル</text><text x="79" y="38" text-anchor="middle" font-size="9.5" fill="#5b6472">動画・画像・動くGIF・透明PNG</text>
+        <rect x="4" y="52" width="150" height="40" rx="7" fill="#fbefe0" stroke="#b5762a"/>
+        <text x="79" y="69" text-anchor="middle" font-weight="700">カメラ・キャプチャーボード</text><text x="79" y="84" text-anchor="middle" font-size="9.5" fill="#5b6472">別のPCの画面と音（低遅延）</text>
+        <rect x="4" y="98" width="150" height="40" rx="7" fill="#e3eef8" stroke="#3a6e9e"/>
+        <text x="79" y="115" text-anchor="middle" font-weight="700">ウィンドウ</text><text x="79" y="130" text-anchor="middle" font-size="9.5" fill="#5b6472">同じPCの Zoom・ブラウザなど</text>
+        <rect x="170" y="6" width="150" height="40" rx="7" fill="#efe4f6" stroke="#7a4aa0"/>
+        <text x="245" y="23" text-anchor="middle" font-weight="700">Spout</text><text x="245" y="38" text-anchor="middle" font-size="9.5" fill="#5b6472">Processing・TouchDesigner など</text>
+        <rect x="170" y="52" width="150" height="40" rx="7" fill="#e7f6ee" stroke="#16834f"/>
+        <text x="245" y="69" text-anchor="middle" font-weight="700">レイヤーの映像</text><text x="245" y="84" text-anchor="middle" font-size="9.5" fill="#5b6472">別レイヤーと同じ映像・同じタイミング</text>
+        <rect x="170" y="98" width="150" height="40" rx="7" fill="#fff" stroke="#9aa3af" stroke-dasharray="4 3"/>
+        <text x="245" y="115" text-anchor="middle" font-weight="700">空白</text><text x="245" y="130" text-anchor="middle" font-size="9.5" fill="#5b6472">何も映さない・音も止める</text>
+      </g>
+      <path d="M326,72 L380,72" stroke="#1b1f27" stroke-width="2.5" marker-end="url(#b1)"/>
+      <rect x="388" y="30" width="190" height="84" rx="9" fill="#eaf1fd" stroke="#1f63d6" stroke-width="2"/>
+      <text x="483" y="52" text-anchor="middle" font-size="12" font-weight="700" fill="#1f63d6">レイヤーのクリップ</text>
+      <rect x="402" y="62" width="34" height="24" rx="3" fill="#9dbcf0"/><rect x="442" y="62" width="34" height="24" rx="3" fill="#d9b88c"/><rect x="482" y="62" width="34" height="24" rx="3" fill="#bfa1d6"/><rect x="522" y="62" width="34" height="24" rx="3" fill="#8fd1ae"/>
+      <text x="483" y="104" text-anchor="middle" font-size="9.5" fill="#5b6472">押すとクロスフェードで切り替わる</text>
+      <g font-size="9.5" fill="#5b6472">
+        <text x="600" y="40">● 素材の欄にパソコンのファイルを</text><text x="612" y="54">ドロップすると取り込める</text>
+        <text x="600" y="76">● カメラ・Spout が途中で止まると</text><text x="612" y="90">最後の映像のまま赤字で知らせる</text>
+        <text x="600" y="112">● カメラは自動でつなぎ直す</text>
+      </g>
+    </svg>
+  </div>
+
+  <!-- 7. 出力の組み方 -->
+  <div class="box">
+    <h2><span class="n">9</span>出力（プロジェクター）の組み方</h2>
+    <svg viewBox="0 0 760 132" role="img" aria-label="出力の組み方3通り">
+      <g font-size="10.5">
+        <text x="120" y="14" text-anchor="middle" font-weight="700">それぞれ別の映像</text>
+        <rect x="20" y="24" width="90" height="56" rx="4" fill="#1b1f27"/><text x="65" y="57" text-anchor="middle" fill="#fff" font-size="10">出力1：L1＋L2</text>
+        <rect x="130" y="24" width="90" height="56" rx="4" fill="#1b1f27"/><text x="175" y="57" text-anchor="middle" fill="#fff" font-size="10">出力2：L3</text>
+        <text x="120" y="100" text-anchor="middle" font-size="9.5" fill="#5b6472">レイヤーごとに「映す出力」を選ぶ</text>
+
+        <text x="380" y="14" text-anchor="middle" font-weight="700">同じ映像を両方に</text>
+        <rect x="280" y="24" width="90" height="56" rx="4" fill="#1b1f27"/><polygon points="292,72 310,34 346,40 356,72" fill="#3f6fb5"/>
+        <rect x="390" y="24" width="90" height="56" rx="4" fill="#1b1f27"/><polygon points="398,70 420,32 466,36 470,74" fill="#3f6fb5"/>
+        <text x="380" y="100" text-anchor="middle" font-size="9.5" fill="#5b6472">1つのレイヤーを両方にチェック</text>
+        <text x="380" y="114" text-anchor="middle" font-size="9.5" fill="#5b6472">（形は出力ごとに合わせる・音は1回）</text>
+
+        <text x="640" y="14" text-anchor="middle" font-weight="700">2台で1枚の横長</text>
+        <defs><linearGradient id="fadeR" x1="0" x2="1"><stop offset="0" stop-color="#3f6fb5" stop-opacity="1"/><stop offset="1" stop-color="#3f6fb5" stop-opacity="0"/></linearGradient>
+          <linearGradient id="fadeL" x1="0" x2="1"><stop offset="0" stop-color="#3f6fb5" stop-opacity="0"/><stop offset="1" stop-color="#3f6fb5" stop-opacity="1"/></linearGradient></defs>
+        <rect x="540" y="24" width="110" height="56" fill="#3f6fb5" opacity=".9"/><rect x="620" y="24" width="30" height="56" fill="url(#fadeR)"/>
+        <rect x="620" y="24" width="120" height="56" fill="url(#fadeL)" opacity=".9"/><rect x="650" y="24" width="90" height="56" fill="#3f6fb5" opacity=".9"/>
+        <rect x="620" y="22" width="30" height="60" fill="none" stroke="#cc3322" stroke-width="2" stroke-dasharray="4 3"/>
+        <text x="580" y="57" text-anchor="middle" fill="#fff" font-size="10">出力2</text><text x="700" y="57" text-anchor="middle" fill="#fff" font-size="10">出力3</text>
+        <text x="635" y="96" text-anchor="middle" font-size="9.5" fill="#cc3322">重なり（ぼかしてつなぐ）</text>
+        <text x="640" y="112" text-anchor="middle" font-size="9.5" fill="#5b6472">明るさはつなぎ目ごとの「ガンマ」で合わせる</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="two">
+    <!-- 8. 写真ウォール -->
+    <div class="box">
+      <h2><span class="n">10</span>写真ウォール</h2>
+      <svg viewBox="0 0 360 92" role="img" aria-label="フォルダの写真が順番に出る図">
+        <defs><marker id="b2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#1b1f27"/></marker></defs>
+        <path d="M10,26 L40,26 L48,34 L100,34 L100,82 L10,82z" fill="#ffd98a" stroke="#b5762a"/>
+        <rect x="22" y="44" width="22" height="16" fill="#9dbcf0"/><rect x="50" y="48" width="16" height="22" fill="#8fd1ae"/><rect x="72" y="44" width="20" height="20" fill="#f3a2a2"/>
+        <text x="55" y="18" text-anchor="middle" font-size="9.5" fill="#5b6472">確認済みの写真だけ</text>
+        <path d="M108,56 L146,56" stroke="#1b1f27" stroke-width="2" marker-end="url(#b2)"/>
+        <rect x="154" y="18" width="108" height="66" rx="3" fill="#1b1f27"/><rect x="176" y="28" width="64" height="48" fill="#fff"/><rect x="180" y="32" width="56" height="40" fill="#9dbcf0"/>
+        <rect x="236" y="28" width="26" height="48" fill="#8fd1ae" opacity=".8"/><path d="M246,52 L230,52" stroke="#fff" stroke-width="2" marker-end="url(#b2)"/>
+        <text x="312" y="34" text-anchor="middle" font-size="9.5" fill="#5b6472">新着を優先</text>
+        <text x="312" y="50" text-anchor="middle" font-size="9.5" fill="#5b6472">順番に表示</text>
+        <text x="312" y="66" text-anchor="middle" font-size="9.5" fill="#5b6472">縦長も歪まない</text>
+      </svg>
+      <p>切り替え方は8種類（フェード／静止／スライド／ワイプ／ズーム）。素材の画像を行に並べれば、その順で出す（1枚なら出し続ける）。</p>
+    </div>
+    <!-- 9. スマホで位置合わせ -->
+    <div class="box">
+      <h2><span class="n">11</span>スマホで位置合わせ</h2>
+      <svg viewBox="0 0 360 92" role="img" aria-label="スマホからWi-Fiで四隅を合わせる図">
+        <defs><marker id="b3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#1b1f27"/></marker></defs>
+        <rect x="12" y="10" width="44" height="78" rx="7" fill="#1b1f27"/><rect x="17" y="18" width="34" height="26" fill="#323946"/><polygon points="20,40 26,22 46,24 46,40" fill="none" stroke="#59ccff" stroke-width="1.5"/>
+        <rect x="19" y="50" width="9" height="9" fill="#3dd68c"/><rect x="40" y="50" width="9" height="9" fill="#323946"/><rect x="30" y="60" width="9" height="9" fill="#323946"/><rect x="30" y="72" width="9" height="9" fill="#323946"/>
+        <path d="M64,46 Q96,24 128,46" fill="none" stroke="#1b1f27" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#b3)"/>
+        <text x="96" y="20" text-anchor="middle" font-size="9.5" fill="#5b6472">同じ Wi-Fi</text>
+        <rect x="134" y="34" width="66" height="40" rx="3" fill="#fff" stroke="#1b1f27" stroke-width="2"/><text x="167" y="58" text-anchor="middle" font-size="9.5">PC</text>
+        <path d="M204,54 L236,54" stroke="#1b1f27" stroke-width="2" marker-end="url(#b3)"/>
+        <polygon points="244,22 344,30 340,82 248,76" fill="#eaf1fd" stroke="#1f63d6" stroke-width="2"/>
+        <polygon points="256,30 330,36 326,72 260,68" fill="none" stroke="#ffd400" stroke-width="2"/><rect x="252" y="26" width="8" height="8" fill="#ff4d4f"/>
+        <text x="294" y="90" text-anchor="middle" font-size="9" fill="#5b6472">スクリーンに枠と赤い印</text>
+      </svg>
+      <p>スクリーンの前でスマホを持ち、<b>十字ボタン</b>で1px ずつ（長押しで続けて）。スクリーンを見たまま合わせられる。<span class="dim">（上の帯の「スマホ」→ QR コードで開く）</span></p>
+    </div>
+  </div>
+
+  <!-- 12. 用語 -->
+  <div class="box">
+    <h2><span class="n">12</span>ことばの意味</h2>
+    <div class="two" style="gap:2mm">
+      <table>
+        <tr><td>クリップ</td><td>再生する素材1つ分（8 のどれでも）</td></tr>
+        <tr><td>レイヤー</td><td>映像を重ねる層。L1が一番奥</td></tr>
+        <tr><td>出力</td><td>プロジェクター1台分の映像</td></tr>
+        <tr><td>フルスクリーン</td><td>出力ウィンドウを画面いっぱいに</td></tr>
+        <tr><td>マッピング</td><td>四隅を動かして形を合わせること</td></tr>
+      </table>
+      <table>
+        <tr><td>BLACKOUT</td><td>映像だけを暗くする（音は残る）</td></tr>
+        <tr><td>エッジブレンド</td><td>横長のつなぎ目をぼかして重ねること</td></tr>
+        <tr><td>Spout</td><td>アプリ同士で映像を渡すしくみ（Windows）</td></tr>
+        <tr><td>セッティング</td><td>会場・公演ごとの設定ファイル（名前を付けて保存）</td></tr>
+        <tr><td>テスト用素材</td><td>media・photos の「テスト用」。動き・音の確認に</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 13. 当日の流れ -->
+  <div class="box">
+    <h2><span class="n">13</span>当日の流れ</h2>
+    <div class="flow">
+      <div><b>起動</b><span>run.bat</span></div><i>→</i>
+      <div><b>映す</b><span>プロジェクターへ移し<br>フルスクリーン</span></div><i>→</i>
+      <div><b>合わせる</b><span>マッピング（E・スマホ）<br>終わったら必ずオフ</span></div><i>→</i>
+      <div><b>確かめる</b><span>テスト用素材で<br>なめらかさ・音・左右</span></div><i>→</i>
+      <div><b>通しリハ</b><span>同じPC・同じ<br>プロジェクターで</span></div><i>→</i>
+      <div class="go"><b>本番</b><span>クリップ・列で再生<br>あわてたら B</span></div>
+    </div>
+  </div>
+
+  <div class="foot"><span>VPT39 のしくみ（2／2）</span><span>操作の手順：quickstart.pdf　くわしく：guide.pdf　画面の場所：index.html</span></div>
+</section>
+
+</body>
+</html>

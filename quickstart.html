@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VPT39 クイックスタート</title>
+<style>
+@page{size:A4;margin:0}
+:root{--ink:#1b1f27;--dim:#5b6472;--line:#d5dae1;--blue:#1f63d6;--blue-bg:#eaf1fd;--org:#d97706;--org-bg:#fff4e2;--red:#cc3322;--red-bg:#fdecea;--grn:#16834f;--grn-bg:#e7f6ee}
+*{box-sizing:border-box}
+html,body{margin:0;background:#e9ecf0;color:var(--ink);font-family:"Yu Gothic UI","Yu Gothic","Hiragino Sans","Meiryo",sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.sheet{width:210mm;height:297mm;margin:8mm auto;background:#fff;padding:8mm 10mm 7mm;display:flex;flex-direction:column;gap:2.4mm;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.12);font-size:9.8pt;line-height:1.48}
+@media print{html,body{background:#fff}.sheet{margin:0;box-shadow:none;page-break-after:always}}
+.top{display:flex;align-items:center;gap:4mm;border-bottom:2.5pt solid var(--ink);padding-bottom:2mm}
+.top h1{margin:0;font-size:19pt;letter-spacing:.02em}
+.top h1 small{font-size:11pt;font-weight:600;margin-left:3mm;color:var(--dim)}
+.top .side{margin-left:auto;display:flex;gap:1.5mm}
+.top .side span{border:1pt solid var(--ink);border-radius:2mm;padding:.5mm 3mm;font-size:9.5pt;font-weight:700}
+.top .side span.on{background:var(--ink);color:#fff}
+.lead{font-size:10pt;color:var(--dim);margin:0}
+.lead b{color:var(--ink)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:3mm}
+.box{border:1pt solid var(--line);border-radius:2.5mm;padding:2.2mm 3mm}
+.box h3{margin:0 0 1mm;font-size:10.5pt}
+.step{display:grid;grid-template-columns:11mm 1fr;gap:2.5mm;align-items:start}
+.step .n{width:11mm;height:11mm;border-radius:50%;background:var(--blue);color:#fff;font-weight:800;font-size:14pt;display:flex;align-items:center;justify-content:center;line-height:1}
+.step h2{margin:.5mm 0 .8mm;font-size:12.5pt}
+.step p{margin:0 0 .8mm}
+.step ul,.box ul{margin:0;padding-left:4.5mm}
+.step li,.box li{margin:.2mm 0}
+.row{display:flex;gap:3mm;align-items:flex-start}
+.shot{border:1pt solid #9aa3af;border-radius:1.5mm;display:block;max-width:100%}
+.fig{position:relative;display:inline-block;line-height:0}
+.fig .b{position:absolute;transform:translate(-50%,-50%);width:6mm;height:6mm;border-radius:50%;background:var(--red);color:#fff;font:800 9.5pt/6mm "Yu Gothic UI",sans-serif;text-align:center;border:.8pt solid #fff}
+kbd{display:inline-block;min-width:6mm;padding:0 1.5mm;border:1pt solid #8a93a0;border-bottom-width:2pt;border-radius:1.2mm;background:#f6f7f9;font:700 9.5pt/1.45 "Segoe UI","Yu Gothic UI",sans-serif;text-align:center;color:var(--ink)}
+.btn{display:inline-block;padding:0 1.6mm;border-radius:1.2mm;background:#2a2f37;color:#fff;font-weight:700;font-size:9pt;line-height:1.5;white-space:nowrap}
+.btn.red{background:#3a2a08;color:#ffd27a;border:1pt solid #ffb020}
+.btn.grn{background:#2fd17c;color:#04120a}
+.note{background:var(--org-bg);border-left:2mm solid var(--org);padding:1.5mm 3mm;border-radius:0 1.5mm 1.5mm 0;font-size:9.5pt}
+.note b{color:#9a4d00}
+.ok{background:var(--grn-bg);border-left:2mm solid var(--grn);padding:1.5mm 3mm;border-radius:0 1.5mm 1.5mm 0;font-size:9.5pt}
+.em{background:var(--red-bg);border:1.5pt solid var(--red);border-radius:2.5mm;padding:2.2mm 3mm}
+.em h3{color:var(--red);margin:0 0 1mm;font-size:11.5pt}
+table{border-collapse:collapse;width:100%}
+th,td{border:.8pt solid var(--line);padding:.8mm 2mm;text-align:left;vertical-align:top}
+th{background:#f1f3f6;font-size:9.5pt}
+td{font-size:9.5pt}
+.keys td:first-child{width:28mm;white-space:nowrap}
+.dim{color:var(--dim)}
+.grow{flex:1}
+.foot{margin-top:auto;font-size:8.5pt;color:var(--dim);display:flex;justify-content:space-between;border-top:.8pt solid var(--line);padding-top:1.5mm}
+.screens{display:grid;grid-template-columns:1fr auto 1fr;gap:2mm;align-items:center}
+.scr{border:1.2pt solid var(--ink);border-radius:2mm;padding:1.5mm 2.5mm;text-align:center}
+.scr b{display:block;font-size:10.5pt}
+.scr span{font-size:9pt;color:var(--dim)}
+.scr.out{background:#1b1f27;color:#fff}.scr.out span{color:#c9d0da}
+</style>
+</head>
+<body>
+
+<!-- ================= 表：準備 ================= -->
+<section class="sheet">
+  <div class="top">
+    <h1>VPT39 クイックスタート<small>準備編</small></h1>
+    <div class="side"><span class="on">表：準備</span><span>裏：本番</span></div>
+  </div>
+  <div style="font-size:8.8pt;line-height:1.45;color:var(--dim)"><b style="color:var(--ink)">このアプリは：</b>プロジェクションマッピングに特化した映像プレイヤー。プロジェクタをつかったメディア/インタラクションアート作品、ライブ等で使いやすいように工夫してます。</div>
+
+  <div class="screens">
+    <div class="scr out"><b>出力ウィンドウ</b><span>プロジェクターに映る画面。<br>ここは「映すだけ」</span></div>
+    <div style="font-size:16pt;font-weight:800">⇄</div>
+    <div class="scr"><b>操作パネル</b><span>ノートPCのブラウザ。<br>操作は全部ここで行う</span></div>
+  </div>
+
+  <div class="step"><div class="n">1</div><div>
+    <h2>起動する</h2>
+    <p>VPT39 フォルダの <b>run.bat</b> をダブルクリック。<b>出力ウィンドウ</b>（小さな黒い窓）と<b>操作パネル</b>（ブラウザ）が開きます。</p>
+    <div class="note"><b>初めての PC</b>：ネットにつないでおく（部品を自動で入れる）。ファイアウォールの確認は「許可」。</div>
+  </div></div>
+
+  <div class="step"><div class="n">2</div><div>
+    <h2>プロジェクターに映す</h2>
+    <div class="row">
+      <div class="grow">
+        <ol style="margin:0;padding-left:5mm">
+          <li><kbd>⊞Win</kbd>＋<kbd>P</kbd> →「<b>拡張</b>」を選ぶ（「複製」ではない）</li>
+          <li>どれがプロジェクターか分からなければ <span class="btn">識別</span>（各画面に番号が出る）</li>
+          <li>小さな黒い<b>出力ウィンドウ</b>を、マウスで<b>プロジェクターの画面へドラッグ</b></li>
+          <li>手元の<b>操作パネル</b>の「<b>出力</b>」タブで <span class="btn">フルスクリーン</span><span class="dim">（出力ウィンドウ上の <kbd>F</kbd>・ダブルクリックでも可）</span></li>
+          <li>スクリーンに映ったか目で確認。<b>操作パネルは手元のPC画面に残す</b></li>
+        </ol>
+      </div>
+      <img class="shot" src="img/qs_outs.jpg" style="width:70mm" alt="出力ウィンドウ欄のフルスクリーンボタン">
+    </div>
+    <p class="dim" style="margin-top:.8mm">2台以上は <span class="btn">＋出力を追加</span>（横長につなぐのも可。詳細版4章）。</p>
+  </div></div>
+
+  <div class="step"><div class="n">3</div><div>
+    <h2>映像（クリップ）を並べる</h2>
+    <div class="row">
+      <img class="shot" src="img/qs_media.jpg" style="width:58mm" alt="素材の一覧">
+      <ul class="grow">
+        <li>使う動画を <b>media</b> フォルダに入れる（数秒で「<b>素材</b>」タブに出る）。エクスプローラーから「素材」の欄へ<b>ドラッグして離しても</b>入る</li>
+        <li>素材を<b>レイヤーの行へドラッグ</b>（クリックなら選んでいるレイヤーの最後へ）</li>
+        <li><b>曲ごとに番号（列）をそろえる</b>（裏面①で一斉に切り替え）。映さない曲には「<b>＋ 空白を追加</b>」</li>
+        <li>カメラ・ウィンドウ・<b>Spout</b>（Processing など）は「空白・レイヤー・入力」から</li>
+      </ul>
+    </div>
+  </div></div>
+
+  <div class="step"><div class="n">4</div><div>
+    <h2>スクリーンの形に合わせる（マッピング）</h2>
+    <div class="row">
+      <div class="grow">
+        <ul>
+          <li>上の帯の <span class="btn">マッピング編集 (E)</span> をオン（<span class="btn">テスト表示</span> で格子を映すと分かりやすい）</li>
+          <li>レイヤーの行をクリックして選び、「<b>レイヤー設定</b>」タブのマッピングの図で<b>四隅をドラッグ</b>してスクリーンに合わせる</li>
+          <li>細かい調整は矢印キー：図の下で動かす角（または<b>全体</b>）を選び、<kbd>←</kbd><kbd>→</kbd><kbd>↑</kbd><kbd>↓</kbd> で 1px（<kbd>Shift</kbd>で10px）</li>
+          <li><b>スマホから</b>も：上の帯の <span class="btn">スマホ</span> → QR コードを読む（9章）</li>
+        </ul>
+        <div class="note" style="margin-top:1mm"><b>終わったら必ず</b> <kbd>E</kbd> で編集をオフ、テスト表示もオフ（オンのままだと枠や格子が客席に映る）。</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:1.5mm;width:62mm">
+        <img class="shot" src="img/qs_mapout.jpg" style="width:62mm" alt="編集中の出力：四隅と格子">
+        <span class="dim" style="font-size:8.5pt;line-height:1.3">↑編集中の出力。黄色い点が四隅</span>
+      </div>
+    </div>
+  </div></div>
+
+  <div class="step"><div class="n">5</div><div>
+    <h2>音を確かめる</h2>
+    <div class="row">
+      <img class="shot" src="img/qs_mixer.jpg" style="width:62mm" alt="音声ミキサー">
+      <ul class="grow">
+        <li>「<b>ミキサー</b>」タブで音量を調整。上から <b>音声マスター → 出力ごと → レイヤーごと</b></li>
+        <li><span class="btn">M</span> ＝ミュート（<b style="color:var(--red)">赤</b>になったら消音中）</li>
+        <li>緑のバーは目安。スピーカーから出ているかは<b>耳で確認</b></li>
+        <li>出ないときの順番：PC の音量 → 音の出力先（スピーカー）→ ミキサーの M・フェーダー</li>
+      </ul>
+    </div>
+  </div></div>
+
+  <div class="ok">設定は<b>自動で保存</b>されます（次に run.bat で起動すると、同じ画面に同じ状態で出ます）。本番前に、<b>同じPC・同じプロジェクターで通しリハ</b>を1回。</div>
+
+  <div class="foot"><span>VPT39 クイックスタート（表）</span><span>詳しくは manual\index.html（画面対応マニュアル）</span></div>
+</section>
+
+<!-- ================= 裏：本番 ================= -->
+<section class="sheet">
+  <div class="top">
+    <h1>VPT39 クイックスタート<small>本番編</small></h1>
+    <div class="side"><span>表：準備</span><span class="on">裏：本番</span></div>
+  </div>
+
+  <div class="fig" style="width:74%;align-self:center">
+    <img class="shot" src="img/qs_clips.jpg" style="width:100%" alt="クリップの操作">
+    <span class="b" style="left:77.9%;top:4%">1</span>
+    <span class="b" style="left:55.4%;top:23.7%">2</span>
+    <span class="b" style="left:55.4%;top:65%">3</span>
+    <span class="b" style="left:32.8%;top:50.5%">4</span>
+  </div>
+  <div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2mm">
+      <div class="box"><h3>① 列で再生 <span class="dim" style="font-weight:400">— 曲が変わるとき</span></h3>真下に並んだ番号のクリップを、<b>全部のレイヤーで一斉に</b>切り替え。</div>
+      <div class="box"><h3>② サムネイルをクリック <span class="dim" style="font-weight:400">— 1つだけ変えるとき</span></h3><b>そのレイヤーだけ</b>、そのクリップにふわっと切り替わる（クロスフェード）。緑の枠＝いま再生中。</div>
+      <div class="box"><h3>③ ミニ操作</h3>バーを<b>ドラッグ</b>で再生位置を移動。<br><b>⏮</b> 頭から　<b>⏸</b> 一時停止（バーがオレンジ）　<b>⏹</b> 止めて消す</div>
+      <div class="box"><h3>④ 前・次へ・消す</h3>行の左のボタン。そのレイヤーだけを前／次のクリップへ。「消す」でフェードアウト。</div>
+    </div>
+  </div>
+
+  <table class="keys">
+    <tr><th colspan="2">よく使うキー（操作パネルでも、出力ウィンドウでも）</th></tr>
+    <tr><td><kbd>Space</kbd></td><td><b>L1 だけ</b>を次のクリップへ（ほかのレイヤーは変わらない）</td></tr>
+    <tr><td><kbd>B</kbd></td><td><b>ブラックアウト</b>（映像を0.5秒で暗く）。<b>もう一度 B で戻る</b></td></tr>
+    <tr><td><kbd>E</kbd></td><td>マッピング編集のオン／オフ（<b>本番中はオフ</b>）</td></tr>
+    <tr><td><kbd>F</kbd>・ダブルクリック</td><td>（出力ウィンドウ上で）フルスクリーンの切り替え</td></tr>
+  </table>
+
+  <div class="em">
+    <h3>あわてたとき</h3>
+    <div class="fig" style="width:100%;margin:.5mm 0 1.5mm">
+      <img class="shot" src="img/qs_header.jpg" style="width:100%" alt="上の帯のボタン">
+      <span class="b" style="left:64.6%;top:50%">A</span>
+      <span class="b" style="left:82.2%;top:50%">B</span>
+      <span class="b" style="left:95.4%;top:50%">C</span>
+    </div>
+    <table>
+      <tr><td style="width:42mm"><b>映像だけすぐ消したい</b></td><td><b>A</b> <span class="btn red">BLACKOUT</span> ボタンか <kbd>B</kbd> キー。<b>音は流れたまま</b>。戻すときはもう一度</td></tr>
+      <tr><td><b>音だけすぐ止めたい</b></td><td>音声ミキサーの <span class="btn">M</span>。映像はそのまま（全部止めるなら各「出力」の M）</td></tr>
+      <tr><td><b>映像を止めたい（静止）</b></td><td>クリップの <b>⏸</b>（もう一度押すと続きから）</td></tr>
+      <tr><td><b>枠・線・文字が映っている</b></td><td><b>B</b> マッピング編集がオン → <kbd>E</kbd> でオフ。格子なら「テスト表示」をオフ</td></tr>
+      <tr><td><b>アプリを終える</b></td><td><b>C</b> <span class="btn">終了</span>（設定は保存される）</td></tr>
+    </table>
+  </div>
+
+  <table>
+    <tr><th style="width:52mm">困ったとき</th><th>まず見るところ</th></tr>
+    <tr><td>プロジェクターに何も映らない</td><td>プロジェクターの入力切替・ケーブル → 出力ウィンドウがその画面で<b>フルスクリーン</b>か → <b>BLACKOUT</b> が赤く光っていないか → 「明るさ」</td></tr>
+    <tr><td>出力ウィンドウが見当たらない</td><td>「出力」タブの <span class="btn">手元に戻す</span>（メイン画面の真ん中に戻る）</td></tr>
+    <tr><td>違う映像が出ている</td><td>そのレイヤーの<b>緑の枠</b>のクリップ ／ 「レイヤー設定」の「<b>映す出力</b>」が正しいか</td></tr>
+    <tr><td>音が出ない</td><td>ミキサーの <b>M（赤）</b>・フェーダー → PC の音量と出力先 → 上の帯が「VLC（音声あり）」か</td></tr>
+    <tr><td>操作パネルを閉じてしまった</td><td>ブラウザで <b>http://localhost:8080/</b> を開く（映像は止まっていない）</td></tr>
+    <tr><td>アプリが落ちた</td><td>① プロジェクターの <b>AV ミュート</b>（リモコン）で客席を隠す ② <b>run.bat</b> ③ 出力が元の画面にフルスクリーンで出る（出なければ STEP2）④ クリップを押し直す（並び・形・音量は保存済み、<b>再生位置は戻らない</b>）⑤ AV ミュート解除</td></tr>
+  </table>
+
+  <div class="foot"><span>VPT39 クイックスタート（裏）</span><span>しくみ：manual\concept.pdf　くわしく：manual\guide.pdf</span></div>
+</section>
+
+</body>
+</html>
