@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VPT39 Quick Start</title>
+<style>
+@page{size:A4;margin:0}
+:root{--ink:#1b1f27;--dim:#5b6472;--line:#d5dae1;--blue:#1f63d6;--blue-bg:#eaf1fd;--org:#d97706;--org-bg:#fff4e2;--red:#cc3322;--red-bg:#fdecea;--grn:#16834f;--grn-bg:#e7f6ee}
+*{box-sizing:border-box}
+html,body{margin:0;background:#e9ecf0;color:var(--ink);font-family:"Segoe UI","Yu Gothic UI","Yu Gothic","Hiragino Sans","Meiryo",sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.sheet{width:210mm;height:297mm;margin:8mm auto;background:#fff;padding:8mm 10mm 7mm;display:flex;flex-direction:column;gap:2.4mm;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.12);font-size:9.8pt;line-height:1.48}
+@media print{html,body{background:#fff}.sheet{margin:0;box-shadow:none;page-break-after:always}}
+.top{display:flex;align-items:center;gap:4mm;border-bottom:2.5pt solid var(--ink);padding-bottom:2mm}
+.top h1{margin:0;font-size:19pt;letter-spacing:.02em}
+.top h1 small{font-size:11pt;font-weight:600;margin-left:3mm;color:var(--dim)}
+.top .side{margin-left:auto;display:flex;gap:1.5mm}
+.top .side span{border:1pt solid var(--ink);border-radius:2mm;padding:.5mm 3mm;font-size:9.5pt;font-weight:700}
+.top .side span.on{background:var(--ink);color:#fff}
+.lead{font-size:10pt;color:var(--dim);margin:0}
+.lead b{color:var(--ink)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:3mm}
+.box{border:1pt solid var(--line);border-radius:2.5mm;padding:2.2mm 3mm}
+.box h3{margin:0 0 1mm;font-size:10.5pt}
+.step{display:grid;grid-template-columns:11mm 1fr;gap:2.5mm;align-items:start}
+.step .n{width:11mm;height:11mm;border-radius:50%;background:var(--blue);color:#fff;font-weight:800;font-size:14pt;display:flex;align-items:center;justify-content:center;line-height:1}
+.step h2{margin:.5mm 0 .8mm;font-size:12.5pt}
+.step p{margin:0 0 .8mm}
+.step ul,.box ul{margin:0;padding-left:4.5mm}
+.step li,.box li{margin:.2mm 0}
+.row{display:flex;gap:3mm;align-items:flex-start}
+.shot{border:1pt solid #9aa3af;border-radius:1.5mm;display:block;max-width:100%}
+.fig{position:relative;display:inline-block;line-height:0}
+.fig .b{position:absolute;transform:translate(-50%,-50%);width:6mm;height:6mm;border-radius:50%;background:var(--red);color:#fff;font:800 9.5pt/6mm "Segoe UI","Yu Gothic UI",sans-serif;text-align:center;border:.8pt solid #fff}
+kbd{display:inline-block;min-width:6mm;padding:0 1.5mm;border:1pt solid #8a93a0;border-bottom-width:2pt;border-radius:1.2mm;background:#f6f7f9;font:700 9.5pt/1.45 "Segoe UI","Yu Gothic UI",sans-serif;text-align:center;color:var(--ink)}
+.btn{display:inline-block;padding:0 1.6mm;border-radius:1.2mm;background:#2a2f37;color:#fff;font-weight:700;font-size:9pt;line-height:1.5;white-space:nowrap}
+.btn.red{background:#3a2a08;color:#ffd27a;border:1pt solid #ffb020}
+.btn.grn{background:#2fd17c;color:#04120a}
+.note{background:var(--org-bg);border-left:2mm solid var(--org);padding:1.5mm 3mm;border-radius:0 1.5mm 1.5mm 0;font-size:9.5pt}
+.note b{color:#9a4d00}
+.ok{background:var(--grn-bg);border-left:2mm solid var(--grn);padding:1.5mm 3mm;border-radius:0 1.5mm 1.5mm 0;font-size:9.5pt}
+.em{background:var(--red-bg);border:1.5pt solid var(--red);border-radius:2.5mm;padding:2.2mm 3mm}
+.em h3{color:var(--red);margin:0 0 1mm;font-size:11.5pt}
+table{border-collapse:collapse;width:100%}
+th,td{border:.8pt solid var(--line);padding:.8mm 2mm;text-align:left;vertical-align:top}
+th{background:#f1f3f6;font-size:9.5pt}
+td{font-size:9.5pt}
+.keys td:first-child{width:28mm;white-space:nowrap}
+.dim{color:var(--dim)}
+.grow{flex:1}
+.foot{margin-top:auto;font-size:8.5pt;color:var(--dim);display:flex;justify-content:space-between;border-top:.8pt solid var(--line);padding-top:1.5mm}
+.screens{display:grid;grid-template-columns:1fr auto 1fr;gap:2mm;align-items:center}
+.scr{border:1.2pt solid var(--ink);border-radius:2mm;padding:1.5mm 2.5mm;text-align:center}
+.scr b{display:block;font-size:10.5pt}
+.scr span{font-size:9pt;color:var(--dim)}
+.scr.out{background:#1b1f27;color:#fff}.scr.out span{color:#c9d0da}
+</style>
+</head>
+<body>
+
+<!-- ================= Front: preparation ================= -->
+<section class="sheet">
+  <div class="top">
+    <h1>VPT39 Quick Start<small>Preparation</small></h1>
+    <div class="side"><span class="on">Front: Prep</span><span>Back: Show</span></div>
+  </div>
+  <div style="font-size:8.8pt;line-height:1.45;color:var(--dim)"><b style="color:var(--ink)">About this app:</b> A video player made for projection mapping. It is designed to be easy to use for media and interactive art with projectors, live shows and more.<br>VPT39 is an unofficial tool inspired by VPT (VideoProjectionTool) by HC Gilje. It is not affiliated with VPT in any way.</div>
+
+  <div class="screens">
+    <div class="scr out"><b>Output window</b><span>What the projector shows.<br>It "only shows" the picture</span></div>
+    <div style="font-size:16pt;font-weight:800">⇄</div>
+    <div class="scr"><b>Control panel</b><span>A browser on the laptop.<br>You do everything here</span></div>
+  </div>
+
+  <div class="step"><div class="n">1</div><div>
+    <h2>Start</h2>
+    <p>Double-click <b>run.bat</b> (VPT39 folder). The <b>output window</b> (small, black) and <b>control panel</b> (browser) open.</p>
+    <div class="note"><b>First time on a PC</b>: be online (parts install automatically). For the firewall prompt, choose "Allow".</div>
+  </div></div>
+
+  <div class="step"><div class="n">2</div><div>
+    <h2>Show it on the projector</h2>
+    <div class="row">
+      <div class="grow">
+        <ol style="margin:0;padding-left:5mm">
+          <li><kbd>⊞Win</kbd>+<kbd>P</kbd> → "<b>Extend</b>" (not "Duplicate")</li>
+          <li>Which is the projector? <span class="btn">Identify</span> numbers each display</li>
+          <li><b>Drag</b> the small black <b>output window</b> <b>to the projector display</b></li>
+          <li><b>Control panel</b>, "<b>Outputs</b>" tab: <span class="btn">Fullscreen</span><span class="dim"> (or <kbd>F</kbd> / double-click on the output window)</span></li>
+          <li>Check the screen. <b>Keep the control panel on the laptop</b></li>
+        </ol>
+      </div>
+      <img class="shot" src="img/qs_outs.jpg" style="width:56mm" alt="Fullscreen button in the output window list">
+    </div>
+    <p class="dim" style="margin-top:.8mm">2 or more: <span class="btn">+ Add output</span> (can also be joined into one wide picture; full guide, ch. 4).</p>
+  </div></div>
+
+  <div class="step"><div class="n">3</div><div>
+    <h2>Arrange videos (clips)</h2>
+    <div class="row">
+      <img class="shot" src="img/qs_media.jpg" style="width:58mm" alt="Media list">
+      <ul class="grow">
+        <li>Put videos in the <b>media</b> folder (in seconds they show in the "<b>Media</b>" tab), or <b>drag and drop</b> from Explorer onto "Media"</li>
+        <li><b>Drag media onto a layer row</b> (click: add to end of selected layer)</li>
+        <li><b>Same number (column) for each song</b> (switch all with ① on the back). No picture for a song: "<b>+ Add blank</b>"</li>
+        <li>Cameras, windows, <b>Spout</b> (Processing, etc.): in "Blank, layers, inputs"</li>
+      </ul>
+    </div>
+  </div></div>
+
+  <div class="step"><div class="n">4</div><div>
+    <h2>Fit the screen shape (mapping)</h2>
+    <div class="row">
+      <div class="grow">
+        <ul>
+          <li>Turn on <span class="btn">Edit mapping (E)</span> in the top bar (a <span class="btn">Test pattern</span> grid helps)</li>
+          <li>Select a layer row. In "<b>Layer settings</b>", <b>drag the four corners</b> of the mapping diagram to fit the screen</li>
+          <li>Fine moves: pick a corner (or <b>All</b>) under the diagram, then <kbd>←</kbd><kbd>→</kbd><kbd>↑</kbd><kbd>↓</kbd> = 1 px (<kbd>Shift</kbd>: 10 px)</li>
+          <li><b>From a phone</b>: <span class="btn">Phone</span> in the top bar → scan the QR code (ch. 9)</li>
+        </ul>
+        <div class="note" style="margin-top:1mm"><b>When done, always</b> press <kbd>E</kbd> (editing off) and turn off the test pattern, or the frame and grid show to the audience.</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:1.5mm;width:62mm">
+        <img class="shot" src="img/qs_mapout.jpg" style="width:62mm" alt="Output while editing: four corners and grid">
+        <span class="dim" style="font-size:8.5pt;line-height:1.3">↑Output while editing. The yellow dots are the corners</span>
+      </div>
+    </div>
+  </div></div>
+
+  <div class="step"><div class="n">5</div><div>
+    <h2>Check the sound</h2>
+    <div class="row">
+      <img class="shot" src="img/qs_mixer.jpg" style="width:54mm" alt="Audio mixer">
+      <ul class="grow">
+        <li>"<b>Mixer</b>" tab, top down: <b>Audio master → output → layer</b></li>
+        <li><span class="btn">M</span> = mute (<b style="color:var(--red)">red</b> = muted)</li>
+        <li>Green bars are only a guide. <b>Listen</b> to the speakers</li>
+        <li>No sound? PC volume → output device (speakers) → mixer M, faders</li>
+      </ul>
+    </div>
+  </div></div>
+
+  <div class="ok">Settings are <b>saved automatically</b> (run.bat brings back the same state on the same displays). Before the show, do one <b>full rehearsal on the same PC and projector</b>.</div>
+
+  <div class="foot"><span>VPT39 Quick Start (front)</span><span>Details: manual\en\index.html (screen-by-screen manual)</span></div>
+</section>
+
+<!-- ================= Back: show ================= -->
+<section class="sheet">
+  <div class="top">
+    <h1>VPT39 Quick Start<small>During the show</small></h1>
+    <div class="side"><span>Front: Prep</span><span class="on">Back: Show</span></div>
+  </div>
+
+  <div class="fig" style="width:74%;align-self:center">
+    <img class="shot" src="img/qs_clips.jpg" style="width:100%" alt="Clip controls">
+    <span class="b" style="left:77.9%;top:4%">1</span>
+    <span class="b" style="left:55.4%;top:23.7%">2</span>
+    <span class="b" style="left:55.4%;top:65%">3</span>
+    <span class="b" style="left:32.8%;top:50.5%">4</span>
+  </div>
+  <div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2mm">
+      <div class="box"><h3>① Play column <span class="dim" style="font-weight:400">— when the song changes</span></h3>Switches <b>all layers at once</b> to the clips with the number right below.</div>
+      <div class="box"><h3>② Click a thumbnail <span class="dim" style="font-weight:400">— to change just one</span></h3><b>Only that layer</b> changes smoothly to that clip (crossfade). Green frame = playing now.</div>
+      <div class="box"><h3>③ Mini controls</h3><b>Drag</b> the bar to move the playback position.<br><b>⏮</b> Restart&nbsp;&nbsp;<b>⏸</b> Pause (the bar turns orange)&nbsp;&nbsp;<b>⏹</b> Stop and clear</div>
+      <div class="box"><h3>④ Previous / Next / Clear</h3>Buttons at the left of the row. Moves only that layer to the previous / next clip. "Clear" fades it out.</div>
+    </div>
+  </div>
+
+  <table class="keys">
+    <tr><th colspan="2">Common keys (in the control panel or the output window)</th></tr>
+    <tr><td><kbd>Space</kbd></td><td>Moves <b>only L1</b> to the next clip (other layers do not change)</td></tr>
+    <tr><td><kbd>B</kbd></td><td><b>Blackout</b> (darkens the picture in 0.5 s). <b>Press B again to bring it back</b></td></tr>
+    <tr><td><kbd>E</kbd></td><td>Edit mapping on / off (<b>keep it off during the show</b>)</td></tr>
+    <tr><td><kbd>F</kbd> / double-click</td><td>(on the output window) Fullscreen on / off</td></tr>
+  </table>
+
+  <div class="em">
+    <h3>If you panic</h3>
+    <div class="fig" style="width:100%;margin:.5mm 0 1.5mm">
+      <img class="shot" src="img/qs_header.jpg" style="width:100%" alt="Buttons in the top bar">
+      <span class="b" style="left:46%;top:50%">A</span>
+      <span class="b" style="left:60.9%;top:50%">B</span>
+      <span class="b" style="left:95.2%;top:50%">C</span>
+    </div>
+    <table>
+      <tr><td style="width:42mm"><b>Hide the picture now</b></td><td><b>A</b> <span class="btn red">BLACKOUT</span> button or the <kbd>B</kbd> key. <b>The sound keeps playing</b>. Press again to bring it back</td></tr>
+      <tr><td><b>Stop only the sound now</b></td><td><span class="btn">M</span> in the audio mixer. The picture stays (to stop all, the M of each "Output")</td></tr>
+      <tr><td><b>Freeze the picture</b></td><td><b>⏸</b> on the clip (press again to continue)</td></tr>
+      <tr><td><b>A frame, lines or text show</b></td><td><b>B</b> Edit mapping is on → press <kbd>E</kbd> to turn it off. For a grid, turn off "Test pattern"</td></tr>
+      <tr><td><b>Quit the app</b></td><td><b>C</b> <span class="btn">Quit</span> (settings are saved)</td></tr>
+    </table>
+  </div>
+
+  <table>
+    <tr><th style="width:42mm">Problem</th><th>Check first</th></tr>
+    <tr><td>Nothing on the projector</td><td>Projector input, cable → output window <b>fullscreen</b>? → <b>BLACKOUT</b> on? → "Brightness"</td></tr>
+    <tr><td>Output window lost</td><td><span class="btn">Bring back</span> in the "Outputs" tab (to the main display)</td></tr>
+    <tr><td>The wrong picture shows</td><td>The clip with the <b>green frame</b> in that layer / is "<b>Outputs</b>" in "Layer settings" right?</td></tr>
+    <tr><td>No sound</td><td><b>M (red)</b> / faders in the mixer → PC volume and output device</td></tr>
+    <tr><td>Closed the control panel</td><td>Open <b>http://localhost:8080/</b> (the video keeps playing)</td></tr>
+    <tr><td>The app crashed</td><td>① Projector <b>AV mute</b> ② <b>run.bat</b> ③ Outputs return fullscreen (if not, STEP 2) ④ Press the clips again ⑤ AV mute off</td></tr>
+  </table>
+
+  <div class="foot"><span>VPT39 Quick Start (back)</span><span>How it works: manual\en\concept.pdf&nbsp;&nbsp; Details: manual\en\guide.pdf</span></div>
+</section>
+
+</body>
+</html>

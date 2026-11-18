@@ -1,0 +1,1088 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VPT39 User Guide (Detailed)</title>
+<style>
+@page{size:A4;margin:13mm 13mm 14mm}
+:root{--ink:#1b1f27;--dim:#5b6472;--line:#d5dae1;--blue:#1f63d6;--blue-bg:#eaf1fd;--org:#d97706;--org-bg:#fff4e2;--red:#cc3322;--red-bg:#fdecea;--grn:#16834f;--grn-bg:#e7f6ee}
+*{box-sizing:border-box}
+html,body{margin:0;background:#e9ecf0;color:var(--ink);font-family:"Segoe UI","Yu Gothic UI","Yu Gothic","Hiragino Sans","Meiryo",sans-serif;font-size:10.3pt;line-height:1.65;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.doc{width:210mm;margin:8mm auto;background:#fff;padding:13mm 13mm 14mm;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+@media print{html,body{background:#fff}.doc{width:auto;margin:0;padding:0;box-shadow:none}}
+.chap{break-before:page;page-break-before:always}
+.cover{min-height:255mm;display:flex;flex-direction:column}
+.cover h1{font-size:30pt;margin:30mm 0 2mm;letter-spacing:.02em}
+.cover .sub{font-size:14pt;color:var(--dim);margin:0 0 10mm}
+.cover .lead{font-size:11pt;max-width:150mm}
+h2{font-size:17pt;margin:0 0 3mm;padding-bottom:1.5mm;border-bottom:2.5pt solid var(--ink);display:flex;gap:3mm;align-items:baseline}
+h2 .c{color:var(--blue);font-size:13pt}
+h3{font-size:12.5pt;margin:5mm 0 1.5mm;padding-left:2.5mm;border-left:1.5mm solid var(--blue);break-after:avoid}
+h4{font-size:10.8pt;margin:3mm 0 1mm;break-after:avoid}
+p{margin:1mm 0 2mm}
+ul,ol{margin:1mm 0 2mm;padding-left:6mm}
+li{margin:.6mm 0}
+.toc{columns:2;column-gap:10mm;padding:0;list-style:none;font-size:11pt}
+.toc li{break-inside:avoid;margin:0 0 2mm}
+.toc b{color:var(--blue);display:inline-block;width:9mm}
+.note,.warn,.tip,.danger{border-radius:0 2mm 2mm 0;padding:2mm 3.5mm;margin:2mm 0 3mm;font-size:9.8pt;break-inside:avoid}
+.note{background:var(--blue-bg);border-left:2mm solid var(--blue)}
+.warn{background:var(--org-bg);border-left:2mm solid var(--org)}
+.tip{background:var(--grn-bg);border-left:2mm solid var(--grn)}
+.danger{background:var(--red-bg);border-left:2mm solid var(--red)}
+.note b.h,.warn b.h,.tip b.h,.danger b.h{margin-right:2mm}
+.warn b.h{color:#9a4d00}.tip b.h{color:var(--grn)}.danger b.h{color:var(--red)}.note b.h{color:var(--blue)}
+kbd{display:inline-block;min-width:6mm;padding:0 1.5mm;border:1pt solid #8a93a0;border-bottom-width:2pt;border-radius:1.2mm;background:#f6f7f9;font:700 9.5pt/1.45 "Segoe UI","Yu Gothic UI",sans-serif;text-align:center}
+.btn{display:inline-block;padding:0 1.6mm;border-radius:1.2mm;background:#2a2f37;color:#fff;font-weight:700;font-size:9.2pt;line-height:1.55;white-space:nowrap}
+.btn.red{background:#4a1515;color:#ffd0d0;border:1pt solid #b33}
+table{border-collapse:collapse;width:100%;margin:1.5mm 0 3mm;break-inside:auto}
+th,td{border:.8pt solid var(--line);padding:1.2mm 2.2mm;text-align:left;vertical-align:top;font-size:9.6pt}
+th{background:#f1f3f6}
+tr{break-inside:avoid}
+td.k{white-space:nowrap;font-weight:700;width:30mm;background:#fafbfc}
+figure{margin:2.5mm 0 3.5mm;break-inside:avoid}
+figcaption{font-size:9pt;color:var(--dim);margin-top:1mm}
+.shot{position:relative;overflow:hidden;border:1pt solid #8b94a1;border-radius:1.5mm;background:#111}
+.shot img{position:absolute;max-width:none;display:block}
+.shot .bx{position:absolute;border:2.2pt solid var(--red);border-radius:1mm}
+.shot .bx i{position:absolute;left:-2.5mm;top:-2.5mm;width:5.4mm;height:5.4mm;border-radius:50%;background:var(--red);color:#fff;font:800 8.8pt/5.4mm "Segoe UI","Yu Gothic UI",sans-serif;text-align:center;font-style:normal;border:.7pt solid #fff}
+.side{display:grid;grid-template-columns:1fr 1fr;gap:5mm;align-items:start}
+.side.w{grid-template-columns:1.25fr 1fr}
+.legend{list-style:none;padding:0;margin:1mm 0}
+.legend li{display:flex;gap:2mm;margin:0 0 1.5mm}
+.legend li i{flex:none;width:5.4mm;height:5.4mm;border-radius:50%;background:var(--red);color:#fff;font:800 8.8pt/5.4mm "Segoe UI","Yu Gothic UI",sans-serif;text-align:center;font-style:normal;margin-top:.4mm}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps>li{counter-increment:s;position:relative;padding-left:9mm;margin:0 0 2.2mm;break-inside:avoid}
+.steps>li::before{content:counter(s);position:absolute;left:0;top:.2mm;width:6.4mm;height:6.4mm;border-radius:50%;background:var(--blue);color:#fff;font-weight:800;font-size:10pt;line-height:6.4mm;text-align:center}
+.check{list-style:none;padding:0}
+.check li{padding-left:7mm;position:relative;margin:0 0 1.5mm;break-inside:avoid}
+.check li::before{content:"";position:absolute;left:0;top:1mm;width:4mm;height:4mm;border:1.2pt solid var(--ink);border-radius:.8mm}
+.dim{color:var(--dim)}
+.pill{display:inline-block;border-radius:3mm;padding:0 2mm;font-size:9pt;font-weight:700;color:#fff}
+.l1{background:var(--blue)}.l2{background:var(--grn)}.l3{background:var(--org)}
+.foot{font-size:8.5pt;color:var(--dim);margin-top:6mm;border-top:.8pt solid var(--line);padding-top:1.5mm}
+
+.flow{display:flex;align-items:stretch;gap:1.5mm;margin:2mm 0 3mm}
+.flow .fb{flex:1;border:1pt solid var(--line);border-radius:2mm;padding:2mm 1.5mm;text-align:center;background:var(--blue-bg);display:flex;flex-direction:column;gap:.6mm;font-size:9.6pt;line-height:1.3}
+.flow .fb b{color:var(--blue);font-size:12pt}
+.flow .fb small{color:var(--dim);font-size:8pt}
+.flow .fb.go{background:var(--grn-bg)}.flow .fb.go b{color:var(--grn)}
+.flow .fa{align-self:center;color:var(--dim);font-size:9pt}
+.mock{border:1pt solid #8b94a1;border-radius:1.5mm;overflow:hidden;font-family:"Segoe UI","Yu Gothic UI",sans-serif;background:#fff;break-inside:avoid}
+.mock.web .url{background:#eef0f3;padding:1.2mm 3mm;font-size:8.5pt;color:#444;border-bottom:1pt solid #d5dae1}
+.mock.web .pg{padding:3mm 5mm;font-size:9pt}
+.mock .h1{font-size:13pt;font-weight:700;margin-bottom:1.5mm}
+.mock .rel{font-weight:700;margin-top:2.2mm}
+.mock .rel em{font-style:normal;color:var(--red);font-weight:400;font-size:8.5pt;margin-left:2mm}
+.mock .rel em.ok{color:var(--grn);font-weight:700}
+.mock .li{color:#1f63d6;padding-left:4mm;margin:.7mm 0}
+.mock .dimx{opacity:.45}
+.mock .hit,.mock .hit2{position:relative;outline:2.2pt solid var(--red);outline-offset:.9mm;border-radius:1mm}
+.mock .hit i,.mock .hit2 i{position:absolute;right:-7mm;top:50%;transform:translateY(-50%);width:5.4mm;height:5.4mm;border-radius:50%;background:var(--red);color:#fff;font:800 8.8pt/5.4mm "Segoe UI","Yu Gothic UI",sans-serif;text-align:center;font-style:normal}
+.mock.inst .tb{background:#f3f3f3;border-bottom:1pt solid #ddd;padding:1.2mm 3mm;font-size:8.5pt;display:flex;justify-content:space-between}
+.mock.inst .bd{display:flex}
+.mock.inst .lft{width:24mm;flex:none;background:linear-gradient(#2b5b84,#3776ab);color:#ffd43b;font-size:22pt;display:flex;align-items:flex-end;justify-content:center;padding-bottom:4mm}
+.mock.inst .mn{flex:1;padding:3mm 9mm 3mm 5mm;font-size:9pt}
+.mock .big{font-size:13pt;font-weight:600;color:#1b3a6b;margin-bottom:1.5mm}
+.mock .sm{font-size:8.5pt;color:#444;margin-bottom:2mm}
+.mock .opt{margin:1.6mm 0;font-size:10pt;color:#1b3a6b}
+.mock .opt small{color:#555;font-size:8pt;margin-left:5mm;display:inline-block;line-height:1.35}
+.mock .cb{font-size:9pt;margin:1.3mm 0}
+.mock .btnrow{text-align:right;margin-top:2mm}
+.mock .btnrow span{display:inline-block;border:1pt solid #888;padding:.5mm 6mm;border-radius:1mm;background:#f0f0f0}
+.mock.small .lft{width:16mm;font-size:16pt}
+pre.term{background:#0c0c0c;color:#e6e6e6;font:8.6pt/1.45 "Cascadia Mono","Consolas","BIZ UDGothic","MS Gothic",monospace;padding:3mm 4mm;border-radius:1.5mm;margin:0;white-space:pre-wrap;word-break:break-all}
+pre.term.sm{font-size:7.4pt}
+pre.term .cut{color:#888}
+pre.term .okl{color:#3dd68c;font-weight:700}
+pre.term .ngl{color:#ff8080;font-weight:700}
+pre.term .err{color:#ff5555}
+pre.code{background:#f4f6f8;border:1pt solid var(--line);border-radius:1.5mm;font:8.8pt/1.5 "Cascadia Mono","Consolas",monospace;padding:2.5mm 3.5mm;margin:1.5mm 0 3mm;white-space:pre;break-inside:avoid}
+pre.code .c{color:#6a737d}
+.sw{display:inline-block;padding:0 1.6mm;border-radius:1.2mm;font-weight:700;font-size:9.2pt;line-height:1.55;white-space:nowrap}
+.sw.g{background:#3dd68c;color:#04120a}.sw.h{background:#a9ecc9;color:#06291a}.sw.r{background:#ff4d4f;color:#fff}.sw.y{background:#3a2a08;color:#ffd27a;border:1pt solid #ffb020}.sw.n{background:#1f232a;color:#e6e8eb}
+</style>
+</head>
+<body>
+<div class="doc">
+
+<!-- ===================== Cover ===================== -->
+<section class="cover">
+  <h1>VPT39 User Guide</h1>
+  <p class="sub">Video playback + projection mapping for live shows / Detailed edition</p>
+  <div class="note" style="font-size:11pt;margin:0 0 6mm"><b class="h">About this app:</b>A video player made for projection mapping.<br>It is designed to be easy to use for media and interactive art with projectors, live shows and more.<br><span style="font-size:.85em;color:#5b6472">VPT39 is an unofficial tool inspired by VPT (VideoProjectionTool) by HC Gilje. It is not affiliated with VPT in any way.</span></div>
+  <p class="lead">This guide helps first-time users of VPT39 work on their own, from preparation to the show and through any trouble. It explains the real screens with numbered marks.<br>During the show, also use the "Quick Start (A4, two-sided)". For the big picture, see "How It Works (A4, 2 pages, concept.pdf)".</p>
+  <h3 style="margin-top:10mm">Contents</h3>
+  <ol class="toc">
+    <li><b>1</b>What VPT39 can do</li>
+    <li><b>2</b>First-time setup (installation)</li>
+    <li><b>3</b>Starting up and the screens</li>
+    <li><b>4</b>Showing on a projector (output windows)</li>
+    <li><b>5</b>Media and clips</li>
+    <li><b>6</b>Layers</li>
+    <li><b>7</b>Playback</li>
+    <li><b>8</b>Live inputs and layer pictures</li>
+    <li><b>9</b>Mapping (fitting the shape)</li>
+    <li><b>10</b>Photo wall</li>
+    <li><b>11</b>Audio mixer</li>
+    <li><b>12</b>During the show and emergencies</li>
+    <li><b>13</b>Saving and setup files</li>
+    <li><b>14</b>Troubleshooting</li>
+    <li><b>15</b>Pre-show checklist</li>
+  </ol>
+  <div class="danger" style="margin-top:auto;font-size:11pt"><b class="h">Trouble during the show?</b>If you panic (emergency actions), see <b>Chapter 12</b>. If the picture or sound does not work, see <b>Chapter 14 "Troubleshooting"</b>.</div>
+  <div class="note"><b class="h">About the pictures in this guide</b>They show a demo state prepared for this guide. Media names and numbers differ from a real show.</div>
+</section>
+
+<!-- ===================== 1 ===================== -->
+<section class="chap">
+  <h2><span class="c">1</span>What VPT39 can do</h2>
+  <p>VPT39 is an app for <b>showing videos and photos on a projector and fitting them to the shape of a screen or wall</b>, with just one laptop. It combines the "four-corner mapping" of VPT (VideoProjectionTool) with the VJ-app style of "lining up clips and switching between them".</p>
+  <table>
+    <tr><th style="width:36mm">Feature</th><th>What it does</th></tr>
+    <tr><td class="k">Clip playback</td><td>Line up videos and images as thumbnails and click to switch. The picture changes smoothly from the previous one (crossfade)</td></tr>
+    <tr><td class="k">Play column</td><td>Switch the clips with the same number on all layers at once. Change all the pictures for each song together</td></tr>
+    <tr><td class="k">Layers</td><td>Stack as many pictures as you like. Choose the blend mode (Normal, Add, Screen, Multiply) and the opacity</td></tr>
+    <tr><td class="k">Mapping</td><td>Move the four corners of each layer to fit a trapezoid or tilted screen exactly</td></tr>
+    <tr><td class="k">Multiple outputs</td><td>Use any number of projectors. Choose which projector each layer shows on (also the same picture on several at once)</td></tr>
+    <tr><td class="k">Wide screen</td><td>Join two or more projectors into one wide picture. The overlap is blended softly</td></tr>
+    <tr><td class="k">Live inputs</td><td>Show cameras, capture boards (another PC's screen and sound) or windows on the same PC (Zoom etc.)</td></tr>
+    <tr><td class="k">Layer picture</td><td>Show one layer's picture at the same time in another place or on another output</td></tr>
+    <tr><td class="k">Audio mixer</td><td>Play the sound of all videos at once. Set volume and mute per output and per layer</td></tr>
+    <tr><td class="k">Photo wall</td><td>Show the photos in a folder one after another. New photos are shown first</td></tr>
+    <tr><td class="k">Auto save</td><td>Settings are saved automatically 2 seconds after a change. The next start begins from the same state</td></tr>
+  </table>
+  <h3>What you need</h3>
+  <ul>
+    <li><b>A Windows laptop</b> (with graphics that support OpenGL 3.3)</li>
+    <li><b>A projector</b> and a cable to the PC (HDMI etc.). One per projector if you use two or more</li>
+    <li><b>Speakers</b> (for sound), from the PC's headphone jack, HDMI or an audio interface</li>
+    <li>You control VPT39 in a <b>browser</b> on the PC (Edge or Chrome)</li>
+  </ul>
+  <h3>Two screens</h3>
+  <p>When VPT39 starts, two different screens open. Knowing the difference is the most important thing.</p>
+  <table>
+    <tr><th style="width:36mm">Screen</th><th>Role</th><th style="width:45mm">Where to put it</th></tr>
+    <tr><td class="k">Output window</td><td>The picture shown by the projector. <b>You basically do not operate here</b> (only fine-tuning the mapping)</td><td>On the projector's display, fullscreen</td></tr>
+    <tr><td class="k">Control panel</td><td>The control screen in the browser. <b>Playback, volume and settings are all here</b></td><td>On your laptop's own screen</td></tr>
+  </table>
+</section>
+
+<!-- ===================== 2 ===================== -->
+<section class="chap">
+  <h2><span class="c">2</span>First-time setup (installation)</h2>
+  <p>Do this <b>only once</b> on a new PC. Connect to the internet and allow <b>about 20 minutes</b>. Skip anything that is already installed.</p>
+  <h3>Overview</h3>
+  <div class="flow">
+    <div class="fb"><b>①</b><span>Install<br>Python 3.13</span><small>The base that runs VPT39</small></div>
+    <div class="fa">▶</div>
+    <div class="fb"><b>②</b><span>Install<br>VLC</span><small>Plays the video sound</small></div>
+    <div class="fa">▶</div>
+    <div class="fb"><b>③</b><span>Extract<br>the ZIP</span><small>Creates the VPT39 folder</small></div>
+    <div class="fa">▶</div>
+    <div class="fb"><b>④</b><span>Run<br>setup.bat</span><small>Installs the rest automatically</small></div>
+    <div class="fa">▶</div>
+    <div class="fb go"><b>⑤</b><span>Start with<br>run.bat</span><small>From now on, only this</small></div>
+  </div>
+  <table>
+    <tr><th style="width:30mm">Step</th><th style="width:48mm">When</th><th>Where from</th></tr>
+    <tr><td class="k">① Python</td><td>Once per PC</td><td>https://www.python.org/downloads/windows/</td></tr>
+    <tr><td class="k">② VLC</td><td>Once per PC</td><td>https://www.videolan.org/vlc/</td></tr>
+    <tr><td class="k">③ Extract ZIP</td><td>When you put VPT39 in a new place</td><td>The VPT39_配布用.zip you received</td></tr>
+    <tr><td class="k">④ setup.bat</td><td>Once, after ③</td><td>In the VPT39 folder</td></tr>
+    <tr><td class="k">⑤ run.bat</td><td>Every time</td><td>In the VPT39 folder</td></tr>
+  </table>
+  <div class="warn"><b class="h">Choose Python "3.13"</b>With the newest versions at the top of python.org (3.14, 3.15), the Spout component (Chapter 8) cannot be installed. VPT39 is tested with <b>Python 3.13 (64-bit)</b>.</div>
+  <div class="tip"><b class="h">Not sure if Python is installed?</b>Skip ① and try running setup.bat in ④. If Python is missing, it shows "Failed: Python not found". Then go back to ①.</div>
+
+</section>
+
+<section class="chap">
+  <h3 style="margin-top:0">① Install Python</h3>
+  <ol class="steps">
+    <li><b>Open https://www.python.org/downloads/windows/ in a browser</b><br>
+      Find the heading "Python 3.13.xx" and click <b>Download Windows installer (64-bit)</b> under it. For xx, the largest number (the one nearest the top) is fine.</li>
+  </ol>
+  <figure>
+    <div class="mock web">
+      <div class="url">🔒 python.org/downloads/windows/</div>
+      <div class="pg">
+        <div class="h1">Python Releases for Windows</div>
+        <div class="rel dimx">Python 3.15.2 - Oct. 25, 2026 <em>← not 3.15</em></div>
+        <div class="li dimx">Download using the Python install manager.</div>
+        <div class="li dimx">Download Windows installer (64-bit)</div>
+        <div class="rel">Python 3.13.17 - Oct. 21, 2026 <em class="ok">← this one (3.13)</em></div>
+        <div class="li dimx">Note that Python 3.13.17 cannot be used on Windows 7 or earlier.</div>
+        <div class="li"><span class="hit">Download Windows installer (64-bit)<i>1</i></span></div>
+        <div class="li dimx">Download Windows installer (32-bit)</div>
+        <div class="li dimx">Download Windows installer (ARM64)</div>
+      </div>
+    </div>
+    <figcaption>Figure (illustration): the python.org download page. Do not choose 32-bit, ARM64, "install manager" or "embeddable package".</figcaption>
+  </figure>
+  <ol class="steps" start="2" style="counter-reset:s 1">
+    <li><b>Double-click the downloaded "python-3.13.xx-amd64.exe"</b><br>It is in the browser's download list or in the "Downloads" folder.</li>
+    <li><b>On the first screen, check "Add python.exe to PATH" at the bottom → "Install Now"</b><br>
+      <b>If you forget this check, setup.bat cannot find Python.</b> This is the most important part.</li>
+  </ol>
+  <figure>
+    <div class="mock inst">
+      <div class="tb">Python 3.13.17 (64-bit) Setup<span>✕</span></div>
+      <div class="bd">
+        <div class="lft">🐍</div>
+        <div class="mn">
+          <div class="big">Install Python 3.13.17 (64-bit)</div>
+          <div class="sm">Select Install Now to install Python with default settings, or choose Customize to enable or disable features.</div>
+          <div class="opt hit2">→ <b>Install Now</b><i>2</i><br><small>C:\Users\(name)\AppData\Local\Programs\Python\Python313<br>Includes IDLE, pip and documentation<br>Creates shortcuts and file associations</small></div>
+          <div class="opt">→ Customize installation<br><small>Choose location and features</small></div>
+          <div class="cb">☑ Use admin privileges when installing py.exe</div>
+          <div class="cb"><span class="hit">☑ Add python.exe to PATH<i>1</i></span></div>
+        </div>
+      </div>
+    </div>
+    <figcaption>Figure (illustration): the Python installer. <b>①</b> Check "Add python.exe to PATH" (unchecked at first) → <b>②</b> "Install Now".</figcaption>
+  </figure>
+</section>
+
+<section class="chap">
+  <ol class="steps" start="4" style="counter-reset:s 3">
+    <li><b>If "Do you want to allow this app to make changes to your device?" appears, choose "Yes"</b></li>
+    <li><b>When "Setup was successful" appears, press "Close"</b><br>You may or may not press "Disable path length limit", which appears on the way.</li>
+  </ol>
+  <figure style="width:118mm">
+    <div class="mock inst small">
+      <div class="tb">Python 3.13.17 (64-bit) Setup<span>✕</span></div>
+      <div class="bd">
+        <div class="lft">🐍</div>
+        <div class="mn">
+          <div class="big">Setup was successful</div>
+          <div class="sm">New to Python? Start with the online tutorial and documentation. …</div>
+          <div class="opt">→ Disable path length limit</div>
+          <div class="btnrow"><span class="hit">Close<i>3</i></span></div>
+        </div>
+      </div>
+    </div>
+    <figcaption>Figure (illustration): the final screen. <b>③</b> Close it with "Close".</figcaption>
+  </figure>
+  <div class="note"><b class="h">If you forgot the check</b>Run python-3.13.xx-amd64.exe again, choose "Modify" → Next → check "Add Python to environment variables" → "Install". Or uninstall once and install again.</div>
+
+  <h3>② Install VLC</h3>
+  <ol class="steps">
+    <li><b>Open https://www.videolan.org/vlc/ and click the orange "Download VLC"</b><br>On a Windows PC, the 64-bit version is chosen automatically.</li>
+    <li><b>Run the downloaded "vlc-xx-win64.exe"</b><br>Choose your language → keep pressing "Next" → "Install" → "Finish". You do not need to change any settings.</li>
+  </ol>
+  <div class="warn"><b class="h">Without VLC</b>Videos play but there is <b>no sound</b>. If the top left of the control panel shows "VLC (audio)", all is well. "OpenCV (no audio)" means VLC is not installed.</div>
+  <h3>③ Extract the ZIP</h3>
+  <ol class="steps">
+    <li><b>Right-click VPT39_配布用.zip ("for distribution") → "Extract All" → "Extract"</b><br>Put it anywhere you like, such as the desktop or Documents. A <b>VPT39</b> folder is created inside.</li>
+  </ol>
+  <div class="danger"><b class="h">Do not open it from inside the ZIP</b>If you double-click the ZIP and run setup.bat while looking inside it, it will not work. Always "Extract All" first, then run it in the extracted folder.</div>
+
+</section>
+
+<section class="chap">
+  <h3 style="margin-top:0">④ Run setup.bat</h3>
+  <ol class="steps">
+    <li><b>Double-click setup.bat in the VPT39 folder</b><br>A black window opens and goes through [1/4] to [4/4]. It downloads components, so it takes <b>2 to 5 minutes</b>. While text is scrolling, wait and do not close it.</li>
+    <li><b>When "Success" appears, press any key to close it</b></li>
+  </ol>
+  <div class="note"><b class="h">If a blue warning appears</b>For "Windows protected your PC", choose "More info" → "Run anyway". For "The publisher could not be verified", press "Run".</div>
+  <figure>
+<pre class="term">============================================
+  VPT39 Setup
+============================================
+
+[1/4] Checking Python...
+Python 3.13.17
+
+[2/4] Creating the environment (.venv)...
+
+[3/4] Downloading and installing the components (takes a few minutes)...
+Collecting glfw>=2.7 (from -r requirements.txt (line 1))
+<span class="cut">    … (many component names scroll by here) …</span>
+Successfully installed SpoutGL-0.1.1 cffi-2.1.1 comtypes-1.5.0 glcontext-3.1.0 …
+
+[4/4] Preparing folders...
+
+<span class="okl">============================================
+  Success. Start VPT39 with run.bat.
+============================================</span>
+  To play videos with sound, also install VLC media player (64-bit).
+  https://www.videolan.org/vlc/
+
+Press any key to continue . . .</pre>
+    <figcaption>The screen when it succeeds (the real display; the component list and the Japanese lines are left out). If <b>"Success" appears at the end</b>, you are ready.</figcaption>
+  </figure>
+</section>
+
+<section class="chap">
+  <h3 style="margin-top:0">If setup.bat does not work</h3>
+  <p>setup.bat always stops with <b>either "Success" or "Failed: …"</b> at the end. It never ends without a message. If it fails, fix the problem shown and <b>run setup.bat again</b> (components already installed are skipped; it continues from there).</p>
+  <div class="side">
+    <figure>
+<pre class="term sm">[1/4] Checking Python...
+
+<span class="ngl">############################################
+  Failed: Python not found
+############################################</span>
+  1. Install Python (3.10 or later, 64-bit) from https://www.python.org/
+  2. Check "Add python.exe to PATH" during the installation.
+  3. Then close this window and run setup.bat again.</pre>
+      <figcaption>Failure A: Python not found (real display)</figcaption>
+    </figure>
+    <figure>
+<pre class="term sm">[3/4] Downloading and installing the components...
+<span class="err">ERROR: Could not find a version that satisfies the requirement …
+ERROR: No matching distribution found for …</span>
+
+<span class="ngl">############################################
+  Failed: could not install the components
+############################################</span>
+  - Check the internet connection.
+  - The red text (ERROR) above shows the cause.
+  - After fixing it, run setup.bat again (it continues where it stopped).</pre>
+      <figcaption>Failure B: components cannot be installed (real display; the ERROR text depends on the cause)</figcaption>
+    </figure>
+  </div>
+  <table>
+    <tr><th style="width:52mm">Message</th><th>Cause and fix</th></tr>
+    <tr><td class="k">Failed: Python not found</td><td>Python is not installed, or "Add python.exe to PATH" was not checked. Redo ①. <b>Right after installing Python, close the black window that was open</b>, then run setup.bat again</td></tr>
+    <tr><td class="k">Failed: could not install the components</td><td>No internet connection (a school or company network may block it). Try another connection (phone tethering etc.). If it still fails, take a photo of the red ERROR lines and ask for help</td></tr>
+    <tr><td class="k">(Note) Spout does not work with this Python</td><td>Not a failure, just a note. Setup continues. If you do not use Spout, leave it. To use Spout, install Python 3.13 and run setup.bat again</td></tr>
+    <tr><td class="k">Microsoft Store opened</td><td>Python is not installed. Close it without installing from the Store, and install with step ① (python.org)</td></tr>
+  </table>
+
+  <h3>⑤ Check that run.bat starts it</h3>
+  <ol class="steps">
+    <li><b>Double-click run.bat</b><br>If a black output window and the control panel in the browser open, it works (Chapter 3).</li>
+    <li><b>The first time only, if a "Windows Security Alert" appears, allow it</b><br>It is a check for the connection used to control VPT39 from a phone or tablet.</li>
+  </ol>
+  <div class="tip"><b class="h">Normally</b>just double-click run.bat. If any component is missing, it is installed automatically before starting.</div>
+</section>
+
+<section class="chap">
+  <h3 style="margin-top:0">What is in the folder</h3>
+  <table>
+    <tr><th style="width:42mm">Name</th><th>What it is for</th></tr>
+    <tr><td class="k">run.bat</td><td>Normal start. Outputs that were fullscreen last time open fullscreen on the same display</td></tr>
+    <tr><td class="k">run_window.bat</td><td>Opens all outputs as windows, for this run only (for preparation and rehearsal; settings are not changed)</td></tr>
+    <tr><td class="k">setup.bat</td><td>First-time setup (④ above)</td></tr>
+    <tr><td class="k">.venv</td><td>VPT39's own component folder, made by setup.bat (if deleted, run setup.bat again)</td></tr>
+    <tr><td class="k">media</td><td>Folder for videos and images (subfolders are OK)</td></tr>
+    <tr><td class="k">photos</td><td>Folder for the photo wall's photos (another place can be set)</td></tr>
+    <tr><td class="k">project.json</td><td>Settings file (saved automatically; normally do not touch it)</td></tr>
+    <tr><td class="k">manual</td><td>This guide, the quick start and the screen map manual (index.html)</td></tr>
+  </table>
+</section>
+
+<!-- ===================== 3 ===================== -->
+<section class="chap">
+  <h2><span class="c">3</span>Starting up and the screens</h2>
+  <p>Double-click <b>run.bat</b>, and a black <b>output window</b> and the <b>control panel</b> in the browser open. If the control panel does not open, open <b>http://localhost:8080/</b> in the browser.</p>
+  <figure>
+    <div class="shot" data-img="panel" data-crop="0,0,1440,900" data-b="0,0,1440,59,1;232,61,584,36,2;2,99,1026,604,3;0,706,1028,54,4;1033,61,405,40,5;1041,111,389,779,6"></div>
+    <figcaption>The whole control panel (demo state)</figcaption>
+  </figure>
+  <ul class="legend">
+    <li><i>1</i><span><b>Top bar</b>: Brightness, BLACKOUT, Edit mapping, Phone, Setup, Save, Quit (Chapters 12 and 13)</span></li>
+    <li><i>2</i><span><b>Play column</b>: plays the clips in the column right below on all layers at once (Chapter 7)</span></li>
+    <li><i>3</i><span><b>Layer rows</b>: one row is one layer. Name and basic controls on the left, clips on the right. Lower rows are stacked in front (Chapter 6). With many layers, only this area scrolls</span></li>
+    <li><i>4</i><span><b>Add layer</b> (Chapter 6)</span></li>
+    <li><i>5</i><span><b>Tabs</b>: switch between "Media", "Layer settings", "Mixer" and "Outputs". <b>⧉</b> opens a separate window (below)</span></li>
+    <li><i>6</i><span>The content of the selected tab (here "Media": Chapter 5)</span></li>
+  </ul>
+</section>
+
+<section class="chap">
+  <h3 style="margin-top:0">Top bar</h3>
+  <figure>
+    <div class="shot" data-img="panel" data-crop="0,0,875,59" data-b="12,12,302,34,1;306,14,206,30,2;518,8,134,42,3;658,10,75,38,4;739,10,128,38,5"></div>
+  </figure>
+  <figure style="width:66mm;margin-left:auto;margin-top:-1mm">
+    <div class="shot" data-img="panel" data-crop="970,0,470,59" data-b="977,10,91,38,6;1074,10,171,38,7;1311,10,117,38,8;1249,11,60,36,9"></div>
+  </figure>
+  <ul class="legend">
+    <li><i>1</i><span><b>VPT39 and status</b>: the playback engine ("VLC (audio)" is normal), number of outputs, drawing speed (fps), and whether it is "unsaved"</span></li>
+    <li><i>2</i><span><b>Brightness</b>: brightness of all outputs. It does not affect the volume</span></li>
+    <li><i>3</i><span><b>BLACKOUT (B)</b>: darkens all pictures in 0.5 seconds (the button glows yellow while dark). Press again to return. <b>The sound does not stop</b></span></li>
+    <li><i>4</i><span><b>Clear all</b>: fades out and clears all layers</span></li>
+    <li><i>5</i><span><b>Edit mapping (E)</b>: the mode for adjusting the corners (red while on). Always off during the show</span></li>
+    <li><i>6</i><span><b>Phone</b>: adjust the corners from a phone (on/off and QR code, Chapter 9). Green "Phone ON" while on</span></li>
+    <li><i>7</i><span><b>Setup: (name)</b>: setup files for each venue or show (Chapter 13)</span></li>
+    <li><i>8</i><span><b>Save</b> (save now) and <b>Quit</b> (after confirming, saves and closes the app)</span></li>
+    <li><i>9</i><span><b>日本語 / EN</b>: switches the control panel and phone page between Japanese and English (remembered on this PC)</span></li>
+  </ul>
+  <h3>Tabs on the right and separate windows</h3>
+  <p>The right side has four tabs: <b>Media</b> (Chapters 5 and 8) / <b>Layer settings</b> (Chapters 6 and 9) / <b>Mixer</b> (Chapter 11) / <b>Outputs</b> (Chapter 4).</p>
+  <ul>
+    <li>Press a tab's <b>⧉</b>, or <b>drag the tab out of the browser window and drop it</b>, and that panel becomes a separate window (it opens where you drop it). With many media files, a large separate Media window is handy</li>
+    <li>The tab of a panel in a separate window gets a "↗" and turns pale. Press it to bring that window to the front</li>
+    <li>Close the separate window (or press "Back to main screen") to put it back as a tab</li>
+  </ul>
+  <h3>The "selected layer"</h3>
+  <p>Click a layer row and that layer becomes <b>selected</b>; the left edge of the row turns orange. The "Layer settings" tab, the mapping diagram and clicked media all apply to this selected layer.</p>
+  <h3>Button colors</h3>
+  <table>
+    <tr><th style="width:44mm">Color</th><th>Meaning</th><th style="width:60mm">Examples</th></tr>
+    <tr><td><span class="sw g">Show</span> Green</td><td>Working normally / selected</td><td>Show, Fullscreen, the frame of the playing clip, the selected tab</td></tr>
+    <tr><td><span class="sw h">Clear</span> Light green</td><td>Under the mouse (this is what a press will act on). Green and red buttons keep their color and get a light green edge</td><td>All buttons</td></tr>
+    <tr><td><span class="sw r">M</span> Red</td><td>Stopped or locked. Red text means an error</td><td>Mute, Hidden, editing mapping, test pattern on</td></tr>
+    <tr><td><span class="sw y">BLACKOUT (B)</span> Yellow</td><td>Only for BLACKOUT (emergency button). Glows yellow while dark</td><td>BLACKOUT</td></tr>
+  </table>
+  <h3>Keyboard</h3>
+  <table>
+    <tr><th style="width:30mm">Key</th><th>Action</th><th style="width:50mm">Where</th></tr>
+    <tr><td><kbd>Space</kbd></td><td>Next clip on layer 1 only (L1, the back)</td><td>Control panel, output window</td></tr>
+    <tr><td><kbd>B</kbd></td><td>Blackout on/off</td><td>Control panel, output window</td></tr>
+    <tr><td><kbd>E</kbd></td><td>Edit mapping on/off (on the output window, <kbd>Esc</kbd> also turns it off)</td><td>Control panel, output window</td></tr>
+    <tr><td><kbd>F</kbd> <kbd>F11</kbd></td><td>Fullscreen on/off for that output window (double-click too; double-click does not work while editing mapping)</td><td>Output window</td></tr>
+    <tr><td><kbd>←</kbd><kbd>→</kbd><kbd>↑</kbd><kbd>↓</kbd></td><td>Only while editing mapping: move the selected corner (or all) by 1 px (<kbd>Shift</kbd>: 10 px)</td><td>Control panel, output window</td></tr>
+    <tr><td><kbd>1</kbd>–<kbd>9</kbd></td><td>Select a layer</td><td>Output window</td></tr>
+    <tr><td><kbd>Ctrl</kbd>+<kbd>S</kbd> / <kbd>Ctrl</kbd>+<kbd>Q</kbd></td><td>Save / Quit</td><td>Output window</td></tr>
+  </table>
+  <div class="warn"><b class="h">Note</b>Keys do not work while the cursor is in a text or number field (name, folder, fade etc.) or a drop-down (▼). Click outside the field first (they do work right after touching a slider or button). <kbd>Ctrl</kbd>+<kbd>Q</kbd> <b>quits at once without asking</b>.</div>
+</section>
+
+<!-- ===================== 4 ===================== -->
+<section class="chap">
+  <h2><span class="c">4</span>Showing on a projector (output windows)</h2>
+  <ol class="steps">
+    <li><b>Connect the PC and the projector, and set the display to "Extend"</b><br>Press <kbd>⊞Win</kbd>+<kbd>P</kbd> and choose "<b>Extend</b>". With "Duplicate", your own screen is shown as it is.</li>
+    <li><b>Find out which display is the projector</b><br>Press <span class="btn">Identify</span> under "Display layout" in the "Outputs" tab. A number appears in the middle of each display for 4 seconds.</li>
+    <li><b>Drag the output window to the projector's display</b><br>Grab the bar at the top (title) of the small black window and move it to the projector side.</li>
+    <li><b>Make it fullscreen</b><br>Press <span class="btn">Fullscreen</span> in the "Outputs" tab, and it fills <b>the display the window is on</b>. Pressing <kbd>F</kbd> or double-clicking on the output window does the same.</li>
+    <li><b>Check with your eyes that it appears on the screen</b>. Keep the control panel on your own PC screen.</li>
+  </ol>
+  <div class="side" style="grid-template-columns:56mm 1fr">
+    <figure style="margin-top:0">
+      <div class="shot" data-img="panel_outs" data-crop="1041,111,389,789" data-b="1327,122,92,27,1;1052,156,160,43,2;1222,159,87,38,3;1311,165,76,27,4;1389,165,30,27,5;1052,268,367,73,6;1052,457,367,24,7;1052,663,367,64,8;1243,737,177,27,9;1074,770,324,128,10;1052,207,367,55,11"></div>
+      <figcaption>The "Outputs" tab (example with Output 2 and Output 3 joined into a wide screen)</figcaption>
+    </figure>
+    <ul class="legend">
+      <li><i>1</i><span><b>+ Add output</b>: add Output 2, Output 3… (no limit)</span></li>
+      <li><i>2</i><span>Output name, resolution and current display (display 1 is the main one)</span></li>
+      <li><i>3</i><span><b>Fullscreen</b>: on/off with each press. When on: no frame, always on top, no mouse cursor</span></li>
+      <li><i>4</i><span><b>Bring back</b>: back to a window in the middle of the main display (if you lose it)</span></li>
+      <li><i>5</i><span><b>✕</b>: delete that output (with two or more outputs; its layers move to Output 1)</span></li>
+      <li><i>6</i><span><b>Layers shown</b>: check the layers to show on this output. Grayed out = "this is the layer's only output"</span></li>
+      <li><i>7</i><span>Name and size of the joined wide screen</span></li>
+      <li><i>8</i><span><b>Join (wide)</b> check, <b>Overlap</b>, and the <b>Gamma</b> of that seam (below)</span></li>
+      <li><i>9</i><span><b>Identify</b> / <b>Display settings…</b> (opens the Windows settings)</span></li>
+      <li><i>10</i><span><b>Display layout</b>: order, resolution and scale of the connected displays. Green frame = a display with an output window</span></li>
+      <li><i>11</i><span><b>Show resolution</b>: the resolution of the show projector (below)</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="chap">
+  <h3 style="margin-top:0">With two or more projectors</h3>
+  <p>There are two ways to use them.</p>
+  <table>
+    <tr><th style="width:44mm">Use</th><th>How</th></tr>
+    <tr><td class="k">A different picture on each</td><td>Add Output 2 with <span class="btn">+ Add output</span> and make it fullscreen on the second display. Choose the layers with "Layers shown" (⑥) or with "Outputs" in the "Layer settings" tab</td></tr>
+    <tr><td class="k">The same picture on both</td><td><b>Check both outputs</b> for one layer. The same picture appears at the same time. The corners are set per output (Chapter 9). The sound plays only once</td></tr>
+    <tr><td class="k">One wide picture with two</td><td>See "Wide screen" below</td></tr>
+  </table>
+  <h3>Wide screen (one picture with two projectors)</h3>
+  <ol class="steps">
+    <li>Prepare two outputs. Make Output 1 (Output 2 in the example) fullscreen on the left projector and Output 2 (Output 3 in the example) on the right</li>
+    <li>On the right output, check "<b>Join to the right of Output ○ (wide)</b>" (⑧). The two become <b>one wide screen</b> (e.g. 1920 + 1920), named "Output 2+Output 3 (wide)"</li>
+    <li>Show the layer on this wide screen and fit its corners to the whole wide screen</li>
+    <li>If the projector pictures overlap a little, enter the overlap width (px) in "<b>Overlap</b>". Both show the same picture in the overlap, blended smoothly</li>
+    <li>If the overlap is brighter or darker than the rest, adjust "<b>Gamma</b>" (⑧) on that output's row (too bright → larger, too dark → smaller; normally 2.2). Gamma is <b>per seam</b>, so with three or more projectors you can set each seam</li>
+  </ol>
+  <figure>
+    <div class="shot" data-img="out_wide" data-crop="0,40,2560,600" data-b="1150,40,250,600,1"></div>
+    <figcaption>Output 2 (left) and Output 3 (right) joined into a wide screen. ① is the overlap (the same picture on both sides, blended softly)</figcaption>
+  </figure>
+  <div class="note"><b class="h">Tips</b>Use the same resolution on both projectors. You can join three or more (Output 4 "to the right of Output 3"). A joined right-side output has no "Layers shown".</div>
+  <div class="note"><b class="h">It remembers</b>At the next start, it opens fullscreen on the display with <b>the same position and resolution</b>. If that display is missing, it opens as a window with a warning.</div>
+  <div class="tip"><b class="h">Show resolution (⑪)</b>Choose the show projector's resolution (1920×1080 etc.) and it <b>always draws at that size</b>. Adjust on another PC in a small window and use it as it is in the show. "Auto" draws at the window size.</div>
+  <div class="warn"><b class="h">× does not close it / scale 100%</b>× does not close an output window (use ✕ in the "Outputs" tab). Set the projector display's Windows "Scale" to 100%.</div>
+</section>
+
+<!-- ===================== 5 ===================== -->
+<section class="chap">
+  <h2><span class="c">5</span>Media and clips</h2>
+  <h3>Adding media</h3>
+  <p>Put videos and images in the <b>media</b> folder, and within seconds they appear with thumbnails in the "<b>Media</b>" tab.</p>
+  <table>
+    <tr><th style="width:24mm">Type</th><th>Supported files</th></tr>
+    <tr><td class="k">Video</td><td>mp4, mov, m4v, avi, mkv, webm, wmv, mpg, mpeg</td></tr>
+    <tr><td class="k">Image</td><td>png, jpg, jpeg, bmp, gif, webp. <b>Animated GIF, animated PNG (APNG) and animated WebP</b> play as they are. Transparent parts show the layers below</td></tr>
+  </table>
+  <div class="tip"><b class="h">For stable playback</b>Use <b>H.264, 1920×1080 (16:9), 30fps</b> mp4 videos. Anything other than 16:9 is stretched.</div>
+  <div class="side" style="grid-template-columns:70mm 1fr">
+    <figure style="margin-top:0">
+      <div class="shot" data-img="panel" data-crop="1031,59,409,241" data-b="1035,64,93,39,1;1039,109,171,29,2;1039,168,393,34,3;1041,206,258,94,4;1139,207,27,23,5"></div>
+    </figure>
+    <ul class="legend">
+      <li><i>1</i><span><b>Media</b> tab (⧉ for a separate window)</span></li>
+      <li><i>2</i><span>Switch between <b>Files</b> and <b>Blank, layers, inputs</b> (the latter: Chapter 8)</span></li>
+      <li><i>3</i><span><b>Filters</b>: by folder (subfolders in media) and by file name. The slider on the right sets the thumbnail size</span></li>
+      <li><i>5</i><span><b>✕</b>: appears under the mouse. Moves that file to the <b>Recycle Bin</b> (asks first; you can restore it)</span></li>
+      <li><i>4</i><span><b>Media</b>: click to add it <b>at the end of the selected video layer</b>. <b>Drag it onto a layer row</b> to add it where you drop it (anywhere on the row; for lower layers, keep dragging near the bottom edge and it scrolls)</span></li>
+    </ul>
+  </div>
+  <h3>Clips (one piece of media)</h3>
+  <div class="side" style="grid-template-columns:36mm 1fr">
+    <figure style="margin-top:0">
+      <div class="shot" data-img="panel" data-crop="236,102,144,144" data-b="241,107,134,75,1;241,185,134,15,2;241,201,134,18,3;241,220,108,20,4;351,108,24,22,5;352,220,22,20,6"></div>
+    </figure>
+    <ul class="legend">
+      <li><i>1</i><span><b>Thumbnail</b>: click to play, drag to reorder. Top left is the number (column)</span></li>
+      <li><i>2</i><span><b>Position bar</b>: drag to change the playback position (Chapter 7)</span></li>
+      <li><i>3</i><span><b>⏮ Restart / ▶⏸ Play/pause / ⏹ Stop</b> and the elapsed time</span></li>
+      <li><i>4</i><span>File name</span></li>
+      <li><i>5</i><span><b>At the end</b> mark: changes with each press (table below)</span></li>
+      <li><i>6</i><span><b>✕</b> Delete (asks first)</span></li>
+    </ul>
+  </div>
+  <table>
+    <tr><th style="width:36mm">At the end (order when pressing ⑤)</th><th>When the video reaches the end</th></tr>
+    <tr><td class="k">⟳ Loop</td><td>Goes back to the start and repeats (new clips use this)</td></tr>
+    <tr><td class="k">⏸ Hold last frame</td><td>Stops on the last frame</td></tr>
+    <tr><td class="k">■ Clear at end</td><td>Fades out and disappears</td></tr>
+    <tr><td class="k">⏭ Go to next</td><td>Plays the next clip on the same layer automatically (plays on like a playlist). <b>Videos only</b></td></tr>
+  </table>
+</section>
+
+<section class="chap">
+  <h3 style="margin-top:0">Blank clips (show nothing)</h3>
+  <div class="side" style="grid-template-columns:62mm 1fr">
+    <figure style="margin-top:0">
+      <div class="shot" data-img="panel" data-crop="524,102,288,130" data-b="528,106,136,121,1;696,132,87,29,2"></div>
+    </figure>
+    <ul class="legend">
+      <li><i>1</i><span><b>Blank clip</b>: press it, and the current picture and sound fade out; the layer shows nothing</span></li>
+      <li><i>2</i><span><b>+ Add blank</b>: adds a blank clip at the end. You can also drag media onto this box</span></li>
+    </ul>
+  </div>
+  <p>Use it when "the other layers are playing, but this layer should rest for this song". Like normal clips, it works with reordering, "Next" and "Play column", so it is also handy for <b>filling gaps</b> when you line up columns for each song.</p>
+  <h3>Copying in from the PC / deleting</h3>
+  <div class="note"><b class="h">Copying in from the PC</b><b>Drag and drop</b> videos or images from File Explorer onto the "Media" area of the control panel, and they are copied to the media folder (drop when the green dotted line appears; any number at once). If a folder filter is on, they go into that folder. If the same name exists, it is saved as "name (2)". Files that are not videos or images are skipped. To delete media, put the mouse on the tile and press ✕ at the top right (moves to the Recycle Bin).</div>
+  <h3>Reordering and copying</h3>
+  <ul>
+    <li><b>Drag</b> a clip thumbnail to reorder it within the same layer (a yellow line shows where it will drop)</li>
+    <li><b>Drag it to another layer</b> to <b>copy</b> it there ("At the end" goes back to "Loop")</li>
+    <li><b>Line up the columns for each song</b>: put song 1's picture first on every layer, song 2's second, and so on. Then one "Play column" switches all layers. Put a blank on layers that show nothing</li>
+  </ul>
+</section>
+
+<!-- ===================== 6 ===================== -->
+<section class="chap">
+  <h2><span class="c">6</span>Layers</h2>
+  <p>A layer is "a sheet for stacking pictures". <b>L1 is at the back</b>; higher numbers are stacked further in front. There are two kinds of layers: <b>video layers</b> (play clips in a row) and <b>photo walls</b> (Chapter 10).</p>
+  <figure style="max-width:130mm">
+    <div class="shot" data-img="panel" data-crop="0,252,820,153" data-b="8,258,155,24,1;8,285,215,23,2;8,313,215,23,3;8,338,215,27,4;8,366,215,26,5;238,258,140,140,6"></div>
+  </figure>
+  <ul class="legend">
+    <li><i>1</i><span><b>Name and number</b>: in "L2 Video", L2 is the second layer from the back and "Video" is the kind</span></li>
+    <li><i>2</i><span><b>Now playing</b>: file name, elapsed / length, progress</span></li>
+    <li><i>3</i><span><b>◀ Previous / Next ▶ / Clear</b> (Chapter 7)</span></li>
+    <li><i>4</i><span><b>Show</b> (shown while green; press for red "Hidden"), <b>M</b> (mute; red while muted), <b>▲▼</b> (stacking order), <b>🗑</b> (delete; asks first). While "Hidden", <b>the sound keeps playing</b></span></li>
+    <li><i>5</i><span><b>Opacity</b></span></li>
+    <li><i>6</i><span><b>Clips</b> (Chapters 5 and 7)</span></li>
+  </ul>
+  <h3>The "Layer settings" tab</h3>
+  <div class="side" style="grid-template-columns:48mm 1fr">
+    <figure style="margin-top:0">
+      <div class="shot" data-img="panel_insp" data-crop="1041,118,389,612" data-b="1052,153,367,34,1;1052,192,369,22,2;1052,220,367,35,3;1052,259,367,61,4;1052,322,367,61,5;1052,388,369,22,6;1052,418,367,280,7"></div>
+    </figure>
+    <ul class="legend">
+      <li><i>1</i><span><b>Name</b></span></li>
+      <li><i>2</i><span><b>Opacity</b> (same as on the left of the row)</span></li>
+      <li><i>3</i><span><b>Blend mode</b> (table below)</span></li>
+      <li><i>4</i><span><b>Outputs</b>: which outputs (projectors) show it. <b>Check more than one to show the same picture at the same time</b>. Hidden when there is only one output</span></li>
+      <li><i>5</i><span><b>Fade</b>: seconds for a change (0–30 s). 0 is instant. The sound changes over the same time</span></li>
+      <li><i>6</i><span><b>Edge feather</b>: softens the edges of the picture so spill-over is less visible (to join two projectors, use "Overlap" in Chapter 4)</span></li>
+      <li><i>7</i><span><b>Mapping</b> (Chapter 9)</span></li>
+    </ul>
+  </div>
+  <table>
+    <tr><th style="width:30mm">Blend mode</th><th>How it looks</th><th style="width:52mm">Good for</th></tr>
+    <tr><td class="k">Normal</td><td>Lies on top as it is (see-through with opacity)</td><td>Ordinary pictures</td></tr>
+    <tr><td class="k">Add</td><td>Adds brightness to the picture below. Black is transparent; overlaps get brighter</td><td>Light, fire, particles</td></tr>
+    <tr><td class="k">Screen</td><td>Brightens more gently than Add. Black is transparent</td><td>Media on a black background</td></tr>
+    <tr><td class="k">Multiply</td><td>Darkens the picture below. White is transparent</td><td>Shadows, grunge, frames</td></tr>
+  </table>
+  <p><b>Adding a layer</b>: <span class="btn">+ Video layer</span> or <span class="btn">+ Photo wall</span> at the bottom of the layer area. A new layer is added <b>at the very front</b> and shows on the same outputs as the selected layer.</p>
+</section>
+
+<!-- ===================== 7 ===================== -->
+<section class="chap">
+  <h2><span class="c">7</span>Playback</h2>
+  <figure style="max-width:130mm">
+    <div class="shot" data-img="panel" data-crop="0,58,680,196" data-b="232,61,440,36,1;241,107,134,75,2;241,187,134,33,3;8,157,215,27,4"></div>
+  </figure>
+  <table>
+    <tr><th style="width:8mm"></th><th style="width:36mm">Action</th><th>What happens</th><th style="width:34mm">Layers affected</th></tr>
+    <tr><td>1</td><td class="k">Play column 1, 2 …</td><td>Plays the clips with that number at once</td><td><b>All</b> video layers</td></tr>
+    <tr><td>2</td><td class="k">Click a thumbnail</td><td>Crossfades to that clip. Green frame = playing</td><td><b>That layer only</b></td></tr>
+    <tr><td>3</td><td class="k">Mini controls</td><td>See below</td><td>That layer only</td></tr>
+    <tr><td>4</td><td class="k">Previous, Next, Clear</td><td>To the previous / next clip (after the last comes the first). "Clear" fades out</td><td>That layer only</td></tr>
+    <tr><td></td><td class="k"><kbd>Space</kbd></td><td>To the next clip</td><td><b>L1 only</b></td></tr>
+  </table>
+  <h3>Mini controls (under the thumbnail)</h3>
+  <ul>
+    <li><b>Position bar</b>: <b style="color:var(--grn)">green</b> while playing, <b style="color:var(--org)">orange</b> while paused. Drag it to jump to that position</li>
+    <li><b>⏮</b> Restart (back to the start and play)&nbsp;&nbsp;<b>▶/⏸</b> Play/pause (press again to continue)&nbsp;&nbsp;<b>⏹</b> Stop (clears that layer)</li>
+    <li>Dragging the bar or pressing ⏮ on a clip that is not playing <b>starts that clip</b></li>
+    <li>Image, blank, camera, window and layer picture clips have only ⏹</li>
+  </ul>
+  <h3>How switching works (crossfade)</h3>
+  <p>When you press a clip, the previous picture fades out while the next one fades in. <b>The sound changes at the same time</b>. The time it takes is the layer's "Fade".</p>
+  <div class="note"><b class="h">No gaps</b>Until the first frame of the next video is ready (up to about 3 seconds), the previous video's picture and sound keep playing. If a video file is missing or broken, it does not switch; the previous picture stays, and red text on the left of the row tells you.</div>
+</section>
+
+<!-- ===================== 8 ===================== -->
+<section class="chap">
+  <h2><span class="c">8</span>Live inputs and layer pictures</h2>
+  <p>Switch to <span class="btn">Blank, layers, inputs</span> in the "Media" tab to see media other than files. As with files, <b>click to add at the end of the selected layer</b>, or <b>drag onto a layer row to add at any position</b>.</p>
+  <div class="side" style="grid-template-columns:62mm 1fr">
+    <figure style="margin-top:0">
+      <div class="shot" data-img="panel_special" data-crop="1036,97,399,742" data-b="1082,109,132,29,1;1039,174,393,102,2;1039,284,393,200,3;1039,491,393,108,4;1355,491,77,27,5;1039,607,393,102,6;1039,717,393,119,7"></div>
+    </figure>
+    <ul class="legend">
+      <li><i>1</i><span><b>Blank, layers, inputs</b> ("Files" goes back to the file list)</span></li>
+      <li><i>2</i><span><b>Blank</b>: shows nothing and stops the sound (Chapter 5)</span></li>
+      <li><i>3</i><span><b>Layer picture</b>: the current picture of L1, L2 … (below)</span></li>
+      <li><i>4</i><span><b>Cameras and capture boards</b> (below)</span></li>
+      <li><i>5</i><span><b>Refresh list</b>: press after connecting a device or opening a window</span></li>
+      <li><i>6</i><span><b>Windows</b>: windows open on the same PC (below)</span></li>
+      <li><i>7</i><span><b>Spout</b>: pictures sent from other video apps (TouchDesigner, Processing, OBS etc.) (next page)</span></li>
+    </ul>
+  </div>
+  <figure style="max-width:120mm">
+    <div class="shot" data-img="panel" data-crop="236,405,576,160" data-b="240,413,136,145,1;243,490,130,25,2;384,413,136,121,3;528,413,136,121,4;672,413,136,121,5"></div>
+    <figcaption>Special clips in a layer row</figcaption>
+  </figure>
+  <ul class="legend">
+    <li><i>1</i><span><b>Camera</b> (brown)</span></li>
+    <li><i>2</i><span>Box to choose the <b>audio input</b> played with it</span></li>
+    <li><i>3</i><span><b>Window</b> (blue)</span></li>
+    <li><i>4</i><span><b>Spout</b> (purple)</span></li>
+    <li><i>5</i><span><b>Layer picture</b> (green). Blank is striped</span></li>
+  </ul>
+</section>
+
+<section class="chap">
+  <h3 style="margin-top:0">Layer picture (the same picture in another place or output)</h3>
+  <p>Use <b>the current picture itself</b> of one layer as media on another layer. When you switch clips on the source layer, this one switches at the same time.</p>
+  <ul>
+    <li>Example: show the picture of L1 "Background" on Output 2 as well, with L3 (L3 can have a different position and shape from L1)</li>
+    <li>It works even with "Show" off on the source layer (used only as a source)</li>
+    <li>The sound plays from the source layer (it does not double). A layer cannot show itself</li>
+    <li>To simply show "the same layer on two outputs", it is easier to check both in "Outputs" (Chapter 6)</li>
+  </ul>
+  <h3>Cameras and capture boards (another PC's screen and sound)</h3>
+  <ol class="steps">
+    <li>Connect a capture board (HDMI→USB etc.) or camera to the PC and press "<b>Refresh list</b>"</li>
+    <li>Add the device from the list to a layer and press the clip; the picture appears (delay about 0.1–0.2 s)</li>
+    <li>For sound too, choose the audio input in the clip's "<b>No audio</b>" box (for a capture board, usually something like "Digital Audio Interface" with the same name). Set the volume on that layer in the mixer</li>
+  </ol>
+  <div class="note"><b class="h">Tips</b>If you change the audio input during playback, only the sound changes; the picture keeps going. Sound comes out of the Windows "default speaker". The <b>OBS virtual camera</b> also appears in the list, so you can bring in scenes made in OBS.</div>
+  <div class="note"><b class="h">Two of the same model</b>With two capture boards of the same model, the second shows as "<b>name (#2)</b>". Unplugging or restarting can swap the first and second, so always use the same USB ports.</div>
+  <div class="note"><b class="h">If it is unplugged</b>If a camera's cable comes out or its power goes off, <b>the last picture stays</b>, red text "The camera picture has stopped" appears on the left of the row, and it reconnects every 5 seconds automatically. The red text goes away when it reconnects.</div>
+  <div class="warn"><b class="h">One camera, one place</b>The same camera cannot be opened by two clips at once (red text tells you). To show the same camera in another place, use "Layer picture".</div>
+  <h3>Window capture (another app on the same PC)</h3>
+  <p>You can capture the picture of <b>any window</b>, such as Zoom, Discord or a browser. Sound is not captured.</p>
+  <ul>
+    <li><b>Do not minimize</b> the window (it may stop). It still works when hidden behind other windows</li>
+    <li>For apps whose title changes (e.g. showing the current song), it looks for a window with a similar title</li>
+    <li>Protected video, such as streaming services, may turn black</li>
+  </ul>
+</section>
+
+
+<section class="chap">
+  <h3 style="margin-top:0">Spout (receiving from other video apps)</h3>
+  <p><b>Spout</b> is a way for Windows apps to pass pictures to each other (like Syphon on Mac). It passes the picture directly inside the graphics card, so there is <b>almost no delay</b>, and <b>transparent parts stay transparent</b> when stacked. The sending app must support Spout.</p>
+  <table>
+    <tr><th style="width:36mm">Sending app</th><th>How to send with Spout</th></tr>
+    <tr><td class="k">Processing</td><td>The "Spout for Processing" library (details below)</td></tr>
+    <tr><td class="k">TouchDesigner</td><td>Connect a "<b>Syphon Spout Out</b>" TOP after the TOP you want to send. The name is "Sender Name"</td></tr>
+    <tr><td class="k">OBS Studio</td><td>Install the add-on "<b>Spout2 Plugin for OBS</b>", then start output in Tools → Spout Output Settings</td></tr>
+    <tr><td class="k">VJ apps</td><td>If it supports Spout, turn on Spout in its output settings</td></tr>
+  </table>
+  <ol class="steps">
+    <li><b>Turn on Spout output in the sending app</b> (keep the app running)</li>
+    <li>In VPT39: "Media" tab → <span class="btn">Blank, layers, inputs</span> → <span class="btn">Refresh list</span></li>
+    <li>The sender's name appears under "Spout". Drag it onto a layer row (or click to add). Press the clip to show it</li>
+  </ol>
+  <div class="note"><b class="h">If it stops</b>If the sending app stops or closes, <b>the last picture stays</b> and red text "The Spout picture has stopped" appears. Send again with the same name and it continues automatically.</div>
+  <div class="warn"><b class="h">Use Python 3.13</b>The Spout component supports Python only up to 3.13. If you run setup.bat with Python 3.14 or later, it shows "(Note) Spout does not work with this Python" and the Spout list stays empty (other features work).</div>
+
+</section>
+
+<section class="chap">
+  <h3 style="margin-top:0">Showing pictures made in Processing (Spout for Processing)</h3>
+  <ol class="steps">
+    <li><b>Install the library</b>: in Processing, menu "Sketch" → "Import Library" → "<b>Add Library…</b>". Type <b>Spout</b> in the search box, choose "<b>Spout for Processing</b>" and press "Install". Only once</li>
+    <li><b>Add three things to the sketch</b> (example below): ① <code>import spout.*;</code> at the very top ② create Spout and give it a name in <code>setup()</code> ③ <code>spout.sendTexture();</code> at the <b>end</b> of <code>draw()</code></li>
+    <li><b>Use P2D or P3D in size()</b>. Plain <code>size(1280, 720)</code> (JAVA2D) cannot send</li>
+    <li><b>Run it (▶)</b>. Press "Refresh list" in VPT39, and the name you gave (e.g. Processing) appears under Spout</li>
+  </ol>
+<pre class="code"><span class="c">// ① Use Spout</span>
+import spout.*;
+Spout spout;
+
+void setup() {
+  size(1280, 720, P2D);            <span class="c">// P2D or P3D (OpenGL)</span>
+  spout = new Spout(this);         <span class="c">// ② create it</span>
+  spout.setSenderName("Processing"); <span class="c">//    the name shown in VPT39's list</span>
+}
+
+void draw() {
+  background(0);
+  fill(255, 120, 200);
+  ellipse(mouseX, mouseY, 160, 160);
+  spout.sendTexture();             <span class="c">// ③ send what was just drawn (end of draw)</span>
+}</pre>
+  <table>
+    <tr><th style="width:40mm">To do this</th><th>Write this</th></tr>
+    <tr><td class="k">Transparent background</td><td><code>clear();</code> instead of <code>background(0);</code>. Only what you draw is stacked on top in VPT39 (blend mode "Normal" in VPT39)</td></tr>
+    <tr><td class="k">Resolution</td><td>The <code>size()</code> is sent as it is. Use the projection size (e.g. 1920, 1080) for a sharp picture</td></tr>
+    <tr><td class="k">Send two or more</td><td>Give each sketch a different name (with the same name, only the one started last is used)</td></tr>
+    <tr><td class="k">Stopping</td><td>When you stop the sketch, VPT39 keeps the last picture and shows red text</td></tr>
+  </table>
+  <div class="tip"><b class="h">Not in the list?</b>Check: ① the sketch is running ② <code>size()</code> uses P2D/P3D ③ <code>sendTexture()</code> is called in <code>draw()</code> ④ you pressed "Refresh list". If it does not show on a <b>laptop</b>, go to Windows "Settings → Display → Graphics" and set both Processing (java.exe) and VPT39 (python.exe) to "High performance", so they run on the same graphics card.</div>
+  <div class="note"><b class="h">On Mac</b>Processing on Mac has a "Syphon" library used the same way. VPT39 is Windows only, so it receives Spout.</div>
+</section>
+
+<!-- ===================== 9 ===================== -->
+<section class="chap">
+  <h2><span class="c">9</span>Mapping (fitting the shape)</h2>
+  <p>When a projector shines from an angle, the picture's shape is off. <b>Move the four corners of each layer</b> to fit the screen.</p>
+  <ol class="steps">
+    <li><b>Click a layer row to select it</b> (the left edge turns orange). Open the "Layer settings" tab</li>
+    <li>Turn on <span class="btn">Edit mapping (E)</span> in the top bar (or <kbd>E</kbd>). The output window shows the frame, the corners and a help line. <span class="btn">Test pattern</span> shows a grid to make distortion easy to see</li>
+    <li><b>Drag the corners</b> in the diagram to the screen's corners (drag inside to move it all)</li>
+    <li>Finally, <b>fine-tune with the arrow keys</b>: choose a corner (or all) in ⑥ and move 1 px at a time. In front of the screen, use a <b>phone</b> (next page)</li>
+  </ol>
+  <div class="side">
+    <figure>
+      <div class="shot" data-img="panel_insp" data-crop="1035,409,389,353" data-b="1177,418,242,27,1;1052,451,367,27,2;1052,484,367,209,3;1052,696,367,63,6"></div>
+      <figcaption>Mapping in the "Layer settings" tab</figcaption>
+    </figure>
+    <figure>
+      <div class="shot" data-img="out1_edit" data-crop="0,0,1280,720" data-b="66,46,22,22,4;15,655,1180,50,5"></div>
+      <figcaption>The output window while editing</figcaption>
+    </figure>
+  </div>
+  <ul class="legend">
+    <li><i>1</i><span><b>Edit (E)</b> / <b>Test pattern</b> / <b>Reset corners</b> (back to a full-screen rectangle)</span></li>
+    <li><i>2</i><span><b>Output to adjust</b>: for a layer on several outputs, which output's corners to fix</span></li>
+    <li><i>3</i><span><b>Diagram</b>: the layers on that output (others are pale). White squares are movable corners</span></li>
+    <li><i>4</i><span><b>Selected corner</b> (red; others yellow)</span></li>
+    <li><i>5</i><span><b>Help line</b>: the layer and output being edited and the keys (only while editing)</span></li>
+    <li><i>6</i><span><b>Arrow keys move</b>: Top left / Top right / Bottom right / Bottom left / <b>All</b> (green = selected). "All" moves without changing the shape</span></li>
+  </ul>
+  <table>
+    <tr><th style="width:40mm">On the output window</th><th>Action</th></tr>
+    <tr><td><kbd>1</kbd>–<kbd>9</kbd> / <kbd>Tab</kbd> / <kbd>A</kbd></td><td>Select a layer / next corner (<kbd>Shift</kbd>+<kbd>Tab</kbd> back) / all</td></tr>
+    <tr><td><kbd>←</kbd><kbd>→</kbd><kbd>↑</kbd><kbd>↓</kbd></td><td>Move 1 px (10 px with <kbd>Shift</kbd>). <b>Also on the control panel</b> while editing</td></tr>
+    <tr><td><kbd>T</kbd> / <kbd>R</kbd> / <kbd>E</kbd>, <kbd>Esc</kbd></td><td>Test pattern / Reset corners (<b>never during the show</b>) / finish</td></tr>
+  </table>
+</section>
+
+
+<section class="chap">
+  <h3 style="margin-top:0">Adjusting with a phone (setup mode)</h3>
+  <p>You can leave the PC and adjust the corners <b>with a phone in front of the screen or in the audience</b>. While you use the phone, a yellow frame and a red mark (the part you are moving) appear in the picture on the screen itself, so you can <b>keep watching the screen</b> and just press the arrow pad.</p>
+  <div class="side" style="grid-template-columns:52mm 1fr">
+    <figure style="margin-top:0">
+      <div class="shot" data-img="mobile" data-crop="0,0,390,720" data-b="287,6,93,47,1;10,57,370,100,2;10,161,370,211,3;10,401,162,172,4;178,401,202,172,5;10,579,370,50,6;10,632,370,76,7"></div>
+      <figcaption>The phone screen (http://PC-address:8080/m)</figcaption>
+    </figure>
+    <ul class="legend">
+      <li><i>1</i><span><b>Show frame</b>: shows the frame and mark on the screen (same as "Edit mapping" on the PC). Turns on automatically when opened on the phone. <b>Always turn it off when done</b>. A green dot at the top left means connected</span></li>
+      <li><i>2</i><span>Choose the <b>Layer</b>, and the <b>output</b> if it is shown on several (the PC's selection changes too)</span></li>
+      <li><i>3</i><span><b>Diagram</b>: drag a corner with your finger to reshape, drag inside to move (for rough positioning)</span></li>
+      <li><i>4</i><span><b>What to move</b>: Top left, Top right, Bottom left, Bottom right, All (green = selected)</span></li>
+      <li><i>5</i><span><b>Arrow pad</b>: tap to move once, <b>hold to keep moving</b> (faster after 1.5 s). The middle button switches 1 px / 10 px</span></li>
+      <li><i>6</i><span><b>Undo</b> (a held move counts as one), <b>Test pattern</b> (grid; red while on), <b>Reset corners</b> (asks first; Undo brings it back)</span></li>
+      <li><i>7</i><span><b>Opacity</b> and <b>Feather</b></span></li>
+    </ul>
+  </div>
+  <h3>How to connect (QR code)</h3>
+  <div class="side" style="grid-template-columns:62mm 1fr">
+    <figure style="margin-top:0">
+      <div class="shot" data-img="panel_lan" data-crop="454,71,520,463" data-b="473,117,154,38,1;606,158,228,228,2;647,417,145,27,3"></div>
+    </figure>
+    <ol class="steps">
+      <li><b>Press "Phone" in the top bar, then "Control from a phone" (①)</b>. No restart needed. The first time, if a "Windows Security Alert" appears, check "<b>Private networks</b>" and press "Allow access"</li>
+      <li><b>Connect the PC and the phone to the same Wi-Fi, and scan the QR code (②) with the phone camera</b>. The adjustment page opens (the address is also shown below, so you can type it)</li>
+      <li><b>When done, press "Stop phone control"</b>. On/off is saved and stays the same at the next start. After changing the Wi-Fi, press "Find the address again" (③)</li>
+    </ol>
+  </div>
+  <div class="warn"><b class="h">Be careful</b>There is no password, so <b>anyone on the same Wi-Fi can control it</b>. Use your own router or phone tethering. Venue and hotel Wi-Fi often blocks connections between devices, so it may not connect. When not in use, press "Stop phone control".</div>
+  <div class="tip"><b class="h">Keep the screen on</b>Set the phone's "Auto-Lock" longer (e.g. 5 minutes). If the connection is lost, red "Not connected to the PC" appears at the top of the phone and the buttons stop working (they come back when it reconnects).</div>
+</section>
+
+<!-- ===================== 10 ===================== -->
+<section class="chap">
+  <h2><span class="c">10</span>Photo wall</h2>
+  <p>A layer that shows the photos in a chosen folder one after another. Use it to show photos taken at the venue or collected from the audience.</p>
+  <figure style="max-width:110mm">
+    <div class="shot" data-img="panel" data-crop="0,567,1184,137" data-b="8,573,215,27,1;238,573,428,104,2;670,573,140,124,3;814,573,364,112,4"></div>
+  </figure>
+  <ul class="legend">
+    <li><i>1</i><span>The photo wall row (name, "Show" etc.; it has no sound, so no M)</span></li>
+    <li><i>2</i><span><b>Images in the row</b>: press one to show it now (green frame = shown now). Drag to reorder, ✕ to remove</span></li>
+    <li><i>3</i><span><b>Drag images here</b> from the media to line them up</span></li>
+    <li><i>4</i><span>Number of photos, interval, and <b>Next photo ▶</b> (next one now)</span></li>
+  </ul>
+  <h3>Choosing the photos (two ways)</h3>
+  <table>
+    <tr><th style="width:44mm">Way</th><th>How they are shown</th></tr>
+    <tr><td class="k">Line up images in the row</td><td>Drag images from the "Media" tab onto the photo wall row (or click a media image while the photo wall is selected). Shown <b>in the order lined up</b>, then from the start again. <b>With only one image, it keeps showing that image</b>. Press an image to show it now</td></tr>
+    <tr><td class="k">Photos in a folder (when the row is empty)</td><td>Shows the photos in "Folder" one after another (as before). New photos can be shown first</td></tr>
+  </table>
+  <p>Both run <b>separately from "Play column"</b>, following "Interval" and "Transition". Only images can go on a photo wall (put videos, cameras and so on on a video layer).</p>
+  <h3>Settings (select the photo wall row, then the "Layer settings" tab)</h3>
+  <table>
+    <tr><th style="width:36mm">Setting</th><th>What it does</th></tr>
+    <tr><td class="k">Folder</td><td>The folder to read photos from when no images are lined up in the row. A name like "photos" means inside the VPT39 folder; a full path can point elsewhere. <b>A misspelled name creates a new empty folder and shows "0 photos"</b>, so check the count</td></tr>
+    <tr><td class="k">Interval (s)</td><td>Seconds until the next photo. 0 = no automatic change</td></tr>
+    <tr><td class="k">Transition</td><td>Fade (gradual) / Cut (no effect, instant) / Slide (right to left, left to right, bottom to top, top to bottom) / Wipe (from the left) / Zoom (from slightly closer). The time is the "Fade" seconds. Slide pushes the previous photo out. <b>No new photo is shown during a transition</b> (if the transition is longer than the interval, the interval gets longer by that much)</td></tr>
+    <tr><td class="k">White border</td><td>Thickness of the white frame around the photo</td></tr>
+    <tr><td class="k">Show the newest first</td><td>Shows newly added photos first (at least 3 s after the last change). Even with interval 0, new photos still appear automatically</td></tr>
+  </table>
+  <div class="side">
+    <figure>
+      <div class="shot" data-img="out_wide" data-crop="1300,0,1260,709" data-b="1716,92,662,503,1"></div>
+      <figcaption>① Photo wall (here on the right side of a wide screen)</figcaption>
+    </figure>
+    <div>
+      <ul>
+        <li>Photos fit <b>in portrait or landscape as they are</b>, without distortion (adjusted automatically to the shape of the mapped rectangle)</li>
+        <li>To avoid photos still being written, it <b>waits 1 second</b> after a photo is saved before loading it</li>
+        <li>Only png, jpg, bmp, gif and webp <b>directly in</b> the folder are read (not in subfolders; iPhone HEIC photos are not shown). Animated GIF, APNG and WebP play</li>
+        <li>To stop, turn off "Show" on the row or press "Clear". After "Clear", no new photo appears until you press "Next photo ▶"</li>
+      </ul>
+    </div>
+  </div>
+  <div class="danger"><b class="h">Operating notes</b>The photo wall shows <b>every</b> photo in its folder. Choose a folder that only gets photos a person has checked and approved (e.g. an "approved" folder in Dropbox). Also take care to get consent from the people in the photos.</div>
+</section>
+
+<!-- ===================== 11 ===================== -->
+<section class="chap">
+  <h2><span class="c">11</span>Audio mixer</h2>
+  <p>The sound of video layers and cameras <b>all plays at the same time</b>, whichever output they are on. Set the volume in the "<b>Mixer</b>" tab.</p>
+  <div class="side">
+    <figure>
+      <div class="shot" data-img="panel_mixer" data-crop="1041,125,389,311" data-b="1052,165,367,27,1;1052,198,367,34,2;1052,232,367,36,3;1221,232,38,27,4"></div>
+    </figure>
+    <ul class="legend">
+      <li><i>1</i><span><b>Audio master</b>: overall volume</span></li>
+      <li><i>2</i><span><b>Per output</b>: volume of all layers shown on that output (a layer on several outputs is under its first output)</span></li>
+      <li><i>3</i><span><b>Per layer</b>: that layer's volume. The green bar below shows roughly how loud it is playing (it moves during a crossfade)</span></li>
+      <li><i>4</i><span><b>M</b>: Mute. Red means muted</span></li>
+    </ul>
+  </div>
+  <p>The actual volume is <b>layer × output × audio master</b>. If any of them is 0 or M (mute), that sound is silent. The photo wall has no sound, so it is not in the mixer. Layer picture, window and blank clips make no sound.</p>
+  <div class="note"><b class="h">Sound that does not stop</b>BLACKOUT or "Show" off <b>does not stop the sound</b> (so music does not cut out during a live show). To stop sound, use M or the fader.</div>
+  <h3>No sound? (check in order)</h3>
+  <ol>
+    <li>Is the PC volume (speaker in the taskbar) at 0 or muted?</li>
+    <li>Is the Windows sound output set to the connected speakers?</li>
+    <li>Is an M in the mixer red, or a fader all the way left?</li>
+    <li>Does the top left of the control panel say "VLC (audio)"? (If it says "one volume for all layers", per-layer volume does not work)</li>
+    <li>Does the video file itself have sound? For a camera, is the clip's audio input set to "No audio"?</li>
+  </ol>
+</section>
+
+<!-- ===================== 12 ===================== -->
+<section class="chap">
+  <h2><span class="c">12</span>During the show and emergencies</h2>
+  <h3>What to do during the show</h3>
+  <ul>
+    <li>When the song changes, use <b>Play column</b>. To change just one, click a <b>thumbnail</b></li>
+    <li>To simply step through L1, use <kbd>Space</kbd></li>
+    <li>Volume with the mixer faders. Picture brightness with "Brightness" in the top bar</li>
+  </ul>
+  <h3>If you panic</h3>
+  <table>
+    <tr><th style="width:44mm">To do this</th><th>Action</th><th style="width:38mm">To undo</th></tr>
+    <tr><td class="k">Hide only the picture</td><td><span class="btn red">BLACKOUT</span> or <kbd>B</kbd> (dark in 0.5 s; the sound keeps playing)</td><td>BLACKOUT or <kbd>B</kbd> again</td></tr>
+    <tr><td class="k">Stop only the sound</td><td>M in the mixer (for everything, the M of each output)</td><td>M again</td></tr>
+    <tr><td class="k">Freeze the picture</td><td>⏸ on the clip</td><td>⏸ / ▶ again</td></tr>
+    <tr><td class="k">Clear everything to black</td><td><span class="btn">Clear all</span> (fades out; <b>picture and sound</b> both stop)</td><td>Press a clip again</td></tr>
+    <tr><td class="k">Frames, lines, text or grid on screen</td><td>Turn off mapping editing with <kbd>E</kbd>, and turn off the test pattern</td><td>—</td></tr>
+  </table>
+  <div class="tip"><b class="h">BLACKOUT vs. Clear all</b>BLACKOUT only hides the picture, like "lowering a curtain"; playback continues behind it. When you return, you see it from where it is now. Clear all stops playback itself.</div>
+  <div class="danger"><b class="h">Always before the show</b>Turn off <kbd>E</kbd> and the test pattern, and <b>look at the screen</b> to make sure the points, frames, text and grid are gone (the editing frame and text show even during BLACKOUT).</div>
+  <h3>If the app crashes</h3>
+  <ol class="steps">
+    <li>Use <b>AV mute</b> (picture mute) on the projector's remote so the audience does not see the desktop</li>
+    <li>Double-click <b>run.bat</b></li>
+    <li>Wait until <b>all outputs</b> open fullscreen on their displays (for any that do not, follow Chapter 4)</li>
+    <li>Press the clips again (order, shape and volume are saved; <b>the playback position is not</b>)</li>
+    <li>Check the picture and sound, then turn off AV mute</li>
+  </ol>
+  <div class="note"><b class="h">If only the control panel was closed</b>The picture has not stopped. Open <b>http://localhost:8080/</b> in the browser to control it again as before.</div>
+</section>
+
+<!-- ===================== 13 ===================== -->
+<section class="chap">
+  <h2><span class="c">13</span>Saving and setup files</h2>
+  <ul>
+    <li>Settings are saved to project.json <b>automatically 2 seconds after a change</b> (and to the open setup file, if any). To save right away, press <span class="btn">Save</span></li>
+    <li>Press <span class="btn">Quit</span> to save and close after confirming</li>
+    <li>Saved: layers and clips, corners, volumes, output windows. Not saved: the playback position, BLACKOUT and test pattern (off at start)</li>
+  </ul>
+  <h3>Setup (setup files for each venue or show)</h3>
+  <p>For each venue or show, you can save the <b>running order, clips, layers, mapping, volume and outputs</b> together under a name. Press "<b>Setup: (name)</b>" in the top bar to open the window.</p>
+  <div class="side" style="grid-template-columns:66mm 1fr">
+    <figure style="margin-top:0">
+      <div class="shot" data-img="panel_set" data-crop="387,60,644,304" data-b="413,133,615,38,1;413,176,614,41,2;864,220,50,27,3;915,183,73,27,4;988,183,30,27,5"></div>
+    </figure>
+    <ul class="legend">
+      <li><i>1</i><span><b>Save as</b>: enter a name and save (Enter works too). If the name exists, it asks before overwriting</span></li>
+      <li><i>2</i><span><b>The setup open now</b> (green frame). Changes are saved over it automatically 2 seconds later</span></li>
+      <li><i>3</i><span><b>Open</b>: after confirming, switches to that setup</span></li>
+      <li><i>4</i><span><b>Duplicate</b>: saves the open setup under a new name (to make a version for another venue)</span></li>
+      <li><i>5</i><span><b>✕</b>: to the Recycle Bin (asks first; you can restore it)</span></li>
+    </ul>
+  </div>
+  <ul>
+    <li>Files are saved as "name.json" in the <b>VPT39\settings</b> folder. Sync it with Dropbox to use the same list on another PC</li>
+    <li><b>Opening a setup also recreates the output windows</b>. On a PC without the saved displays, those outputs open as windows; move them to the projection display and make them fullscreen. <b>Do not open one during the show</b> (the picture cuts out for a moment)</li>
+    <li>Before opening, the current setup is saved ("(unnamed)" is replaced; use "Save as" first to keep it)</li>
+    <li><b>When you prepare on another PC</b>, set each output's "Show resolution" (Chapter 4) to the show projector, and the corners and overlaps can be used as they are in the show</li>
+  </ul>
+  <h3>Main items in project.json</h3>
+  <table>
+    <tr><th style="width:36mm">Item</th><th>Meaning</th></tr>
+    <tr><td class="k">media_dir</td><td>Media folder (normally "media")</td></tr>
+    <tr><td class="k">web_port</td><td>Control panel port number (normally 8080 → http://localhost:8080/)</td></tr>
+    <tr><td class="k">allow_lan</td><td>Whether phone control is on (switched with the "Phone" button; Chapter 9)</td></tr>
+    <tr><td class="k">outputs</td><td>Position, fullscreen display and volume of each output window</td></tr>
+    <tr><td class="k">layers</td><td>Layers and clips, corners, volume etc.</td></tr>
+    <tr><td class="k">setting_name</td><td>Name of the setup open now (empty if unnamed)</td></tr>
+  </table>
+  <div class="warn"><b class="h">Editing by hand</b>Quit the app and make a copy before opening it (if you break it, VPT39 cannot start).</div>
+</section>
+
+<!-- ===================== 14 ===================== -->
+<section class="chap">
+  <h2><span class="c">14</span>Troubleshooting</h2>
+  <table>
+    <tr><th style="width:50mm">Problem</th><th>What to check / how to fix</th></tr>
+    <tr><td class="k">Nothing on the projector</td><td>Projector power, input selection, cable → is <kbd>⊞Win</kbd>+<kbd>P</kbd> set to "Extend"? → is the output window fullscreen on that display? → is BLACKOUT glowing? → is "Brightness" all the way left? → the layer's "Show" and "Outputs"</td></tr>
+    <tr><td class="k">Projector not detected</td><td>Unplug and replug the cable → projector input selection → <kbd>⊞Win</kbd>+<kbd>P</kbd> again. A display that shows no number with <span class="btn">Identify</span> is not detected by the PC</td></tr>
+    <tr><td class="k">Your own screen is shown</td><td>It is set to "Duplicate". Change to "Extend" with <kbd>⊞Win</kbd>+<kbd>P</kbd></td></tr>
+    <tr><td class="k">Cannot find the output window</td><td><span class="btn">Bring back</span> in the "Outputs" tab</td></tr>
+    <tr><td class="k">Fullscreen on the wrong display</td><td>"Bring back" → drag to the right display → Fullscreen. Check the numbers with <span class="btn">Identify</span></td></tr>
+    <tr><td class="k">Opens as a window at start</td><td>The display from last time is not connected, or the resolution or order changed (a warning appears). Connect the projector and make it fullscreen again (Chapter 4)</td></tr>
+    <tr><td class="k">The wrong picture is shown</td><td>The clip with the green frame on that layer / "Outputs" / stacking order (is it hidden behind a layer in front?)</td></tr>
+    <tr><td class="k">Frames, points, text or grid in the picture</td><td>Edit mapping or test pattern is on → turn off <kbd>E</kbd> and the test pattern</td></tr>
+    <tr><td class="k">Picture is choppy or late</td><td>The media is too heavy (4K, high bitrate, HEVC etc.). Export again as H.264, 1080p, 30fps. Has the fps at the top left dropped a lot?</td></tr>
+    <tr><td class="k">Media not in the list</td><td>Is it in the media folder, in a supported format (Chapter 5)? Wait a few seconds</td></tr>
+    <tr><td class="k">No thumbnail</td><td>Wait a while (new media takes time). Videos that cannot be read get none</td></tr>
+    <tr><td class="k">Red text on the left of a row</td><td>"File not found", "Cannot play", "Could not load" = the file was deleted, renamed or is broken. The previous picture keeps playing. Add the media again and recreate the clip</td></tr>
+    <tr><td class="k">No sound</td><td>Chapter 11 "No sound?"</td></tr>
+    <tr><td class="k">Nothing on the photo wall</td><td>If the row says "0 photos", the folder name is wrong / photo format (no HEIC), not in a subfolder? / is "Show" on? / outputs</td></tr>
+    <tr><td class="k">Control panel does not open</td><td>Open http://localhost:8080/ in the browser. If that fails, open the address after "Control panel: http://…" in run.bat's black window (starting run.bat twice gives 8081 etc.)</td></tr>
+    <tr><td class="k">Keys do not work</td><td>The cursor is in a text/number field or drop-down (▼). Click outside the field</td></tr>
+    <tr><td class="k">Camera shows nothing</td><td>"Refresh list" → is the device connected (cable, power)? → is another app (Zoom, OBS etc.) or another clip using the same camera? For a capture board, also check the screen output of the PC connected to it</td></tr>
+    <tr><td class="k">No camera sound</td><td>Is the clip's audio input set to "No audio"? → mixer → Windows default speaker</td></tr>
+    <tr><td class="k">Window shows nothing or stops</td><td>Is the window minimized? If you closed and reopened it, press the clip again. Protected video (streaming etc.) turns black</td></tr>
+    <tr><td class="k">The wide-screen seam is visible</td><td>Set "Overlap" to the real overlap width → fix brightness differences with "Gamma" → match the brightness and color settings of the two projectors</td></tr>
+    <tr><td class="k">Red text "… picture has stopped"</td><td>Camera: check the cable and power (reconnects every 5 s). Spout: is the sending app running? (sending again with the same name restores it). Window: was it closed? In all cases the last picture stays</td></tr>
+    <tr><td class="k">The Spout list is empty</td><td>Is Spout output on in the sending app? → "Refresh list" → if setup.bat said "Spout does not work", install Python 3.13 and run setup.bat again (Chapter 8)</td></tr>
+    <tr><td class="k">Phone cannot connect</td><td>Is "Phone" in the top bar green "Phone ON"? → are the PC and phone on the same Wi-Fi (not on mobile data)? → after changing the Wi-Fi, "Find the address again" → did you "Allow" in the firewall? → on venue Wi-Fi, switch to tethering (Chapter 9)</td></tr>
+    <tr><td class="k">Outputs became windows after opening a setup</td><td>The saved displays are not on this PC (different order or resolution). Move the output windows to the projection displays and make them fullscreen (Chapter 4)</td></tr>
+    <tr><td class="k">The photo wall shows the same photo</td><td>Only one image is lined up in the row (one image keeps showing), or "Interval" is 0. To show folder photos, remove the row's images with ✕</td></tr>
+    <tr><td class="k">Dropped media is not added</td><td>Did you drop it on the "Media" tab area (green dotted line)? Files that are not videos or images are not added. Large videos take time to copy ("Copying … (○%)")</td></tr>
+    <tr><td class="k">setup.bat says "Failed"</td><td>Chapter 2 "If setup.bat does not work"</td></tr>
+    <tr><td class="k">The app crashed</td><td>Chapter 12 "If the app crashes"</td></tr>
+  </table>
+</section>
+
+<!-- ===================== 15 ===================== -->
+<section class="chap">
+  <h2><span class="c">15</span>Pre-show checklist</h2>
+  <div class="side">
+    <div>
+      <h3 style="margin-top:0">By the day before</h3>
+      <ul class="check">
+        <li>Exported the media as H.264, 1080p, 30fps mp4</li>
+        <li>Put the media in the media folder; every clip plays</li>
+        <li>Lined up the columns (numbers) for each song</li>
+        <li>The photo wall folder only gets "approved" photos</li>
+        <li>Did a full rehearsal with <b>the same PC and the same projectors</b> as the show</li>
+        <li>Made a copy of project.json</li>
+        <li>Finished Windows Update and set it not to restart during the show</li>
+      </ul>
+      <h3>At the venue</h3>
+      <ul class="check">
+        <li>Connected the PC's power cable (do not run on battery)</li>
+        <li><kbd>⊞Win</kbd>+<kbd>P</kbd> is "Extend"; projector scale is 100%</li>
+        <li>Outputs are fullscreen on the right displays (check with <span class="btn">Identify</span>)</li>
+        <li>Fitted the mapping (for a wide screen, also check the seam and overlap)</li>
+        <li>Checked the picture and sound of cameras, capture boards, captured windows and Spout</li>
+        <li>With the test media (below), checked smoothness, audio sync and left/right speakers</li>
+      </ul>
+    </div>
+    <div>
+      <h3 style="margin-top:0">Right before the show</h3>
+      <ul class="check">
+        <li><b>Edit mapping is off</b> (the top bar button is not red; if you adjusted from a phone, "Show frame" is off too)</li>
+        <li><b>Test pattern is off</b> (no grid on screen)</li>
+        <li>Checked BLACKOUT (on = glowing yellow, if it stays dark until the show starts)</li>
+        <li>The M buttons in the audio mixer are as intended; checked the volume</li>
+        <li>Heard sound from the speakers with your own ears</li>
+        <li>Notifications off (Windows "Do not disturb" / Focus)</li>
+        <li>Sleep and screen-off time set to "Never"</li>
+        <li>Closed other apps</li>
+        <li>Put the quick start next to the equipment</li>
+        <li>Know where AV mute is on the projector remote</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot">VPT39 User Guide (detailed) / How it works: concept.pdf / During the show: quickstart.pdf / Screen map: index.html</div>
+</section>
+
+<section class="chap">
+  <h3 style="margin-top:0">Test media (media\テスト用, photos\テスト用)</h3>
+  <p>The テスト用 ("test") folders contain media for checking motion and sound instead of real show media. Use them for rehearsals and for checking a new PC or projector.</p>
+  <table>
+    <tr><th style="width:52mm">File</th><th>What you can check</th></tr>
+    <tr><td class="k">01_カウント_音あり.mp4</td><td>Numbers 1–12 and a "beep" every second (only the first is high). Switching, crossfade, <b>audio/video sync</b></td></tr>
+    <tr><td class="k">02_グリッド_60fps.mp4</td><td>Grid, circles, corner names, a clock hand and a moving white band. <b>Corner fitting</b> and <b>smoothness</b> (does the band stutter?)</td></tr>
+    <tr><td class="k">03_カラーバー.mp4</td><td>Color bars and 16 brightness steps (quiet 1 kHz tone). <b>Color, brightness, crushed blacks</b> (can you tell 0–2 apart?)</td></tr>
+    <tr><td class="k">04_横長_3840x1080.mp4</td><td>For a wide screen of two projectors. Left/right names and a yellow line across the seam. <b>Seam position and brightness</b></td></tr>
+    <tr><td class="k">05_左右の音.mp4</td><td>Correct if the sound comes from the speaker on the lit side. <b>Left/right speakers</b></td></tr>
+    <tr><td class="k">06_動くGIF / 07_透明PNG</td><td>Animated image, and stacking with transparent parts</td></tr>
+    <tr><td class="k">08_真っ白 / 09_真っ黒</td><td>Full white (brightest) and full black (darkest). <b>The projector's brightest and darkest</b>, uneven brightness, black level (how much light even on full black)</td></tr>
+    <tr><td class="k">10_月_比率テスト</td><td>A perfectly round moon in the middle of a black background. <b>Aspect check</b>: if it looks oval, the corner shape or output aspect ratio is off</td></tr>
+    <tr><td class="k">11_白にグリッド / 12_黒にグリッド</td><td>Grid every 120 px (16×9 squares), outer frame, center cross, diagonals, a perfect circle. <b>Calibration</b>: corner fitting, cut-off edges, bent lines, focus</td></tr>
+    <tr><td class="k">13_市松模様</td><td>120 px black-and-white checkerboard. <b>Focus and distortion</b>, and <b>misaligned seams</b> on a wide screen (do the squares line up?)</td></tr>
+    <tr><td class="k">photos\テスト用</td><td>Landscape, 4:3, portrait and square photos, and a (perfectly round) moon. How the photo wall <b>fits and switches</b> photos (enter photos/テスト用 as the folder). If the moon is oval, the photos are distorted</td></tr>
+  </table>
+  <div class="note"><b class="h">Recreating them</b>Run <code>.venv\Scripts\python.exe tools\make_test_media.py</code> in the VPT39 folder to recreate them (the ffmpeg component is needed: <code>.venv\Scripts\python.exe -m pip install imageio-ffmpeg</code>).</div>
+  <div class="foot">VPT39 User Guide (detailed) / How it works: concept.pdf / During the show: quickstart.pdf / Screen map: index.html</div>
+</section>
+
+</div>
+<script>
+// Crop the screenshots and draw the numbered red boxes
+(function(){
+  var IMG={panel:{src:'img/panel.jpg',w:1440,h:900},panel_special:{src:'img/panel_special.jpg',w:1440,h:900},panel_insp:{src:'img/panel_insp.jpg',w:1440,h:900},panel_mixer:{src:'img/panel_mixer.jpg',w:1440,h:900},panel_photo:{src:'img/panel_photo.jpg',w:1440,h:900},panel_set:{src:'img/panel_set.jpg',w:1440,h:900},panel_lan:{src:'img/panel_lan.jpg',w:1440,h:900},mobile:{src:'img/mobile.jpg',w:390,h:844},panel_outs:{src:'img/panel_outs.jpg',w:1440,h:900},out1:{src:'img/out1.jpg',w:1280,h:720},out1_edit:{src:'img/out1_edit.jpg',w:1280,h:720},out1_black:{src:'img/out1_black.jpg',w:1280,h:720},out_wide:{src:'img/out_wide.jpg',w:2560,h:709}};
+  [].forEach.call(document.querySelectorAll('.shot'),function(el){
+    var im=IMG[el.dataset.img], c=el.dataset.crop.split(',').map(Number);
+    el.style.aspectRatio=c[2]+' / '+c[3];
+    var h='<img src="'+im.src+'" alt="" style="width:'+(im.w/c[2]*100)+'%;left:'+(-c[0]/c[2]*100)+'%;top:'+(-c[1]/c[3]*100)+'%">';
+    (el.dataset.b||'').split(';').filter(Boolean).forEach(function(s){
+      var b=s.split(','), x=+b[0],y=+b[1],w=+b[2],hh=+b[3];
+      h+='<div class="bx" style="left:'+((x-c[0])/c[2]*100)+'%;top:'+((y-c[1])/c[3]*100)+'%;width:'+(w/c[2]*100)+'%;height:'+(hh/c[3]*100)+'%"><i>'+b[4]+'</i></div>';
+    });
+    el.innerHTML=h;
+  });
+})();
+</script>
+</body>
+</html>

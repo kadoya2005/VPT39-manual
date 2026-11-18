@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How VPT39 Works</title>
+<style>
+@page{size:A4;margin:0}
+:root{--ink:#1b1f27;--dim:#5b6472;--line:#d5dae1;--l1:#1f63d6;--l2:#16834f;--l3:#d97706;--red:#cc3322}
+*{box-sizing:border-box}
+html,body{margin:0;background:#e9ecf0;color:var(--ink);font-family:"Segoe UI","Yu Gothic UI","Yu Gothic","Hiragino Sans","Meiryo",sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.sheet{width:210mm;height:297mm;margin:8mm auto;background:#fff;padding:8mm 10mm 7mm;display:flex;flex-direction:column;gap:2mm;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.12);font-size:9.6pt;line-height:1.5}
+@media print{html,body{background:#fff}.sheet{margin:0;box-shadow:none}}
+.top{display:flex;align-items:baseline;gap:4mm;border-bottom:2.5pt solid var(--ink);padding-bottom:1.5mm}
+.top h1{margin:0;font-size:19pt}
+.top p{margin:0;color:var(--dim);font-size:10.5pt}
+h2{margin:0 0 1mm;font-size:11.5pt;display:flex;align-items:center;gap:2mm}
+h2 .n{width:6mm;height:6mm;border-radius:50%;background:var(--ink);color:#fff;font-size:9.5pt;display:inline-flex;align-items:center;justify-content:center}
+.box{border:1pt solid var(--line);border-radius:2.5mm;padding:1.6mm 3mm}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:2mm}
+.box p{margin:.8mm 0 0}
+svg{display:block;width:100%;height:auto}
+svg text{font-family:"Segoe UI","Yu Gothic UI","Yu Gothic","Meiryo",sans-serif}
+.dim{color:var(--dim)}
+table{border-collapse:collapse;width:100%}
+td{border:.8pt solid var(--line);padding:.7mm 2mm;font-size:9pt;vertical-align:top}
+td:first-child{white-space:nowrap;font-weight:700;width:24mm;background:#f5f6f8}
+.foot{margin-top:auto;font-size:8.5pt;color:var(--dim);display:flex;justify-content:space-between;border-top:.8pt solid var(--line);padding-top:1.5mm}
+.flow{display:flex;align-items:stretch;gap:1.2mm}
+.flow div{flex:1;border:1pt solid var(--line);border-radius:2mm;padding:1.2mm 1.5mm;text-align:center;background:#f5f6f8}
+.flow div b{display:block;font-size:10.5pt}
+.flow div span{display:block;font-size:8.3pt;color:var(--dim);line-height:1.35}
+.flow div.go{background:#1b1f27;border-color:#1b1f27}.flow div.go b{color:#fff}.flow div.go span{color:#c9d0da}
+.flow i{font-style:normal;align-self:center;font-weight:700}
+b.l1{color:var(--l1)}b.l2{color:var(--l2)}b.l3{color:var(--l3)}
+.intro{background:#eaf1fd;border-left:2mm solid var(--l1);border-radius:0 2.5mm 2.5mm 0;padding:2mm 3.5mm;font-size:10pt;line-height:1.55}
+.intro b{color:var(--l1)}
+.sheet+.sheet{page-break-before:always}
+.sw{display:inline-block;padding:0 1.6mm;border-radius:1.2mm;font-weight:700;font-size:8.6pt;line-height:1.55;white-space:nowrap}
+.sw.g{background:#3dd68c;color:#04120a}.sw.h{background:#a9ecc9;color:#06291a}.sw.r{background:#ff4d4f;color:#fff}.sw.y{background:#3a2a08;color:#ffd27a;border:1pt solid #ffb020}
+.chips{display:flex;flex-wrap:wrap;gap:1.2mm;margin-top:1mm}
+.chips span{border-radius:1.5mm;padding:.3mm 2mm;font-size:8.6pt;color:#fff;font-weight:700}
+</style>
+</head>
+<body>
+<section class="sheet">
+  <div class="top"><h1>How VPT39 Works</h1><p>The picture flows in this order: "Media → Layers → Outputs → Screen"</p></div>
+  <div class="intro"><b>About this app:</b> A video player made for projection mapping.<br>It is designed to be easy to use for media and interactive art with projectors, live shows and more.<br><span style="font-size:.85em;color:#5b6472">VPT39 is an unofficial tool inspired by VPT (VideoProjectionTool) by HC Gilje. It is not affiliated with VPT in any way.</span></div>
+
+  <!-- 1. Overall flow -->
+  <div class="box">
+    <h2><span class="n">1</span>How the picture reaches the screen</h2>
+    <svg viewBox="0 0 760 250" role="img" aria-label="Flow from media to layers, outputs and the screen">
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#1b1f27"/></marker>
+      </defs>
+      <!-- Media -->
+      <rect x="4" y="60" width="118" height="130" rx="10" fill="#f5f6f8" stroke="#9aa3af"/>
+      <text x="63" y="84" text-anchor="middle" font-size="15" font-weight="700">① Media</text>
+      <text x="63" y="102" text-anchor="middle" font-size="11" fill="#5b6472">Videos, images,</text>
+      <text x="63" y="116" text-anchor="middle" font-size="11" fill="#5b6472">inputs (media folder)</text>
+      <rect x="22" y="128" width="36" height="24" rx="3" fill="#cfd6df"/><rect x="66" y="128" width="36" height="24" rx="3" fill="#cfd6df"/>
+      <rect x="22" y="158" width="36" height="24" rx="3" fill="#cfd6df"/><rect x="66" y="158" width="36" height="24" rx="3" fill="#cfd6df"/>
+      <line x1="126" y1="125" x2="160" y2="125" stroke="#1b1f27" stroke-width="2" marker-end="url(#ar)"/>
+      <text x="143" y="116" text-anchor="middle" font-size="10" fill="#5b6472">arrange</text>
+
+      <!-- Layers -->
+      <text x="270" y="20" text-anchor="middle" font-size="15" font-weight="700">② Layers (stacked)</text>
+      <g>
+        <rect x="166" y="34" width="210" height="58" rx="8" fill="#fff4e2" stroke="#d97706" stroke-width="2"/>
+        <text x="176" y="54" font-size="12" font-weight="700" fill="#d97706">L3 Photo wall</text>
+        <text x="176" y="72" font-size="10" fill="#5b6472">Shows photos in turn</text>
+        <rect x="300" y="46" width="30" height="34" rx="3" fill="#f3c98a"/><rect x="336" y="46" width="30" height="34" rx="3" fill="#f3c98a" opacity=".6"/>
+      </g>
+      <g>
+        <rect x="166" y="100" width="210" height="58" rx="8" fill="#e7f6ee" stroke="#16834f" stroke-width="2"/>
+        <text x="176" y="120" font-size="12" font-weight="700" fill="#16834f">L2 Overlay</text>
+        <text x="176" y="138" font-size="10" fill="#5b6472">Clips:</text>
+        <rect x="226" y="126" width="30" height="20" rx="3" fill="#8fd1ae"/><text x="241" y="140" text-anchor="middle" font-size="10" font-weight="700">1</text>
+        <rect x="262" y="126" width="30" height="20" rx="3" fill="#8fd1ae"/><text x="277" y="140" text-anchor="middle" font-size="10" font-weight="700">2</text>
+      </g>
+      <g>
+        <rect x="166" y="166" width="210" height="58" rx="8" fill="#eaf1fd" stroke="#1f63d6" stroke-width="2"/>
+        <text x="176" y="186" font-size="12" font-weight="700" fill="#1f63d6">L1 Background</text>
+        <text x="176" y="204" font-size="10" fill="#5b6472">Clips:</text>
+        <rect x="226" y="192" width="30" height="20" rx="3" fill="#9dbcf0"/><text x="241" y="206" text-anchor="middle" font-size="10" font-weight="700">1</text>
+        <rect x="262" y="192" width="30" height="20" rx="3" fill="#9dbcf0"/><text x="277" y="206" text-anchor="middle" font-size="10" font-weight="700">2</text>
+        <rect x="298" y="192" width="30" height="20" rx="3" fill="#9dbcf0"/><text x="313" y="206" text-anchor="middle" font-size="10" font-weight="700">3</text>
+      </g>
+      <text x="270" y="244" text-anchor="middle" font-size="10.5" fill="#5b6472">Higher numbers are in front</text>
+
+      <!-- Arrows to outputs -->
+      <path d="M376,129 C420,129 420,96 452,96" fill="none" stroke="#16834f" stroke-width="2.5" marker-end="url(#ar)"/>
+      <path d="M376,195 C420,195 420,104 452,104" fill="none" stroke="#1f63d6" stroke-width="2.5" marker-end="url(#ar)"/>
+      <path d="M376,63 C430,63 420,182 452,182" fill="none" stroke="#d97706" stroke-width="2.5" marker-end="url(#ar)"/>
+      <text x="414" y="236" text-anchor="middle" font-size="10" fill="#5b6472">Choose where it goes</text>
+      <text x="414" y="249" text-anchor="middle" font-size="10" fill="#5b6472">in "Outputs" (1 or more)</text>
+
+      <!-- Outputs -->
+      <text x="510" y="20" text-anchor="middle" font-size="15" font-weight="700">③ Outputs</text>
+      <rect x="456" y="70" width="110" height="62" rx="8" fill="#1b1f27"/>
+      <text x="511" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">Output 1</text>
+      <text x="511" y="114" text-anchor="middle" font-size="10" fill="#c9d0da">L1 + L2 combined</text>
+      <rect x="456" y="152" width="110" height="62" rx="8" fill="#1b1f27"/>
+      <text x="511" y="178" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">Output 2</text>
+      <text x="511" y="196" text-anchor="middle" font-size="10" fill="#c9d0da">L3 only</text>
+
+      <!-- Projector to screen -->
+      <text x="676" y="20" text-anchor="middle" font-size="15" font-weight="700">④ Screen</text>
+      <g>
+        <line x1="570" y1="101" x2="598" y2="101" stroke="#1b1f27" stroke-width="2" marker-end="url(#ar)"/>
+        <rect x="602" y="88" width="34" height="26" rx="5" fill="#5b6472"/><circle cx="636" cy="101" r="7" fill="#d5dae1" stroke="#5b6472" stroke-width="2"/>
+        <path d="M642,96 L690,62 L690,140 L642,106z" fill="#1f63d6" opacity=".14"/>
+        <polygon points="688,58 752,66 750,132 690,142" fill="#eaf1fd" stroke="#1f63d6" stroke-width="2"/>
+        <text x="720" y="104" text-anchor="middle" font-size="10" fill="#1f63d6">Screen</text>
+      </g>
+      <g>
+        <line x1="570" y1="183" x2="598" y2="183" stroke="#1b1f27" stroke-width="2" marker-end="url(#ar)"/>
+        <rect x="602" y="170" width="34" height="26" rx="5" fill="#5b6472"/><circle cx="636" cy="183" r="7" fill="#d5dae1" stroke="#5b6472" stroke-width="2"/>
+        <path d="M642,178 L690,154 L690,214 L642,188z" fill="#d97706" opacity=".14"/>
+        <rect x="690" y="152" width="62" height="64" rx="3" fill="#fff4e2" stroke="#d97706" stroke-width="2"/>
+        <text x="721" y="188" text-anchor="middle" font-size="10" fill="#d97706">Wall, etc.</text>
+      </g>
+      <text x="676" y="240" text-anchor="middle" font-size="10" fill="#5b6472">1 projector = 1 output</text>
+    </svg>
+  </div>
+
+  <div class="two">
+    <!-- 2. Two screens -->
+    <div class="box">
+      <h2><span class="n">2</span>There are two screens</h2>
+      <svg viewBox="0 0 360 120" role="img" aria-label="Control panel and output window">
+        <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#1b1f27"/></marker></defs>
+        <rect x="10" y="12" width="140" height="84" rx="6" fill="#fff" stroke="#1b1f27" stroke-width="2"/>
+        <rect x="18" y="20" width="124" height="68" rx="2" fill="#20242c"/>
+        <rect x="24" y="28" width="30" height="18" rx="2" fill="#4a5361"/><rect x="58" y="28" width="30" height="18" rx="2" fill="#2fd17c"/><rect x="92" y="28" width="44" height="40" rx="2" fill="#323946"/>
+        <rect x="24" y="52" width="64" height="5" rx="2" fill="#2fd17c"/><rect x="24" y="62" width="64" height="5" rx="2" fill="#4a5361"/>
+        <path d="M0,100 L160,100 L150,96 L10,96z" fill="#1b1f27"/>
+        <text x="80" y="116" text-anchor="middle" font-size="11" font-weight="700">Laptop: control panel</text>
+        <line x1="160" y1="54" x2="208" y2="54" stroke="#1b1f27" stroke-width="2" marker-end="url(#ar2)"/>
+        <text x="184" y="46" text-anchor="middle" font-size="9.5" fill="#5b6472">commands</text>
+        <rect x="212" y="18" width="140" height="78" rx="4" fill="#1b1f27"/>
+        <rect x="222" y="28" width="120" height="58" fill="#2a3f62"/><polygon points="236,78 270,40 300,64 326,48 340,78" fill="#3f6fb5"/>
+        <text x="282" y="116" text-anchor="middle" font-size="11" font-weight="700">Projector: output window</text>
+      </svg>
+      <p><b>Do everything on the laptop's control panel.</b> The output window only shows it (fullscreen, to the audience). Corners can also be set from a <b>phone</b> on the same Wi-Fi.</p>
+    </div>
+    <!-- 3. Play column -->
+    <div class="box">
+      <h2><span class="n">3</span>Switch for each song (Play column)</h2>
+      <svg viewBox="0 0 360 120" role="img" aria-label="Play column diagram">
+        <text x="70" y="18" text-anchor="middle" font-size="10.5" fill="#5b6472">Column 1 (song 1)</text>
+        <text x="170" y="18" text-anchor="middle" font-size="10.5" fill="#cc3322" font-weight="700">Column 2 (song 2)</text>
+        <text x="270" y="18" text-anchor="middle" font-size="10.5" fill="#5b6472">Column 3 (song 3)</text>
+        <text x="4" y="52" font-size="11" font-weight="700" fill="#16834f">L2</text>
+        <text x="4" y="92" font-size="11" font-weight="700" fill="#1f63d6">L1</text>
+        <rect x="35" y="30" width="70" height="36" rx="4" fill="#cdeedb"/><rect x="135" y="30" width="70" height="36" rx="4" fill="#8fd1ae"/><rect x="235" y="30" width="70" height="36" rx="4" fill="#cdeedb"/>
+        <rect x="35" y="72" width="70" height="36" rx="4" fill="#d6e3fa"/><rect x="135" y="72" width="70" height="36" rx="4" fill="#9dbcf0"/><rect x="235" y="72" width="70" height="36" rx="4" fill="#d6e3fa"/>
+        <rect x="128" y="24" width="84" height="90" rx="6" fill="none" stroke="#cc3322" stroke-width="3"/>
+        <text x="318" y="62" font-size="10" fill="#cc3322">Press 2:</text><text x="318" y="76" font-size="10" fill="#cc3322">whole</text><text x="318" y="90" font-size="10" fill="#cc3322">column</text><text x="318" y="104" font-size="10" fill="#cc3322">at once</text>
+      </svg>
+      <p>Put each song's clips at <b>the same number (column)</b>. One press of "Play column 2" then switches every layer to song 2.</p>
+    </div>
+  </div>
+
+  <div class="two">
+    <!-- 4. Mapping -->
+    <div class="box">
+      <h2><span class="n">4</span>Fit the shape (mapping)</h2>
+      <svg viewBox="0 0 360 110" role="img" aria-label="Move the four corners to fit the screen">
+        <defs><marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#cc3322"/></marker></defs>
+        <polygon points="40,22 150,30 146,96 46,86" fill="none" stroke="#9aa3af" stroke-width="2" stroke-dasharray="5 4"/>
+        <text x="96" y="62" text-anchor="middle" font-size="9.5" fill="#5b6472">Screen</text>
+        <rect x="20" y="12" width="150" height="90" fill="#1f63d6" opacity=".18" stroke="#1f63d6" stroke-width="1.5"/>
+        <text x="95" y="8" text-anchor="middle" font-size="9.5" fill="#1f63d6">Before (spills over)</text>
+        <path d="M188,58 L214,58" stroke="#1b1f27" stroke-width="2" marker-end="url(#ar)"/>
+        <polygon points="240,22 350,30 346,96 246,86" fill="#1f63d6" opacity=".22" stroke="#1f63d6" stroke-width="2"/>
+        <circle cx="240" cy="22" r="4.5" fill="#cc3322"/><circle cx="350" cy="30" r="4.5" fill="#ffd400" stroke="#1b1f27"/><circle cx="346" cy="96" r="4.5" fill="#ffd400" stroke="#1b1f27"/><circle cx="246" cy="86" r="4.5" fill="#ffd400" stroke="#1b1f27"/>
+        <path d="M226,10 L237,19" stroke="#cc3322" stroke-width="2" marker-end="url(#ar3)"/>
+        <text x="295" y="8" text-anchor="middle" font-size="9.5" fill="#1f63d6">Corners moved to fit</text>
+      </svg>
+      <p>Drag each layer's <b>four corners</b> to fit a slanted screen. Saved as ratios, so it holds at any resolution.</p>
+    </div>
+    <!-- 5. Transitions -->
+    <div class="box">
+      <h2><span class="n">5</span>Transitions (crossfade)</h2>
+      <svg viewBox="0 0 360 110" role="img" aria-label="Crossfade graph">
+        <line x1="30" y1="92" x2="350" y2="92" stroke="#9aa3af"/>
+        <line x1="30" y1="14" x2="30" y2="92" stroke="#9aa3af"/>
+        <text x="24" y="20" text-anchor="end" font-size="9" fill="#5b6472">100%</text>
+        <text x="24" y="94" text-anchor="end" font-size="9" fill="#5b6472">0</text>
+        <path d="M30,20 L140,20 L240,92 L350,92" fill="none" stroke="#9aa3af" stroke-width="3"/>
+        <path d="M30,92 L140,92 L240,20 L350,20" fill="none" stroke="#1f63d6" stroke-width="3"/>
+        <text x="80" y="15" text-anchor="middle" font-size="10" fill="#5b6472">Previous picture/sound</text>
+        <text x="300" y="15" text-anchor="middle" font-size="10" fill="#1f63d6">Next picture/sound</text>
+        <line x1="140" y1="100" x2="240" y2="100" stroke="#cc3322" stroke-width="2"/>
+        <line x1="140" y1="96" x2="140" y2="104" stroke="#cc3322" stroke-width="2"/><line x1="240" y1="96" x2="240" y2="104" stroke="#cc3322" stroke-width="2"/>
+        <text x="190" y="109" text-anchor="middle" font-size="9.5" fill="#cc3322">"Fade" seconds</text>
+        <text x="85" y="72" text-anchor="middle" font-size="9" fill="#5b6472">While the next one loads,</text>
+        <text x="85" y="84" text-anchor="middle" font-size="9" fill="#5b6472">the previous one goes on</text>
+      </svg>
+      <p>Press a clip and <b>picture and sound</b> change smoothly together. Set the time with the layer's "Fade" (0 = instant).</p>
+    </div>
+  </div>
+
+  <div class="two">
+    <!-- 10. Sound -->
+    <div class="box">
+      <h2><span class="n">6</span>How sound flows</h2>
+      <svg viewBox="0 0 360 74" role="img" aria-label="Volumes are multiplied">
+        <defs><marker id="ar4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#1b1f27"/></marker></defs>
+        <rect x="2" y="14" width="76" height="40" rx="6" fill="#eaf1fd" stroke="#1f63d6"/><text x="40" y="32" text-anchor="middle" font-size="10.5" font-weight="700">Layer</text><text x="40" y="47" text-anchor="middle" font-size="9" fill="#5b6472">volume</text>
+        <text x="88" y="40" text-anchor="middle" font-size="16" font-weight="700">×</text>
+        <rect x="98" y="14" width="76" height="40" rx="6" fill="#f1f3f6" stroke="#1b1f27"/><text x="136" y="32" text-anchor="middle" font-size="10.5" font-weight="700">Output</text><text x="136" y="47" text-anchor="middle" font-size="9" fill="#5b6472">volume</text>
+        <text x="184" y="40" text-anchor="middle" font-size="16" font-weight="700">×</text>
+        <rect x="194" y="14" width="80" height="40" rx="6" fill="#f1f3f6" stroke="#1b1f27"/><text x="234" y="32" text-anchor="middle" font-size="10.5" font-weight="700">Audio</text><text x="234" y="47" text-anchor="middle" font-size="9" fill="#5b6472">master</text>
+        <line x1="278" y1="34" x2="300" y2="34" stroke="#1b1f27" stroke-width="2" marker-end="url(#ar4)"/>
+        <path d="M306,26 L316,26 L330,14 L330,54 L316,42 L306,42z" fill="#1b1f27"/>
+        <path d="M336,22 Q346,34 336,46 M342,16 Q356,34 342,52" fill="none" stroke="#1b1f27" stroke-width="2"/>
+        <text x="180" y="70" text-anchor="middle" font-size="9.5" fill="#5b6472">If any one is 0 or M (mute), that sound is silent</text>
+      </svg>
+      <p>All layers' sound plays <b>at the same time</b>. <b>BLACKOUT and "Hidden" affect only the picture</b>, not the sound.</p>
+    </div>
+    <!-- 11. Button colors -->
+    <div class="box">
+      <h2><span class="n">7</span>What the button colors mean</h2>
+      <table>
+        <tr><td><span class="sw g">Show</span> Green</td><td>Working normally, or selected</td></tr>
+        <tr><td><span class="sw h">Clear</span> Pale green</td><td>Where the mouse is</td></tr>
+        <tr><td><span class="sw r">M</span> Red</td><td>Stopped or held (mute, hidden, editing, test pattern). Red text = error</td></tr>
+        <tr><td><span class="sw y">BLACKOUT</span></td><td>Emergency button. Yellow during blackout</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="foot"><span>How VPT39 Works (1/2)</span><span>Steps: quickstart.pdf&nbsp;&nbsp; Details: guide.pdf&nbsp;&nbsp; Screen map: index.html</span></div>
+</section>
+
+<section class="sheet">
+  <div class="top"><h1>How VPT39 Works</h1><p>Setting up inputs and outputs, and features that help in the show</p></div>
+
+  <!-- 6. Kinds of media -->
+  <div class="box">
+    <h2><span class="n">8</span>Kinds of media (inputs)&nbsp;&nbsp;<span class="dim" style="font-weight:400;font-size:9pt">— all are clips you arrange and switch the same way</span></h2>
+    <svg viewBox="0 0 760 150" role="img" aria-label="Many kinds of media go into a layer">
+      <defs><marker id="b1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#1b1f27"/></marker></defs>
+      <g font-size="11">
+        <rect x="4" y="6" width="150" height="40" rx="7" fill="#f5f6f8" stroke="#9aa3af"/>
+        <text x="79" y="23" text-anchor="middle" font-weight="700">Files</text><text x="79" y="38" text-anchor="middle" font-size="9.5" fill="#5b6472">Video, image, GIF, clear PNG</text>
+        <rect x="4" y="52" width="150" height="40" rx="7" fill="#fbefe0" stroke="#b5762a"/>
+        <text x="79" y="69" text-anchor="middle" font-weight="700">Camera / capture board</text><text x="79" y="84" text-anchor="middle" font-size="9.5" fill="#5b6472">Another PC + sound (low lag)</text>
+        <rect x="4" y="98" width="150" height="40" rx="7" fill="#e3eef8" stroke="#3a6e9e"/>
+        <text x="79" y="115" text-anchor="middle" font-weight="700">Window</text><text x="79" y="130" text-anchor="middle" font-size="9.5" fill="#5b6472">Zoom, browser etc. (same PC)</text>
+        <rect x="170" y="6" width="150" height="40" rx="7" fill="#efe4f6" stroke="#7a4aa0"/>
+        <text x="245" y="23" text-anchor="middle" font-weight="700">Spout</text><text x="245" y="38" text-anchor="middle" font-size="9.5" fill="#5b6472">Processing, TouchDesigner…</text>
+        <rect x="170" y="52" width="150" height="40" rx="7" fill="#e7f6ee" stroke="#16834f"/>
+        <text x="245" y="69" text-anchor="middle" font-weight="700">Layer picture</text><text x="245" y="84" text-anchor="middle" font-size="9.5" fill="#5b6472">Copy of another layer, in sync</text>
+        <rect x="170" y="98" width="150" height="40" rx="7" fill="#fff" stroke="#9aa3af" stroke-dasharray="4 3"/>
+        <text x="245" y="115" text-anchor="middle" font-weight="700">Blank</text><text x="245" y="130" text-anchor="middle" font-size="9.5" fill="#5b6472">Shows nothing, stops sound</text>
+      </g>
+      <path d="M326,72 L380,72" stroke="#1b1f27" stroke-width="2.5" marker-end="url(#b1)"/>
+      <rect x="388" y="30" width="190" height="84" rx="9" fill="#eaf1fd" stroke="#1f63d6" stroke-width="2"/>
+      <text x="483" y="52" text-anchor="middle" font-size="12" font-weight="700" fill="#1f63d6">Clips in a layer</text>
+      <rect x="402" y="62" width="34" height="24" rx="3" fill="#9dbcf0"/><rect x="442" y="62" width="34" height="24" rx="3" fill="#d9b88c"/><rect x="482" y="62" width="34" height="24" rx="3" fill="#bfa1d6"/><rect x="522" y="62" width="34" height="24" rx="3" fill="#8fd1ae"/>
+      <text x="483" y="104" text-anchor="middle" font-size="9.5" fill="#5b6472">Press one to crossfade to it</text>
+      <g font-size="9.5" fill="#5b6472">
+        <text x="600" y="40">● Drop PC files on the Media</text><text x="612" y="54">list to copy them in</text>
+        <text x="600" y="76">● If a camera or Spout stops,</text><text x="612" y="90">last frame stays + red text</text>
+        <text x="600" y="112">● Cameras auto-reconnect</text>
+      </g>
+    </svg>
+  </div>
+
+  <!-- 7. Output setups -->
+  <div class="box">
+    <h2><span class="n">9</span>Ways to set up outputs (projectors)</h2>
+    <svg viewBox="0 0 760 132" role="img" aria-label="Three ways to set up outputs">
+      <g font-size="10.5">
+        <text x="120" y="14" text-anchor="middle" font-weight="700">A different picture on each</text>
+        <rect x="20" y="24" width="90" height="56" rx="4" fill="#1b1f27"/><text x="65" y="57" text-anchor="middle" fill="#fff" font-size="10">Output 1: L1+L2</text>
+        <rect x="130" y="24" width="90" height="56" rx="4" fill="#1b1f27"/><text x="175" y="57" text-anchor="middle" fill="#fff" font-size="10">Output 2: L3</text>
+        <text x="120" y="100" text-anchor="middle" font-size="9.5" fill="#5b6472">Choose "Outputs" for each layer</text>
+
+        <text x="380" y="14" text-anchor="middle" font-weight="700">The same picture on both</text>
+        <rect x="280" y="24" width="90" height="56" rx="4" fill="#1b1f27"/><polygon points="292,72 310,34 346,40 356,72" fill="#3f6fb5"/>
+        <rect x="390" y="24" width="90" height="56" rx="4" fill="#1b1f27"/><polygon points="398,70 420,32 466,36 470,74" fill="#3f6fb5"/>
+        <text x="380" y="100" text-anchor="middle" font-size="9.5" fill="#5b6472">Check both for one layer</text>
+        <text x="380" y="114" text-anchor="middle" font-size="9.5" fill="#5b6472">(shape set per output, sound plays once)</text>
+
+        <text x="640" y="14" text-anchor="middle" font-weight="700">One wide picture from two</text>
+        <defs><linearGradient id="fadeR" x1="0" x2="1"><stop offset="0" stop-color="#3f6fb5" stop-opacity="1"/><stop offset="1" stop-color="#3f6fb5" stop-opacity="0"/></linearGradient>
+          <linearGradient id="fadeL" x1="0" x2="1"><stop offset="0" stop-color="#3f6fb5" stop-opacity="0"/><stop offset="1" stop-color="#3f6fb5" stop-opacity="1"/></linearGradient></defs>
+        <rect x="540" y="24" width="110" height="56" fill="#3f6fb5" opacity=".9"/><rect x="620" y="24" width="30" height="56" fill="url(#fadeR)"/>
+        <rect x="620" y="24" width="120" height="56" fill="url(#fadeL)" opacity=".9"/><rect x="650" y="24" width="90" height="56" fill="#3f6fb5" opacity=".9"/>
+        <rect x="620" y="22" width="30" height="60" fill="none" stroke="#cc3322" stroke-width="2" stroke-dasharray="4 3"/>
+        <text x="580" y="57" text-anchor="middle" fill="#fff" font-size="10">Output 2</text><text x="700" y="57" text-anchor="middle" fill="#fff" font-size="10">Output 3</text>
+        <text x="635" y="96" text-anchor="middle" font-size="9.5" fill="#cc3322">Overlap (soft blend)</text>
+        <text x="640" y="112" text-anchor="middle" font-size="9.5" fill="#5b6472">Match brightness with each seam's "Gamma"</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="two">
+    <!-- 8. Photo wall -->
+    <div class="box">
+      <h2><span class="n">10</span>Photo wall</h2>
+      <svg viewBox="0 0 360 92" role="img" aria-label="Photos in a folder appear in turn">
+        <defs><marker id="b2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#1b1f27"/></marker></defs>
+        <path d="M10,26 L40,26 L48,34 L100,34 L100,82 L10,82z" fill="#ffd98a" stroke="#b5762a"/>
+        <rect x="22" y="44" width="22" height="16" fill="#9dbcf0"/><rect x="50" y="48" width="16" height="22" fill="#8fd1ae"/><rect x="72" y="44" width="20" height="20" fill="#f3a2a2"/>
+        <text x="55" y="18" text-anchor="middle" font-size="9.5" fill="#5b6472">Only checked photos</text>
+        <path d="M108,56 L146,56" stroke="#1b1f27" stroke-width="2" marker-end="url(#b2)"/>
+        <rect x="154" y="18" width="108" height="66" rx="3" fill="#1b1f27"/><rect x="176" y="28" width="64" height="48" fill="#fff"/><rect x="180" y="32" width="56" height="40" fill="#9dbcf0"/>
+        <rect x="236" y="28" width="26" height="48" fill="#8fd1ae" opacity=".8"/><path d="M246,52 L230,52" stroke="#fff" stroke-width="2" marker-end="url(#b2)"/>
+        <text x="312" y="34" text-anchor="middle" font-size="9.5" fill="#5b6472">Newest first</text>
+        <text x="312" y="50" text-anchor="middle" font-size="9.5" fill="#5b6472">Shown in turn</text>
+        <text x="312" y="66" text-anchor="middle" font-size="9.5" fill="#5b6472">No distortion</text>
+      </svg>
+      <p>8 transition types (fade / cut / slide / wipe / zoom). Put media images in the row and they show in that order (a single image stays on).</p>
+    </div>
+    <!-- 9. Phone alignment -->
+    <div class="box">
+      <h2><span class="n">11</span>Align from a phone</h2>
+      <svg viewBox="0 0 360 92" role="img" aria-label="Adjusting the four corners from a phone over Wi-Fi">
+        <defs><marker id="b3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#1b1f27"/></marker></defs>
+        <rect x="12" y="10" width="44" height="78" rx="7" fill="#1b1f27"/><rect x="17" y="18" width="34" height="26" fill="#323946"/><polygon points="20,40 26,22 46,24 46,40" fill="none" stroke="#59ccff" stroke-width="1.5"/>
+        <rect x="19" y="50" width="9" height="9" fill="#3dd68c"/><rect x="40" y="50" width="9" height="9" fill="#323946"/><rect x="30" y="60" width="9" height="9" fill="#323946"/><rect x="30" y="72" width="9" height="9" fill="#323946"/>
+        <path d="M64,46 Q96,24 128,46" fill="none" stroke="#1b1f27" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#b3)"/>
+        <text x="96" y="20" text-anchor="middle" font-size="9.5" fill="#5b6472">Same Wi-Fi</text>
+        <rect x="134" y="34" width="66" height="40" rx="3" fill="#fff" stroke="#1b1f27" stroke-width="2"/><text x="167" y="58" text-anchor="middle" font-size="9.5">PC</text>
+        <path d="M204,54 L236,54" stroke="#1b1f27" stroke-width="2" marker-end="url(#b3)"/>
+        <polygon points="244,22 344,30 340,82 248,76" fill="#eaf1fd" stroke="#1f63d6" stroke-width="2"/>
+        <polygon points="256,30 330,36 326,72 260,68" fill="none" stroke="#ffd400" stroke-width="2"/><rect x="252" y="26" width="8" height="8" fill="#ff4d4f"/>
+        <text x="294" y="90" text-anchor="middle" font-size="9" fill="#5b6472">Frame + red mark on screen</text>
+      </svg>
+      <p>Stand in front of the screen with your phone and use the <b>arrow pad</b> to move 1 px at a time (hold to repeat). You can adjust while watching the screen. <span class="dim">(Open it with "Phone" in the top bar → QR code)</span></p>
+    </div>
+  </div>
+
+  <!-- 12. Words -->
+  <div class="box">
+    <h2><span class="n">12</span>Words used</h2>
+    <div class="two" style="gap:2mm">
+      <table>
+        <tr><td>Clip</td><td>One media item to play (any kind in 8)</td></tr>
+        <tr><td>Layer</td><td>A level for stacking pictures. L1 is at the back</td></tr>
+        <tr><td>Output</td><td>The picture for one projector</td></tr>
+        <tr><td>Fullscreen</td><td>The output window fills the display</td></tr>
+        <tr><td>Mapping</td><td>Moving the four corners to fit the shape</td></tr>
+      </table>
+      <table>
+        <tr><td>BLACKOUT</td><td>Darkens only the picture (the sound stays)</td></tr>
+        <tr><td>Edge blend</td><td>Softly overlapping the seam of a wide picture</td></tr>
+        <tr><td>Spout</td><td>A way for apps to pass video to each other (Windows)</td></tr>
+        <tr><td>Setup</td><td>A settings file for each venue or show ("Save as")</td></tr>
+        <tr><td>Test media</td><td>"テスト用" in media and photos. For checking motion and sound</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 13. On the day -->
+  <div class="box">
+    <h2><span class="n">13</span>On the day</h2>
+    <div class="flow">
+      <div><b>Start</b><span>run.bat</span></div><i>→</i>
+      <div><b>Project</b><span>Move to the projector,<br>fullscreen</span></div><i>→</i>
+      <div><b>Align</b><span>Mapping (E, phone)<br>Always turn it off after</span></div><i>→</i>
+      <div><b>Check</b><span>With test media:<br>smoothness, sound, L/R</span></div><i>→</i>
+      <div><b>Rehearse</b><span>Same PC, same<br>projector</span></div><i>→</i>
+      <div class="go"><b>Show</b><span>Clips, Play column<br>Panic? Press B</span></div>
+    </div>
+  </div>
+
+  <div class="foot"><span>How VPT39 Works (2/2)</span><span>Steps: quickstart.pdf&nbsp;&nbsp; Details: guide.pdf&nbsp;&nbsp; Screen map: index.html</span></div>
+</section>
+
+</body>
+</html>
