@@ -1,54 +1,58 @@
-# VPT39 マニュアル
+**日本語版：[README.ja.md](README.ja.md)**
 
-**VPT39** は、プロジェクションマッピングに特化した映像プレイヤーです。プロジェクタをつかったメディア/インタラクションアート作品、ライブ等で使いやすいように工夫しています。
+# VPT39 Manual
 
-> VPT39は、HC Gilje氏によるVPT（VideoProjectionTool）にインスパイアされた非公式ツールです。VPTとは一切関係ありません。
+**VPT39** is a video player made especially for projection mapping. It is designed to be easy to use for media and interactive art works that use projectors, live shows and similar events.
 
-## VPT39 の特徴（VPT8 からの改良点）
+The control panel can be switched between Japanese and English with the 日本語 / English button in the top bar (the choice is remembered).
 
-※ Windows 11 で動作確認済み
+> VPT39 is an unofficial tool inspired by VPT (VideoProjectionTool) by HC Gilje. It is not affiliated with VPT in any way.
 
-1. **出力はいくつでも**
-   出力ウィンドウをいくつでも増やせる。グラフィックボードがつなげる限り、モニターやプロジェクターを何台でも使え、出力ごとに別の映像や別の位置合わせができる。
-2. **スマホから位置合わせ**
-   投影した映像の位置合わせ（四隅のマッピング）を、スクリーンの前でスマホから操作できる。アプリのインストールは不要で、QR コードを読むだけ。
-3. **複数出力の同期再生**
-   1つの映像を複数の出力に、ずれなく同時に映せる。曲やシーンごとにそろえたクリップを、ボタン1つで全レイヤー一斉に頭から再生できる（列で再生）。
-4. **ウィンドウ取り込み**
-   Spout に対応していないアプリ（Zoom・ブラウザなど）でも、同じPCの好きなウィンドウをそのまま素材として映せる。Spout（TouchDesigner・Processing など）からの受け取りにも対応。
-   ※ウィンドウの音声は、現在は取り込めません（映像のみ）。
-5. **横長の画面（疑似ビッグモニター）**
-   プロジェクターやモニター2台以上をつないで、1枚の横長の画面にできる（例：1920×2 ＝ 3840×1080）。重なり部分はなめらかにぼかしてつなぎ、つなぎ目ごとに明るさを合わせられる。分配器などの機材は不要。
+## Features of VPT39 (improvements over VPT8)
 
-### ほかの特徴
+Note: tested on Windows 11.
 
-- **音声ミキサー**：全レイヤーの動画の音を同時に鳴らし、レイヤーごと・出力ごとに音量とミュートを操作できる。切り替えのときは音もクロスフェードする。
-- **キャプチャーボード入力**：別のPCの画面と音声を、低い遅延で取り込める。同じ機種を何台つないでも区別できる。
-- **写真ウォール**：フォルダに入った写真を自動で表示し、新しい写真を優先する。素材の画像を並べて、決めた順番で出すこともできる。
-- **写真の位置をリアルタイムに動かせる**：本番中でも、写真や映像の位置を矢印キーやスマホで動かして調整できる。
-- **別のPCで準備できる**：出力ごとに「本番の解像度」を決めておけば、小さいウィンドウのまま合わせた形がそのまま本番で使える。
-- **セッティングファイル**：会場・公演ごとに、曲順・マッピング・音量・出力をまとめて保存し、切り替えられる。
-- **本番の事故を防ぐ工夫**：自動保存、出力ウィンドウは × で閉じない、次の起動で同じ画面にフルスクリーンで開く、BLACKOUT ボタン。
-- **ブラウザの操作パネル**：タブを別ウィンドウに分けられ、画面に番号付きで対応した日本語のマニュアルが付いている。
-- **素材の形式**：動く GIF・APNG・WebP、透明な PNG をそのまま使える。
-- **無料・MIT ライセンス**：Python で作っているので、誰でも改造できる。
+1. **Any number of outputs**
+   You can add as many output windows as you like. You can use as many monitors and projectors as your graphics card can connect, with a different picture and different mapping for each output.
+2. **Mapping from a phone**
+   You can adjust the position of the projected picture (four-corner mapping) from a phone while standing in front of the screen. No app to install: just scan a QR code.
+3. **Synchronized playback on several outputs**
+   One video can be shown on several outputs at the same time, perfectly in sync. Clips lined up for each song or scene can be started from the beginning on all layers at once with one button ("Play column").
+4. **Window capture**
+   Any window on the same PC can be used directly as media, even from apps that do not support Spout (Zoom, a browser and so on). Receiving from Spout (TouchDesigner, Processing and so on) is also supported.
+   Note: window audio cannot be captured at the moment (picture only).
+5. **Wide picture (virtual big monitor)**
+   Connect two or more projectors or monitors to make one wide picture (e.g. 1920×2 = 3840×1080). Overlapping areas are blended smoothly, and the brightness can be matched at each seam. No splitter or other extra hardware is needed.
 
-### VPT8 と比べて、まだできないこと
+### Other features
 
-- メッシュ変形（曲面などの細かいゆがみ補正）はできない。位置合わせは四隅だけ。
-- マスク（映像の一部を切り抜く）はない。
-- OSC・MIDI のコントローラ、LFO、Arduino のセンサーなど、外部の機材からは操作できない。
-- Spout・Syphon で、ほかのアプリへ映像を送り出すことはできない。
-- Windows だけで、Mac・Linux では動かない。
-- ウィンドウ取り込みの音声は取り込めない。
+- **Audio mixer**: plays the sound of the videos on all layers at the same time, with volume and mute per layer and per output. The sound also crossfades when you switch clips.
+- **Capture board input**: brings in the picture and sound of another PC with low latency. Several units of the same model can be told apart.
+- **Photo wall**: shows the photos in a folder automatically, newest first. You can also line up images from your media and show them in a fixed order.
+- **Move photos in real time**: even during the show, you can move photos and videos with the arrow keys or a phone to adjust their position.
+- **Prepare on another PC**: if you set the "Show resolution" for each output, the shapes you adjust in a small window can be used as they are in the show.
+- **Setup files**: for each venue or show, save the running order, mapping, volume and outputs together and switch between them.
+- **Safeguards for the show**: auto-save, output windows do not close with ×, outputs open fullscreen on the same display at the next start, BLACKOUT button.
+- **Browser control panel**: tabs can be split into separate windows, and it comes with a manual whose numbers match the screen.
+- **Media formats**: animated GIF, APNG and WebP, and transparent PNG can be used as they are.
+- **Free, MIT license**: written in Python, so anyone can modify it.
 
-## マニュアル
+### What it cannot do yet, compared with VPT8
+
+- No mesh warping (fine correction for curved surfaces and so on). Mapping uses the four corners only.
+- No masks (cutting out part of the picture).
+- Cannot be controlled from external hardware such as OSC or MIDI controllers, LFOs or Arduino sensors.
+- Cannot send video to other apps with Spout or Syphon.
+- Windows only; does not run on Mac or Linux.
+- Cannot capture audio from window capture.
+
+## Manuals
 
 | | |
 |---|---|
-| [画面の場所（ブラウザで見る）](https://kadoya2005.github.io/VPT39-manual/) | 操作パネルの各部分の説明 |
-| [クイックスタート（PDF・A4 2ページ）](quickstart.pdf) | 本番中に手元に置く1枚 |
-| [しくみ（PDF・A4 2ページ）](concept.pdf) | 映像が届くまでの流れと考え方 |
-| [詳細ガイド（PDF）](guide.pdf) | インストールから本番までの全部 |
+| [Screen guide (view in the browser)](https://kadoya2005.github.io/VPT39-manual/en/) | Explains each part of the control panel |
+| [Quick start (PDF, 2 A4 pages)](en/quickstart.pdf) | One sheet to keep at hand during the show |
+| [How it works (PDF, 2 A4 pages)](en/concept.pdf) | How the picture gets to the screen, and the ideas behind it |
+| [Detailed guide (PDF)](en/guide.pdf) | Everything from installation to the show |
 
-このリポジトリはマニュアルだけを公開しています（プログラム本体は含みません）。
+This repository publishes only the manuals (the program itself is not included).
