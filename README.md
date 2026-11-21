@@ -1,6 +1,10 @@
-**日本語版：[README.ja.md](README.ja.md)**
+## 🇯🇵 日本語の案内はこちら → [README（日本語）](README.ja.md) ／ [インストール方法（日本語）](https://kadoya2005.github.io/VPT39-manual/install.html) ／ [マニュアル（日本語）](https://kadoya2005.github.io/VPT39-manual/)
 
 # VPT39 Manual
+
+> ### 📘 Manual: **https://kadoya2005.github.io/VPT39-manual/en/**
+> ### ⬇ How to install (step by step): **https://kadoya2005.github.io/VPT39-manual/en/install.html**
+> ### 💾 Download VPT39: **https://github.com/kadoya2005/VPT39** (green "Code" button → "Download ZIP")
 
 **VPT39** is a video player made especially for projection mapping. It is designed to be easy to use for media and interactive art works that use projectors, live shows and similar events.
 

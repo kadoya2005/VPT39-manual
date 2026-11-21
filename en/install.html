@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Installing VPT39</title>
+<style>
+:root{--ink:#1b1f27;--dim:#5b6472;--line:#d5dae1;--blue:#1f63d6;--blue-bg:#eaf1fd;--org:#d97706;--org-bg:#fff4e2;--red:#cc3322;--red-bg:#fdecea;--grn:#16834f;--grn-bg:#e7f6ee}
+*{box-sizing:border-box}
+html,body{margin:0;background:#e9ecf0;color:var(--ink);font-family:"Segoe UI","Yu Gothic UI","Meiryo",sans-serif;font-size:16px;line-height:1.75}
+.doc{max-width:860px;margin:24px auto;background:#fff;padding:36px 44px 44px;box-shadow:0 2px 10px rgba(0,0,0,.12);border-radius:6px}
+@media (max-width:700px){.doc{margin:0;padding:20px 16px 32px;border-radius:0}}
+a{color:var(--blue)}
+.lang{float:right;font-size:14px}
+h1{font-size:30px;margin:0 0 4px;letter-spacing:.02em}
+.sub{color:var(--dim);margin:0 0 20px}
+h2{font-size:23px;margin:40px 0 10px;padding-bottom:6px;border-bottom:3px solid var(--ink);display:flex;gap:10px;align-items:baseline}
+h2 .c{color:var(--blue)}
+h3{font-size:18px;margin:22px 0 6px;padding-left:10px;border-left:6px solid var(--blue)}
+p{margin:6px 0 10px}
+ul,ol{margin:6px 0 10px;padding-left:24px}
+li{margin:3px 0}
+.toc{background:#f5f6f8;border-radius:6px;padding:12px 18px;margin:16px 0}
+.toc ol{margin:0}
+.note,.warn,.tip,.danger{border-radius:0 6px 6px 0;padding:10px 14px;margin:10px 0 14px;font-size:15px}
+.note{background:var(--blue-bg);border-left:7px solid var(--blue)}
+.warn{background:var(--org-bg);border-left:7px solid var(--org)}
+.tip{background:var(--grn-bg);border-left:7px solid var(--grn)}
+.danger{background:var(--red-bg);border-left:7px solid var(--red)}
+b.h{display:block;margin-bottom:2px}
+.warn b.h{color:#9a4d00}.tip b.h{color:var(--grn)}.danger b.h{color:var(--red)}.note b.h{color:var(--blue)}
+kbd{display:inline-block;min-width:22px;padding:0 6px;border:1px solid #8a93a0;border-bottom-width:2px;border-radius:4px;background:#f6f7f9;font:700 14px/1.5 "Segoe UI","Yu Gothic UI",sans-serif;text-align:center}
+code{background:#f1f3f6;border-radius:4px;padding:1px 5px;font-family:"Cascadia Mono",Consolas,monospace;font-size:14px}
+table{border-collapse:collapse;width:100%;margin:8px 0 14px}
+th,td{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top;font-size:15px}
+th{background:#f1f3f6}
+td.k{font-weight:700;background:#fafbfc;width:34%}
+@media (max-width:700px){td.k{width:auto}}
+figure{margin:10px 0 16px}
+figcaption{font-size:14px;color:var(--dim);margin-top:4px}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps>li{counter-increment:s;position:relative;padding-left:38px;margin:0 0 12px}
+.steps>li::before{content:counter(s);position:absolute;left:0;top:1px;width:27px;height:27px;border-radius:50%;background:var(--blue);color:#fff;font-weight:800;font-size:15px;line-height:27px;text-align:center}
+.flow{display:flex;align-items:stretch;gap:6px;margin:10px 0 14px;flex-wrap:wrap}
+.flow .fb{flex:1 1 110px;border:1px solid var(--line);border-radius:8px;padding:8px 6px;text-align:center;background:var(--blue-bg);display:flex;flex-direction:column;gap:2px;font-size:15px;line-height:1.35}
+.flow .fb b{color:var(--blue);font-size:19px}
+.flow .fb small{color:var(--dim);font-size:12.5px}
+.flow .fb.go{background:var(--grn-bg)}.flow .fb.go b{color:var(--grn)}
+.mock{border:1px solid #8b94a1;border-radius:6px;overflow:hidden;font-family:"Segoe UI","Yu Gothic UI",sans-serif;background:#fff;font-size:14px}
+.mock .url{background:#eef0f3;padding:5px 12px;font-size:13px;color:#444;border-bottom:1px solid #d5dae1}
+.mock .pg{padding:12px 18px}
+.mock .h1{font-size:19px;font-weight:700;margin-bottom:6px}
+.mock .rel{font-weight:700;margin-top:9px}
+.mock .rel em{font-style:normal;color:var(--red);font-weight:400;font-size:13px;margin-left:8px}
+.mock .rel em.ok{color:var(--grn);font-weight:700}
+.mock .li{color:#1f63d6;padding-left:16px;margin:3px 0}
+.mock .dimx{opacity:.45}
+.mock .hit{position:relative;outline:3px solid var(--red);outline-offset:3px;border-radius:4px}
+.mock .hit i{position:absolute;right:-30px;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;background:var(--red);color:#fff;font:800 13px/22px "Yu Gothic UI",sans-serif;text-align:center;font-style:normal}
+.mock .tb{background:#f3f3f3;border-bottom:1px solid #ddd;padding:5px 12px;font-size:13px;display:flex;justify-content:space-between}
+.mock .bd{display:flex}
+.mock .lft{width:86px;flex:none;background:linear-gradient(#2b5b84,#3776ab);color:#ffd43b;font-size:34px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:14px}
+.mock .mn{flex:1;padding:12px 38px 12px 18px}
+.mock .big{font-size:19px;font-weight:600;color:#1b3a6b;margin-bottom:6px}
+.mock .sm{font-size:13px;color:#444;margin-bottom:8px}
+.mock .opt{margin:6px 0;font-size:15px;color:#1b3a6b}
+.mock .opt small{color:#555;font-size:12px;margin-left:18px;display:inline-block;line-height:1.35}
+.mock .cb{font-size:14px;margin:5px 0}
+.gh{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:12px 44px 12px 18px;border-bottom:1px solid #d5dae1}
+.gh .br{border:1px solid #d0d7de;border-radius:6px;padding:3px 10px;background:#f6f8fa;font-size:13px}
+.gh .code{margin-left:auto;background:#1f883d;color:#fff;border-radius:6px;padding:4px 12px;font-weight:600}
+.ghm{margin:0 44px 14px auto;width:300px;max-width:calc(100% - 62px);border:1px solid #d0d7de;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,.12);padding:10px 14px;font-size:13px}
+.ghm .t{font-weight:700;margin-bottom:6px}
+.ghm .row{padding:6px 0;border-top:1px solid #eaeef2}
+pre.term{background:#0c0c0c;color:#e6e6e6;font:13px/1.5 "Cascadia Mono","Consolas","BIZ UDGothic","MS Gothic",monospace;padding:12px 16px;border-radius:6px;margin:0;white-space:pre-wrap;word-break:break-all}
+pre.term .cut{color:#888}
+pre.term .okl{color:#3dd68c;font-weight:700}
+pre.term .ngl{color:#ff8080;font-weight:700}
+pre.term .err{color:#ff5555}
+.foot{font-size:13px;color:var(--dim);margin-top:36px;border-top:1px solid var(--line);padding-top:8px}
+.jabox{display:block;margin:0 0 20px;padding:14px 18px;border-radius:8px;background:#1b1f27;color:#fff;text-decoration:none;font-size:20px;font-weight:700;font-family:"Yu Gothic UI","Meiryo",sans-serif}
+.jabox small{display:block;font-size:14px;font-weight:400;color:#c9d0da}
+.jabox:hover{background:#1f63d6}
+</style>
+</head>
+<body>
+<div class="doc">
+
+<a class="jabox" href="../install.html">日本語のインストール方法はこちら →<small>Japanese version of this page</small></a>
+
+<span class="lang"><a href="index.html">Manual home</a>　|　<a href="../install.html">日本語</a></span>
+<h1>Installing VPT39</h1>
+<p class="sub">How to get VPT39 running on a Windows PC for the first time (once per PC)</p>
+
+<div class="note"><b class="h">What you need</b>
+A Windows 11 PC (64-bit; VPT39 is tested on Windows 11), an internet connection, and <b>about 30 minutes</b>.<br>
+If Python or VLC is already installed, you can skip that step.</div>
+
+<div class="flow">
+  <div class="fb"><b>1</b><span>Download<br>VPT39</span><small>ZIP from GitHub</small></div>
+  <div class="fb"><b>2</b><span>Extract<br>the ZIP</span><small>you get a VPT39 folder</small></div>
+  <div class="fb"><b>3</b><span>Install<br>Python 3.13</span><small>runs VPT39</small></div>
+  <div class="fb"><b>4</b><span>Install<br>VLC</span><small>plays the sound</small></div>
+  <div class="fb"><b>5</b><span>Run<br>setup.bat</span><small>installs the rest</small></div>
+  <div class="fb go"><b>6</b><span>Start with<br>run.bat</span><small>from now on, just this</small></div>
+</div>
+
+<div class="toc"><b>Contents</b>
+<ol>
+  <li><a href="#dl">Download VPT39</a></li>
+  <li><a href="#unzip">Extract the ZIP</a></li>
+  <li><a href="#python">Install Python</a></li>
+  <li><a href="#vlc">Install VLC</a></li>
+  <li><a href="#setup">Run setup.bat</a></li>
+  <li><a href="#run">Start with run.bat</a></li>
+  <li><a href="#trouble">If something goes wrong</a></li>
+  <li><a href="#update">Updating to a new version</a></li>
+</ol></div>
+
+<h2 id="dl"><span class="c">1</span>Download VPT39</h2>
+<ol class="steps">
+  <li><b>Open <a href="https://github.com/kadoya2005/VPT39">https://github.com/kadoya2005/VPT39</a> in your browser</b><br>
+    This is the VPT39 page on GitHub. You do <b>not</b> need an account or to sign in.</li>
+  <li><b>Click the green "Code" button → "Download ZIP"</b><br>
+    "VPT39-main.zip" is saved to your Downloads folder.</li>
+</ol>
+<figure>
+  <div class="mock">
+    <div class="url">🔒 github.com/kadoya2005/VPT39</div>
+    <div class="gh"><b>kadoya2005 / VPT39</b><span class="br">main ▾</span><span class="code hit">&lt;&gt; Code ▾<i>1</i></span></div>
+    <div class="ghm">
+      <div class="t">Local　　Codespaces</div>
+      <div class="row dimx">Clone: HTTPS　SSH　GitHub CLI</div>
+      <div class="row dimx">Open with GitHub Desktop</div>
+      <div class="row"><span class="hit">📦 Download ZIP<i>2</i></span></div>
+    </div>
+  </div>
+  <figcaption>Figure (illustration): the VPT39 page on GitHub. <b>1</b> the green "Code" button → <b>2</b> "Download ZIP".</figcaption>
+</figure>
+<div class="warn"><b class="h">Do not use the v1.0 ZIP under "Releases"</b>
+In the v1.0 ZIP, setup.bat is in an old format that shows garbled text and does not work. Always use "Code" → "Download ZIP" above.</div>
+<div class="tip"><b class="h">If someone gave you VPT39_配布用.zip</b>
+You can use that ZIP. Start from step 2 (the extracted folder is called "VPT39").</div>
+
+<h2 id="unzip"><span class="c">2</span>Extract the ZIP</h2>
+<ol class="steps">
+  <li><b>(Recommended) Unblock the ZIP</b><br>
+    Right-click VPT39-main.zip → "Properties" → near the bottom, at "Security: This file came from another computer…", <b>check "Unblock"</b> → "OK".<br>
+    <span style="color:var(--dim)">This stops the warning that appears each time you run setup.bat and the other files. If there is no "Unblock" box, just go on.</span></li>
+  <li><b>Right-click the ZIP → "Extract All" → "Extract"</b><br>
+    A folder called "VPT39-main" is created. You can move it anywhere (Desktop, Documents…) and rename it to "VPT39".</li>
+</ol>
+<div class="danger"><b class="h">Do not run files from inside the ZIP</b>
+If you double-click the ZIP and run setup.bat from the preview, it will not work. Always "Extract All" first, then run it <b>inside the extracted folder</b>.</div>
+<div class="note"><b class="h">Where to put it</b>
+It works inside Dropbox or OneDrive too. For a show, make sure your videos are <b>downloaded to the PC</b> ("online-only" files load slowly).</div>
+
+<h2 id="python"><span class="c">3</span>Install Python</h2>
+<p>VPT39 runs on Python.</p>
+<div class="warn"><b class="h">Choose Python "3.13"</b>
+With the newest version at the top of python.org (3.14 or later), the Spout component (for receiving video from TouchDesigner and others) cannot be installed. VPT39 is tested with <b>Python 3.13 (64-bit)</b>.</div>
+<div class="tip"><b class="h">Not sure if Python is installed?</b>
+Skip ahead and run setup.bat (step 5). If Python is missing, it says "Failed: Python not found" — then come back here.</div>
+<ol class="steps">
+  <li><b>Open <a href="https://www.python.org/downloads/windows/">https://www.python.org/downloads/windows/</a></b><br>
+    Find the heading "Python 3.13.xx" and click <b>Download Windows installer (64-bit)</b> under it. If there are several 3.13 versions, take the highest number (the one nearest the top).</li>
+</ol>
+<figure>
+  <div class="mock">
+    <div class="url">🔒 python.org/downloads/windows/</div>
+    <div class="pg">
+      <div class="h1">Python Releases for Windows</div>
+      <div class="rel dimx">Python 3.15.x - … <em>← not 3.14 or 3.15</em></div>
+      <div class="li dimx">Download Windows installer (64-bit)</div>
+      <div class="rel">Python 3.13.xx - … <em class="ok">← this one (3.13)</em></div>
+      <div class="li"><span class="hit">Download Windows installer (64-bit)<i>1</i></span></div>
+      <div class="li dimx">Download Windows installer (32-bit)</div>
+      <div class="li dimx">Download Windows installer (ARM64)</div>
+    </div>
+  </div>
+  <figcaption>Figure (illustration): the python.org download page. Do not choose 32-bit, ARM64, "install manager" or "embeddable package".</figcaption>
+</figure>
+<ol class="steps" start="2" style="counter-reset:s 1">
+  <li><b>Double-click the downloaded "python-3.13.xx-amd64.exe"</b></li>
+  <li><b>On the first screen, check "Add python.exe to PATH" at the bottom → "Install Now"</b><br>
+    <b style="color:var(--red)">This is the most important step.</b> Without the check, setup.bat cannot find Python (the box is empty at first).</li>
+</ol>
+<figure>
+  <div class="mock">
+    <div class="tb">Python 3.13.xx (64-bit) Setup<span>✕</span></div>
+    <div class="bd">
+      <div class="lft">🐍</div>
+      <div class="mn">
+        <div class="big">Install Python 3.13.xx (64-bit)</div>
+        <div class="sm">Select Install Now to install Python with default settings, or choose Customize to enable or disable features.</div>
+        <div class="opt"><span class="hit">→ <b>Install Now</b><i>2</i></span><br><small>Includes IDLE, pip and documentation</small></div>
+        <div class="opt dimx">→ Customize installation</div>
+        <div class="cb">☑ Use admin privileges when installing py.exe</div>
+        <div class="cb"><span class="hit">☑ Add python.exe to PATH<i>1</i></span></div>
+      </div>
+    </div>
+  </div>
+  <figcaption>Figure (illustration): the Python installer. <b>1</b> check "Add python.exe to PATH" → <b>2</b> "Install Now".</figcaption>
+</figure>
+<ol class="steps" start="4" style="counter-reset:s 3">
+  <li><b>If asked "Do you want to allow this app to make changes to your device?", click "Yes"</b></li>
+  <li><b>When "Setup was successful" appears, click "Close"</b><br>"Disable path length limit" is optional.</li>
+</ol>
+<div class="note"><b class="h">Forgot the check?</b>
+Run python-3.13.xx-amd64.exe again → "Modify" → "Next" → check "Add Python to environment variables" → "Install". Or uninstall Python and install it again.</div>
+
+<h2 id="vlc"><span class="c">4</span>Install VLC</h2>
+<p>VLC is a free video player. VPT39 uses VLC's components to play the <b>sound</b> of videos.</p>
+<ol class="steps">
+  <li><b>Open <a href="https://www.videolan.org/vlc/">https://www.videolan.org/vlc/</a> and click the orange "Download VLC" button</b><br>
+    On a Windows PC, the 64-bit version is chosen automatically.</li>
+  <li><b>Run the downloaded "vlc-xx-win64.exe"</b><br>
+    Choose your language, then click "Next" through to "Install" → "Finish". You do not need to change any settings.</li>
+</ol>
+<div class="warn"><b class="h">Without VLC</b>
+Videos play but <b>without sound</b>. After starting VPT39, the top left of the control panel shows "VLC (audio)" when it is fine. If it shows "OpenCV (no audio)", VLC is missing (or the 32-bit version is installed).</div>
+
+<h2 id="setup"><span class="c">5</span>Run setup.bat</h2>
+<ol class="steps">
+  <li><b>Double-click "setup.bat" in the extracted folder</b><br>
+    A black window opens and goes through [1/4] to [4/4]. It downloads components, so it takes <b>2–5 minutes</b>. Do not close it while text is scrolling.</li>
+  <li><b>When it says "Success", press any key to close it</b></li>
+</ol>
+<div class="note"><b class="h">If a blue warning or a question appears</b>
+"Windows protected your PC" → "More info" → "Run anyway".<br>
+"The publisher could not be verified. Are you sure you want to run this software?" → "Run".<br>
+<span style="color:var(--dim)">(These do not appear if you checked "Unblock" in step 2.)</span></div>
+<figure>
+<pre class="term">============================================
+  VPT39 セットアップ / Setup
+============================================
+
+[1/4] Python を確かめています... / Checking Python...
+Python 3.13.xx
+
+[2/4] 専用の環境（.venv）を作っています... / Creating the environment (.venv)...
+
+[3/4] 必要な部品をダウンロードして入れています（数分かかります）...
+      Downloading and installing the components (takes a few minutes)...
+Collecting glfw>=2.7 (from -r requirements.txt (line 1))
+<span class="cut">    … (many component names scroll by) …</span>
+Successfully installed …
+
+[4/4] フォルダを用意しています... / Preparing folders...
+
+<span class="okl">============================================
+  成功しました。run.bat で起動できます。
+  Success. Start VPT39 with run.bat.
+============================================</span>
+
+Press any key to continue . . .</pre>
+  <figcaption>What success looks like. When <b>"Success"</b> appears at the end, setup is done. (The window shows Japanese and English.)</figcaption>
+</figure>
+<div class="tip"><b class="h">You can run setup.bat as many times as you like</b>
+If it fails, fix the cause and run it again. It skips what is already installed and continues.</div>
+
+<h2 id="run"><span class="c">6</span>Start with run.bat</h2>
+<ol class="steps">
+  <li><b>Double-click "run.bat"</b><br>
+    If a black output window and the control panel in your browser open, it worked.<br>
+    If the control panel does not open, open <code>http://localhost:8080/</code> in your browser.</li>
+  <li><b>The first time only: if "Windows Security Alert" appears, allow it</b><br>
+    This is for controlling VPT39 from a phone or tablet. Check "Private networks" and click "Allow access".</li>
+</ol>
+<table>
+  <tr><th>File</th><th>When to use it</th></tr>
+  <tr><td class="k">run.bat</td><td>Normal start. Outputs that were fullscreen last time open fullscreen on the same screen</td></tr>
+  <tr><td class="k">run_window.bat</td><td>Opens all outputs as windows this time only (for preparing and rehearsing; settings are not changed)</td></tr>
+  <tr><td class="k">setup.bat</td><td>First-time setup (step 5). Not needed day to day</td></tr>
+</table>
+<div class="tip"><b class="h">From now on</b>
+Just double-click run.bat. A desktop shortcut is handy (right-click run.bat → "Show more options" → "Create shortcut").</div>
+<p>For how to use VPT39, see the <a href="quickstart.pdf">Quick start</a>, the <a href="guide.pdf">Guide</a> and the <a href="index.html">Screen-by-screen manual</a>.</p>
+
+<h2 id="trouble"><span class="c">7</span>If something goes wrong</h2>
+<p>setup.bat always stops with either <b>"Success" or "Failed: …"</b> at the end. If it fails, fix the cause shown and run setup.bat again.</p>
+<figure>
+<pre class="term">[3/4] 必要な部品をダウンロードして入れています（数分かかります）...
+      Downloading and installing the components (takes a few minutes)...
+<span class="err">ERROR: Could not find a version that satisfies the requirement …
+ERROR: No matching distribution found for …</span>
+
+<span class="ngl">############################################
+  失敗：部品を入れられませんでした / Failed: could not install the components
+############################################</span>
+  - Check the internet connection.
+  - The red text (ERROR) above shows the cause.
+  - After fixing it, run setup.bat again (it continues where it stopped).</pre>
+  <figcaption>An example of a failure. <b>The cause is in the red ERROR lines above it</b> (scroll up in the window to see them).</figcaption>
+</figure>
+<table>
+  <tr><th>What you see</th><th>Cause and fix</th></tr>
+  <tr><td class="k">Failed: Python not found</td><td>Python is not installed, or "Add python.exe to PATH" was not checked. Redo step 3. <b>After installing Python, close any open black windows</b> before running setup.bat again</td></tr>
+  <tr><td class="k">The Microsoft Store opens</td><td>Python is not installed. Close the Store and install Python from python.org (step 3)</td></tr>
+  <tr><td class="k">Failed: could not install the components</td><td>No internet connection (school or office networks may block it) — try another connection such as phone tethering. With Python 3.14 or later, some components may not be available yet → install Python 3.13, delete the <code>.venv</code> folder in the extracted folder, and run setup.bat again. If it still fails, take a photo of the red ERROR lines and ask</td></tr>
+  <tr><td class="k">(Note) Spout does not work with this Python</td><td>This is a note, not a failure. Setup continues. If you do not use Spout, you can ignore it</td></tr>
+  <tr><td class="k">Garbled text and many "'sys' is not recognized as an internal or external command…"</td><td>You have the old-format ZIP (such as the v1.0 release). Download again with "Code" → "Download ZIP" (step 1)</td></tr>
+  <tr><td class="k">The black window closes instantly</td><td>You are running it from inside the ZIP. "Extract All" first (step 2)</td></tr>
+  <tr><td class="k">No sound ("OpenCV (no audio)" is shown)</td><td>VLC is missing or is the 32-bit version. Install the 64-bit VLC (step 4) and restart VPT39</td></tr>
+  <tr><td class="k">The output window stays black or closes right away</td><td>The graphics driver may be old. Install the latest driver from your PC maker or from Intel, NVIDIA or AMD</td></tr>
+</table>
+<div class="note"><b class="h">When asking for help</b>
+Send a photo showing the <b>red text</b> in the black window and your Python version (the "Python 3.xx" line under [1/4]).</div>
+
+<h2 id="update"><span class="c">8</span>Updating to a new version</h2>
+<ol class="steps">
+  <li><b>Keep your own files from the current folder</b><br>
+    <code>media</code> (your media), <code>photos</code> (photos), <code>settings</code> (venue settings), <code>project.json</code> (current settings).</li>
+  <li><b>Download and extract the new version (steps 1 and 2)</b></li>
+  <li><b>Copy the files you kept into the new folder</b> (overwrite files with the same name)</li>
+  <li><b>Run setup.bat in the new folder</b> (no need to reinstall Python or VLC)</li>
+</ol>
+<div class="warn"><b class="h">Do not update just before a show</b>
+Always check a new version in a rehearsal first. Keeping the old folder for a while is a good idea.</div>
+
+<p class="foot">VPT39 is free software under the MIT License. It is an unofficial tool inspired by VPT (VideoProjectionTool) by HC Gilje and is not affiliated with VPT.
+　<a href="https://github.com/kadoya2005/VPT39">GitHub</a>　|　<a href="index.html">Manual home</a></p>
+</div>
+</body>
+</html>

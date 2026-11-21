@@ -2,6 +2,10 @@
 
 # VPT39 マニュアル
 
+> ### 📘 マニュアル：**https://kadoya2005.github.io/VPT39-manual/**
+> ### ⬇ インストール方法（図つき・手順ごと）：**https://kadoya2005.github.io/VPT39-manual/install.html**
+> ### 💾 VPT39 のダウンロード：**https://github.com/kadoya2005/VPT39**（緑の「Code」→「Download ZIP」）
+
 **VPT39** は、プロジェクションマッピングに特化した映像プレイヤーです。プロジェクタをつかったメディア/インタラクションアート作品、ライブ等で使いやすいように工夫しています。
 
 > VPT39は、HC Gilje氏によるVPT（VideoProjectionTool）にインスパイアされた非公式ツールです。VPTとは一切関係ありません。
